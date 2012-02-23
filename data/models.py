@@ -4,11 +4,14 @@ USERNAME_MAX_LENGTH = 25
 PERSON_NAME_MAX_LENGTH = 25
 
 class User(models.Model):
-    user_id = models.IntegerField()
+    user_id = models.IntegerField(primary_key=True)
     username = models.CharField(max_length=USERNAME_MAX_LENGTH)
     first_name = models.CharField(max_length=PERSON_NAME_MAX_LENGTH)
     last_name = models.CharField(max_length=PERSON_NAME_MAX_LENGTH)
     email = models.EmailField()
+
+    def __unicode__(self):
+        return self.last_name + ', ' + self.first_name
 
 ITEM_NAME_MAX_LENGTH = 100
 DESCRIPTION_NAME_MAX_LENGTH = 1000
