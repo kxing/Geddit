@@ -12,7 +12,7 @@ class User(models.Model):
     email = models.EmailField()
 
     @staticmethod
-    def create_new_user(username, first_name, last_name, email):
+    def create_user(username, first_name, last_name, email):
         u = User(username=username, first_name=first_name, \
                 last_name=last_name, email=email)
         u.save()
