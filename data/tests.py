@@ -14,7 +14,7 @@ class UserTest(TestCase):
         Tests to make sure that users can be created, deleted, and queried.
         """
         # create a user
-        User.create_user('asdf1234', 'Asdf', 'Qwerty', 'asdf1234@mit.edu')
+        User.create_user('asdf1234', 'Asdf', 'Qwerty', 'asdf1234@mit.edu', '(123)456-7890')
 
         # find the user and check it
         u = User.get_user('asdf1234')
@@ -22,6 +22,7 @@ class UserTest(TestCase):
         self.assertEqual(u.first_name, 'Asdf')
         self.assertEqual(u.last_name, 'Qwerty')
         self.assertEqual(u.email, 'asdf1234@mit.edu')
+        self.assertEqual(u.cell_phone, '(123)456-7890')
 
         # delete the user
         User.delete_user(u)
