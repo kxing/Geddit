@@ -9,11 +9,36 @@ class UserAdmin(admin.ModelAdmin):
         ),
     ]
     list_display = ['username', 'first_name', 'last_name', 'email', 'cell_phone']
-
-
 admin.site.register(User, UserAdmin)
-admin.site.register(Category)
-admin.site.register(Item)
-admin.site.register(Filter)
-admin.site.register(Claim)
+
+class CategoryAdmin(admin.ModelAdmin):
+    fieldsets = [
+        (None, {'fields': ['name']})
+    ]
+    list_display = ['name']
+admin.site.register(Category, CategoryAdmin)
+
+class ItemAdmin(admin.ModelAdmin):
+    fieldsets = [
+        (None, {'fields': ['name']}),
+        ('Item Information',
+            {'fields': ['description', 'category', 'active', 'seller_user']}
+        ),
+    ]
+    list_display = ['name', 'category', 'active', 'seller_user']
+admin.site.register(Item, ItemAdmin)
+
+class FilterAdmin(admin.ModelAdmin):
+    fieldsets = [
+        (None, {'fields': ['user', 'conditions', 'timestamp']})
+    ]
+    list_display = ['user', 'conditions', 'timestamp']
+admin.site.register(Filter, FilterAdmin)
+
+class ClaimAdmin(admin.ModelAdmin):
+    fieldsets = [
+        (None, {'fields': ['buyer', 'seller', 'item']})
+    ]
+    list_display = ['buyer', 'seller', 'item']
+admin.site.register(Claim, ClaimAdmin)
 

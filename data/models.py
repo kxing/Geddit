@@ -19,6 +19,13 @@ class User(models.Model):
     email = models.EmailField()
     cell_phone = models.CharField(max_length=PHONE_NUMBER_MAX_LENGTH)
 
+    def __unicode__(self):
+        return self.last_name + ', ' + self.first_name
+
+    class Meta:
+        verbose_name = 'User'
+        verbose_name_plural = 'Users'
+
     @staticmethod
     def create_user(username, first_name, last_name, email, cell_phone):
         u = User(username=username, first_name=first_name, \
@@ -32,9 +39,6 @@ class User(models.Model):
     @staticmethod
     def delete_user(user):
         user.delete()
-
-    def __unicode__(self):
-        return self.last_name + ', ' + self.first_name
 
     def send_email(self, message, subject):
         msg = MIMEText(message)
@@ -58,6 +62,13 @@ class Category(models.Model):
     # id = models.IntegerField()
     name = models.CharField(max_length=CATEGORY_NAME_MAX_LENGTH)
 
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
+
 ITEM_NAME_MAX_LENGTH = 100
 DESCRIPTION_NAME_MAX_LENGTH = 1000
 
@@ -70,12 +81,26 @@ class Item(models.Model):
     active = models.BooleanField()
     category = models.ForeignKey(Category)
 
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Item'
+        verbose_name_plural = 'Items'
+
 class Filter(models.Model):
     # Django will automatically generate this:
     # id = models.IntegerField()
     user = models.ForeignKey(User)
     conditions = models.CharField(max_length=DESCRIPTION_NAME_MAX_LENGTH)
     timestamp = models.TimeField()
+
+    def __unicode__(self):
+        return self.conditions
+
+    class Meta:
+        verbose_name = 'Filter'
+        verbose_name_plural = 'Filters'
 
 class Claim(models.Model):
     # Django will automatically generate this:
@@ -84,4 +109,9 @@ class Claim(models.Model):
     seller = models.ForeignKey(User, related_name='seller')
     item = models.ForeignKey(Item)
 
+    def __unicode__(self):
+        return '' + str(self.seller) + ' -> ' + str(self.buyer)
 
+    class Meta:
+        verbose_name = 'Claim'
+        verbose_name_plural = 'Claims'
