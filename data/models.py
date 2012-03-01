@@ -51,13 +51,37 @@ class User(models.Model):
         voice.login(GEDDIT_GMAIL, GEDDIT_PASSWORD)
         voice.send_sms(self.cell_phone, message)
 
+CATEGORY_NAME_MAX_LENGTH = 100
+
+class Category(models.Model):
+    # Django will automatically generate this:
+    # id = models.IntegerField()
+    name = models.CharField(max_length=CATEGORY_NAME_MAX_LENGTH)
+
 ITEM_NAME_MAX_LENGTH = 100
 DESCRIPTION_NAME_MAX_LENGTH = 1000
 
 class Item(models.Model):
-    item_id = models.IntegerField()
-    seller_user_id = models.IntegerField()
+    # Django will automatically generate this:
+    # id = models.IntegerField()
+    seller_user = models.ForeignKey(User)
     name = models.CharField(max_length=ITEM_NAME_MAX_LENGTH)
-    description = models.CharField(max_length=ITEM_NAME_MAX_LENGTH)
+    description = models.CharField(max_length=DESCRIPTION_NAME_MAX_LENGTH)
     active = models.BooleanField()
-    category = models.IntegerField()
+    category = models.ForeignKey(Category)
+
+class Filter(models.Model):
+    # Django will automatically generate this:
+    # id = models.IntegerField()
+    user = models.ForeignKey(User)
+    conditions = models.CharField(max_length=DESCRIPTION_NAME_MAX_LENGTH)
+    timestamp = models.TimeField()
+
+class Claim(models.Model):
+    # Django will automatically generate this:
+    # id = models.IntegerField()
+    buyer = models.ForeignKey(User, related_name='buyer')
+    seller = models.ForeignKey(User, related_name='seller')
+    item = models.ForeignKey(Item)
+
+
