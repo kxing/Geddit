@@ -69,6 +69,19 @@ class Category(models.Model):
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
 
+    @staticmethod
+    def create_category(name):
+        c = Category(name=name)
+        c.save()
+
+    @staticmethod
+    def get_category(name):
+        return Category.objects.get(name=name)
+
+    @staticmethod
+    def delete_category(category):
+        category.delete()
+
 ITEM_NAME_MAX_LENGTH = 100
 DESCRIPTION_NAME_MAX_LENGTH = 1000
 

@@ -20,9 +20,10 @@ class UserTest(TestCase):
         User.delete_user(u)
 
     def test_user(self):
-        """
-        Tests to make sure that users can be queried, and that their attributes are correct.
-        """
+        '''
+        Tests to make sure that users can be queried
+        and that their attributes are correct.
+        '''
         # create a user
 
         # find the user and check it
@@ -33,8 +34,22 @@ class UserTest(TestCase):
         self.assertEqual(u.email, 'asdf1234@mit.edu')
         self.assertEqual(u.cell_phone, '(123)456-7890')
 
-'''
 class CategoryTest(TestCase):
+    def setUp(self):
+        # create a category
+        Category.create_category('3.091')
+
+    def tearDown(self):
+        c = Category.objects.get(name='3.091')
+
+        # delete the category
+        Category.delete_category(c)
+
     def test_categories(self):
-        self.assertEqual
-'''
+        '''
+        Tests to make sure that categories can be queried
+        and that the attributes are correct.
+        '''
+        # find the category and check it
+        c = Category.get_category('3.091')
+        self.assertEqual(c.name, '3.091')
