@@ -37,8 +37,8 @@ admin.site.register(Filter, FilterAdmin)
 
 class ClaimAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None, {'fields': ['buyer', 'seller', 'item']})
+        (None, {'fields': ['buyer', 'item']})
     ]
-    list_display = ['buyer', 'seller', 'item']
+    list_display = ['buyer', 'item']
 admin.site.register(Claim, ClaimAdmin)
 
