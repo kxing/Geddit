@@ -9,10 +9,16 @@ from django.test import TestCase
 from data.models import User, Category, Item
 
 class UserTest(TestCase):
+    USERNAME = 'asdf1234'
+    FIRST_NAME = 'Asdf'
+    LAST_NAME = 'Qwerty'
+    EMAIL = 'asdf1234@mit.edu'
+    PHONE = '(123)456-7890'
+
     def setUp(self):
         # create a user
-        self.user = User.create_user('asdf1234', 'Asdf', 'Qwerty', \
-                'asdf1234@mit.edu', '(123)456-7890')
+        self.user = User.create_user(self.USERNAME, self.FIRST_NAME, \
+                self.LAST_NAME, self.EMAIL, self.PHONE)
 
     def tearDown(self):
         # delete the user
@@ -26,18 +32,20 @@ class UserTest(TestCase):
         # create a user
 
         # find the user and check it
-        u = User.get_user('asdf1234')
+        u = User.get_user(self.USERNAME)
         self.assertEqual(u, self.user)
-        self.assertEqual(u.username, 'asdf1234')
-        self.assertEqual(u.first_name, 'Asdf')
-        self.assertEqual(u.last_name, 'Qwerty')
-        self.assertEqual(u.email, 'asdf1234@mit.edu')
-        self.assertEqual(u.cell_phone, '(123)456-7890')
+        self.assertEqual(u.username, self.USERNAME)
+        self.assertEqual(u.first_name, self.FIRST_NAME)
+        self.assertEqual(u.last_name, self.LAST_NAME)
+        self.assertEqual(u.email, self.EMAIL)
+        self.assertEqual(u.cell_phone, self.PHONE)
 
 class CategoryTest(TestCase):
+    CATEGORY_NAME = '3.091'
+
     def setUp(self):
         # create a category
-        self.category = Category.create_category('3.091')
+        self.category = Category.create_category(self.CATEGORY_NAME)
 
     def tearDown(self):
         # delete the category
@@ -49,11 +57,20 @@ class CategoryTest(TestCase):
         and that the attributes are correct.
         '''
         # find the category and check it
-        c = Category.get_category('3.091')
+        c = Category.get_category(self.CATEGORY_NAME)
         self.assertEqual(c, self.category)
-        self.assertEqual(c.name, '3.091')
+        self.assertEqual(c.name, self.CATEGORY_NAME)
 
 class ItemTest(TestCase):
+    USERNAME = 'asdf1234'
+    FIRST_NAME = 'Asdf'
+    LAST_NAME = 'Qwerty'
+    EMAIL = 'asdf1234@mit.edu'
+    PHONE = '(123)456-7890'
+
+    TEXTBOOK_CATEGORY = '3.091'
+    VIDEOS_CATEGORY = '5.111'
+
     TEXTBOOK_NAME = '3.091 Textbook'
     TEXTBOOK_DESCRIPTION = 'The textbook for the legendary class ... 3.091!'
     VIDEOS_NAME = '5.111 Video Lecture Series'
@@ -61,12 +78,12 @@ class ItemTest(TestCase):
 
     def setUp(self):
         # create the user
-        self.user = User.create_user('asdf1234', 'Asdf', 'Qwerty', \
-                'asdf1234@mit.edu', '(123)456-7890')
+        self.user = User.create_user(self.USERNAME, self.FIRST_NAME, \
+                self.LAST_NAME, self.EMAIL, self.PHONE)
 
         # create the categories
-        self.category1 = Category.create_category('3.091')
-        self.category2 = Category.create_category('5.111')
+        self.category1 = Category.create_category(self.TEXTBOOK_CATEGORY)
+        self.category2 = Category.create_category(self.VIDEOS_CATEGORY)
 
         # create the items
         self.item1 = Item.create_item(self.user, self.TEXTBOOK_NAME, \
@@ -90,26 +107,12 @@ class ItemTest(TestCase):
         User.delete_user(self.user)
 
     def test_items(self):
+        # check to make sure that both ways of getting items work
         for items in [Item.get_items(self.user), self.user.get_items()]:
+            # check the item count
             self.assertEqual(len(items), 3)
 
-            textbooks = []
-            videos = []
+            self.assertTrue(self.item1 in items)
+            self.assertTrue(self.item2 in items)
+            self.assertTrue(self.item3 in items)
 
-            for item in items:
-                if item.seller_user == self.user and \
-                        item.name == self.TEXTBOOK_NAME and \
-                        item.description == self.TEXTBOOK_DESCRIPTION and \
-                        item.active and \
-                        item.category == self.category1:
-                    textbooks.append(item)
-                elif item.seller_user == self.user and \
-                        item.name == self.VIDEOS_NAME and \
-                        item.description == self.VIDEOS_DESCRIPTION and \
-                        item.active and \
-                        item.category == self.category2:
-                    videos.append(item)
-
-            self.assertEqual(len(textbooks), 2)
-            self.assertNotEqual(textbooks[0], textbooks[1])
-            self.assertEqual(len(videos), 1)
