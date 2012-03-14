@@ -31,6 +31,7 @@ class User(models.Model):
         u = User(username=username, first_name=first_name, \
                 last_name=last_name, email=email, cell_phone=cell_phone)
         u.save()
+        return u
 
     @staticmethod
     def get_user(username):
@@ -55,6 +56,12 @@ class User(models.Model):
         voice.login(GEDDIT_GMAIL, GEDDIT_PASSWORD)
         voice.send_sms(self.cell_phone, message)
 
+    def add_item(self, name, description, category):
+        return Item.create_item(self, name, description, category)
+
+    def get_items(self):
+        return Item.get_items(self)
+
 CATEGORY_NAME_MAX_LENGTH = 100
 
 class Category(models.Model):
@@ -73,6 +80,7 @@ class Category(models.Model):
     def create_category(name):
         c = Category(name=name)
         c.save()
+        return c
 
     @staticmethod
     def get_category(name):
@@ -100,6 +108,21 @@ class Item(models.Model):
     class Meta:
         verbose_name = 'Item'
         verbose_name_plural = 'Items'
+
+    @staticmethod
+    def create_item(seller_user, name, description, category):
+        i = Item(seller_user=seller_user, name=name, description=description, \
+                active=True, category=category)
+        i.save()
+        return i
+
+    @staticmethod
+    def get_items(seller_user):
+        return Item.objects.filter(seller_user=seller_user)
+
+    @staticmethod
+    def delete_item(item):
+        item.delete()
 
 class Filter(models.Model):
     # Django will automatically generate this:
