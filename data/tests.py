@@ -6,7 +6,7 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
-from data.models import User, Category, Item
+from data.models import User, Category, Item, Claim
 
 class UserTest(TestCase):
     USERNAME = 'asdf1234'
@@ -116,3 +116,63 @@ class ItemTest(TestCase):
             self.assertTrue(self.item2 in items)
             self.assertTrue(self.item3 in items)
 
+class ClaimTest(TestCase):
+    BUYER_USERNAME = 'qwerty'
+    BUYER_FIRST_NAME = 'Q'
+    BUYER_LAST_NAME = 'W'
+    BUYER_EMAIL = 'qwerty@mit.edu'
+    BUYER_CELL_PHONE = '(123)456-7890'
+
+    SELLER_USERNAME = 'asdf'
+    SELLER_FIRST_NAME = 'A'
+    SELLER_LAST_NAME = 'S'
+    SELLER_EMAIL = 'asdf@mit.edu'
+    SELLER_CELL_PHONE = '(987)654-3210'
+
+    CATEGORY_1 = '3.091'
+    CATEGORY_2 = '5.111'
+
+    ITEM_1_NAME = '3.091 Textbook'
+    ITEM_1_DESCRIPTION = 'Textbook for Professor Sadoway\'s awesome class!'
+
+    ITEM_2_NAME = '5.111 Video Lectures'
+    ITEM_2_DESCRIPTION = 'Professor Klibinov is hilarious!'
+
+    def setUp(self):
+        # create the users
+        self.buyer = User.create_user(self.BUYER_USERNAME, \
+                self.BUYER_FIRST_NAME, self.BUYER_LAST_NAME, \
+                self.BUYER_EMAIL, self.BUYER_CELL_PHONE)
+        self.seller = User.create_user(self.SELLER_USERNAME, \
+                self.SELLER_FIRST_NAME, self.SELLER_LAST_NAME, \
+                self.SELLER_EMAIL, self.SELLER_CELL_PHONE)
+        # create the categories
+        self.category1 = Category.create_category(self.CATEGORY_1)
+        self.category2 = Category.create_category(self.CATEGORY_2)
+        # create the items
+        self.item1 = Item.create_item(self.seller, self.ITEM_1_NAME, \
+                self.ITEM_1_DESCRIPTION, self.category1)
+        self.item2 = Item.create_item(self.seller, self.ITEM_2_NAME, \
+                self.ITEM_2_DESCRIPTION, self.category2)
+        # create the claims
+        self.claim1 = Claim.create_claim(self.buyer, self.item1)
+        self.claim2 = self.buyer.add_claim(self.item2)
+
+    def tearDown(self):
+        # delete the claims
+        Claim.delete_claim(self.claim1)
+        Claim.delete_claim(self.claim2)
+        # delete the items
+        Item.delete_item(self.item1)
+        Item.delete_item(self.item2)
+        # delete the categories
+        Category.delete_category(self.category1)
+        Category.delete_category(self.category2)
+        # delete the users
+        User.delete_user(self.buyer)
+        User.delete_user(self.seller)
+
+    def test_claims(self):
+        for claims in [Claim.get_claims(self.buyer), self.buyer.get_claims()]:
+            self.assertTrue(self.claim1 in claims)
+            self.assertTrue(self.claim2 in claims)

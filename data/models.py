@@ -62,6 +62,12 @@ class User(models.Model):
     def get_items(self):
         return Item.get_items(self)
 
+    def add_claim(self, item):
+        return Claim.create_claim(self, item)
+
+    def get_claims(self):
+        return Claim.get_claims(self)
+
 CATEGORY_NAME_MAX_LENGTH = 100
 
 class Category(models.Model):
@@ -142,12 +148,25 @@ class Claim(models.Model):
     # Django will automatically generate this:
     # id = models.IntegerField()
     buyer = models.ForeignKey(User, related_name='buyer')
-    seller = models.ForeignKey(User, related_name='seller')
     item = models.ForeignKey(Item)
 
     def __unicode__(self):
-        return '' + str(self.seller) + ' -> ' + str(self.buyer)
+        return str(self.buyer) + ' ' + str(item)
 
     class Meta:
         verbose_name = 'Claim'
         verbose_name_plural = 'Claims'
+
+    @staticmethod
+    def create_claim(buyer, item):
+        c = Claim(buyer=buyer, item=item)
+        c.save()
+        return c
+
+    @staticmethod
+    def get_claims(buyer):
+        return Claim.objects.filter(buyer=buyer)
+
+    @staticmethod
+    def delete_claim(claim):
+        claim.delete()
