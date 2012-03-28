@@ -1,20 +1,31 @@
-<html>
+<html lang="en">
+<head>
+  <title>Geddit</title>
+</head>
 <body>
 
-<div><h1>Geddit</h1></div>
-
-<div>
-  <a href="">Buy</a>
-  <a href="">Sell</a>
-  <a href="">Geddit</a>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/site.css" />
+<div class="heading">
+  <div class="logo">
+    <h1>Geddit</h1>
+  </div>
+  <div class=nav_bar">
+    <div class="nav_buttons">
+      <a href="">Buy</a>
+      <a href="">Sell</a>
+      <a href="">Reserve</a>
+      <a href="">Cart</a>
+      <a href="">Settings</a>
+    </div>
+    <div class="search">
+      <form name="search" action="" method="get">
+        <input type="text" name="query" />
+        <input type="submit" value="Search" />
+      </form>
+    </div>
+  </div>
 </div>
-
-<div>
-  <form name="search" action="" method="get">
-    <input type="text" name="query" />
-    <input type="submit" value="Search" />
-  </form>
-</div>
+<br>
 
 </body>
 </html>
