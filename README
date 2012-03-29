@@ -1,2 +1,11 @@
 Project for 21W.785
 
+What all the shell scripts do:
+
+clean.sh: Removes the .pyc files from the project. (Please run this before committing.)
+initial_data.py: Python shell commands to be run after rebuilding the database.
+        Great for autopopulating the database with data.
+serve.sh: Runs the Django server on port 8000.
+shell.sh: Runs the Django Python shell.
+sync_db.sh: Rebuilds the database. Run this after a SQL schema change.
+test.sh: Run all the tests.
