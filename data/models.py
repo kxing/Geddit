@@ -96,6 +96,10 @@ class Category(models.Model):
     def delete_category(category):
         category.delete()
 
+    @staticmethod
+    def get_all_categories():
+        return Category.objects.all().order_by('name')
+
 ITEM_NAME_MAX_LENGTH = 100
 DESCRIPTION_NAME_MAX_LENGTH = 1000
 

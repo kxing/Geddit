@@ -42,14 +42,17 @@ class UserTest(TestCase):
 
 class CategoryTest(TestCase):
     CATEGORY_NAME = '3.091'
+    CATEGORY2_NAME = '1.00'
 
     def setUp(self):
         # create a category
         self.category = Category.create_category(self.CATEGORY_NAME)
+        self.category2 = Category.create_category(self.CATEGORY2_NAME)
 
     def tearDown(self):
         # delete the category
         Category.delete_category(self.category)
+        Category.delete_category(self.category2)
 
     def test_categories(self):
         '''
@@ -60,6 +63,16 @@ class CategoryTest(TestCase):
         c = Category.get_category(self.CATEGORY_NAME)
         self.assertEqual(c, self.category)
         self.assertEqual(c.name, self.CATEGORY_NAME)
+
+        # repeat for category 2
+        c2 = Category.get_category(self.CATEGORY2_NAME)
+        self.assertEqual(c2, self.category2)
+        self.assertEqual(c2.name, self.CATEGORY2_NAME)
+
+        # test to make sure that the list of all categories is sorted
+        all_categories = Category.get_all_categories()
+        self.assertEqual(all_categories[0], self.category2)
+        self.assertEqual(all_categories[1], self.category) 
 
 class ItemTest(TestCase):
     USERNAME = 'asdf1234'
