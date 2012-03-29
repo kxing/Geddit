@@ -16,3 +16,9 @@
 
 .search {
 }
+
+.sidebar {
+    float: left;
+    width: 100%;
+}
+
