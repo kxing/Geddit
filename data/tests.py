@@ -86,8 +86,10 @@ class ItemTest(TestCase):
 
     TEXTBOOK_NAME = '3.091 Textbook'
     TEXTBOOK_DESCRIPTION = 'The textbook for the legendary class ... 3.091!'
+    TEXTBOOK_PRICE = '30.00'
     VIDEOS_NAME = '5.111 Video Lecture Series'
     VIDEOS_DESCRIPTION = 'Watch 5-fun-fun-fun!'
+    VIDEOS_PRICE = '100.00'
 
     def setUp(self):
         # create the user
@@ -100,11 +102,11 @@ class ItemTest(TestCase):
 
         # create the items
         self.item1 = Item.create_item(self.user, self.TEXTBOOK_NAME, \
-                self.TEXTBOOK_DESCRIPTION, self.category1)
+                self.TEXTBOOK_DESCRIPTION, self.category1, self.TEXTBOOK_PRICE)
         self.item2 = self.user.add_item(self.TEXTBOOK_NAME, \
-                self.TEXTBOOK_DESCRIPTION, self.category1)
+                self.TEXTBOOK_DESCRIPTION, self.category1, self.TEXTBOOK_PRICE)
         self.item3 = self.user.add_item(self.VIDEOS_NAME, \
-                self.VIDEOS_DESCRIPTION, self.category2)
+                self.VIDEOS_DESCRIPTION, self.category2, self.VIDEOS_PRICE)
 
     def tearDown(self):
         # delete the items
@@ -147,9 +149,11 @@ class ClaimTest(TestCase):
 
     ITEM_1_NAME = '3.091 Textbook'
     ITEM_1_DESCRIPTION = 'Textbook for Professor Sadoway\'s awesome class!'
+    ITEM_1_PRICE = '30.00'
 
     ITEM_2_NAME = '5.111 Video Lectures'
     ITEM_2_DESCRIPTION = 'Professor Klibinov is hilarious!'
+    ITEM_2_PRICE = '100.00'
 
     def setUp(self):
         # create the users
@@ -164,9 +168,9 @@ class ClaimTest(TestCase):
         self.category2 = Category.create_category(self.CATEGORY_2)
         # create the items
         self.item1 = Item.create_item(self.seller, self.ITEM_1_NAME, \
-                self.ITEM_1_DESCRIPTION, self.category1)
+                self.ITEM_1_DESCRIPTION, self.category1, self.ITEM_1_PRICE)
         self.item2 = Item.create_item(self.seller, self.ITEM_2_NAME, \
-                self.ITEM_2_DESCRIPTION, self.category2)
+                self.ITEM_2_DESCRIPTION, self.category2, self.ITEM_2_PRICE)
         # create the claims
         self.claim1 = Claim.create_claim(self.buyer, self.item1)
         self.claim2 = self.buyer.add_claim(self.item2)
