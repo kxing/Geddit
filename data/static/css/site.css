@@ -1,24 +1,30 @@
-.logo {
+#logo {
     float: left;
     width: 300px;
 }
-.nav_bar {
+
+#nav_bar {
     float: right;
 }
-.nav_buttons {
+
+#nav_buttons {
 }
-.heading {
+
+#heading {
     clear: both;
     height: 90px;
     width: 100%;
 }
-.search {
+
+#search {
 }
-.sidebar {
+
+#sidebar {
     float: left;
     width: 300px;
 }
-.content {
+
+#content {
     float: left;
 }
 

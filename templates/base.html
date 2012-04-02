@@ -5,19 +5,19 @@
 <body>
 
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/site.css" />
-<div class="heading">
-  <div class="logo">
+<div id="heading">
+  <div id="logo">
     <h1>Geddit</h1>
   </div>
-  <div class=nav_bar">
-    <div class="nav_buttons">
+  <div id=nav_bar">
+    <div id="nav_buttons">
       <a href="">Buy</a>
       <a href="">Sell</a>
       <a href="">Reserve</a>
       <a href="">Cart</a>
       <a href="">Settings</a>
     </div>
-    <div class="search">
+    <div id="search">
       <form name="search" action="" method="get">
         <input type="text" name="query" />
         <input type="submit" value="Search" />
@@ -25,14 +25,14 @@
     </div>
   </div>
 </div>
-<div class="sidebar">
+<div id="sidebar">
   <h3>Browse by Category</h3>
   {% for category in categories %}
     <a href="">{{ category.name }}</a><br>
   {% endfor %}
 </div>
 
-<div class="content">
+<div id="content">
   {% block content %}{% endblock %}
 </div>
 </body>
