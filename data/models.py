@@ -131,6 +131,10 @@ class Item(models.Model):
         return Item.objects.filter(seller_user=seller_user)
 
     @staticmethod
+    def get_all_items():
+        return Item.objects.all().order_by('name')
+
+    @staticmethod
     def delete_item(item):
         item.delete()
 

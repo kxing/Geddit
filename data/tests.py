@@ -121,7 +121,7 @@ class ItemTest(TestCase):
 
     def test_items(self):
         # check to make sure that both ways of getting items work
-        for items in [Item.get_items(self.user), self.user.get_items()]:
+        for items in [Item.get_items(self.user), self.user.get_items(), Item.get_all_items()]:
             # check the item count
             self.assertEqual(len(items), 3)
 
