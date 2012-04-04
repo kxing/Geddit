@@ -1,36 +1,54 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Geddit</title>
+  <title>{% block title %}Geddit{% endblock %}</title>
+  
+  {% block imports %}
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/site.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"
+        type="text/javascript"
+        charset="utf8"></script>
+  {% endblock %}
 </head>
-<body>
-Geddit is awesome!
 
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/site.css" />
+<body>  
+
 <div id="heading">
   <div id="logo">
-    <h1>Geddit</h1>
+    <h1><a href="/">Geddit</a></h1>
   </div>
+  
   <div id=nav_bar">
     <div id="nav_buttons">
-      <a href="">Buy</a>
-      <a href="">Sell</a>
+    {% block navigation %}
+      <a href="/buy">Buy</a>
+      <a href="/sell">Sell</a>
       <a href="">Reserve</a>
       <a href="">Cart</a>
       <a href="">Settings</a>
+    {% endblock %}
     </div>
+    
     <div id="search">
+    {% block search %}
       <form name="search" action="" method="get">
         <input type="text" name="query" />
         <input type="submit" value="Search" />
       </form>
+    {% endblock %}
     </div>
+    
   </div>
 </div>
+
+
 <div id="sidebar">
+  {% block sidebar %}
   <h3>Browse by Category</h3>
   {% for category in categories %}
     <a href="">{{ category.name }}</a><br>
   {% endfor %}
+  {% endblock %}
 </div>
 
 <div id="content">
@@ -38,4 +56,9 @@ Geddit is awesome!
 </div>
 
 </body>
+
+{% block js_extra_imports %}
+<script src="{{ STATIC_URL }}js/main.js" type="text/javascript"></script>
+{% endblock %}
+
 </html>
