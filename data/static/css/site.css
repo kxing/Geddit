@@ -1,0 +1,30 @@
+#logo {
+    float: left;
+    width: 300px;
+}
+
+#nav_bar {
+    float: right;
+}
+
+#nav_buttons {
+}
+
+#heading {
+    clear: both;
+    height: 90px;
+    width: 100%;
+}
+
+#search {
+}
+
+#sidebar {
+    float: left;
+    width: 300px;
+}
+
+#content {
+    float: left;
+}
+

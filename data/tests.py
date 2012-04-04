@@ -42,14 +42,17 @@ class UserTest(TestCase):
 
 class CategoryTest(TestCase):
     CATEGORY_NAME = '3.091'
+    CATEGORY2_NAME = '1.00'
 
     def setUp(self):
         # create a category
         self.category = Category.create_category(self.CATEGORY_NAME)
+        self.category2 = Category.create_category(self.CATEGORY2_NAME)
 
     def tearDown(self):
         # delete the category
         Category.delete_category(self.category)
+        Category.delete_category(self.category2)
 
     def test_categories(self):
         '''
@@ -60,6 +63,16 @@ class CategoryTest(TestCase):
         c = Category.get_category(self.CATEGORY_NAME)
         self.assertEqual(c, self.category)
         self.assertEqual(c.name, self.CATEGORY_NAME)
+
+        # repeat for category 2
+        c2 = Category.get_category(self.CATEGORY2_NAME)
+        self.assertEqual(c2, self.category2)
+        self.assertEqual(c2.name, self.CATEGORY2_NAME)
+
+        # test to make sure that the list of all categories is sorted
+        all_categories = Category.get_all_categories()
+        self.assertEqual(all_categories[0], self.category2)
+        self.assertEqual(all_categories[1], self.category) 
 
 class ItemTest(TestCase):
     USERNAME = 'asdf1234'
@@ -73,8 +86,10 @@ class ItemTest(TestCase):
 
     TEXTBOOK_NAME = '3.091 Textbook'
     TEXTBOOK_DESCRIPTION = 'The textbook for the legendary class ... 3.091!'
+    TEXTBOOK_PRICE = '30.00'
     VIDEOS_NAME = '5.111 Video Lecture Series'
     VIDEOS_DESCRIPTION = 'Watch 5-fun-fun-fun!'
+    VIDEOS_PRICE = '100.00'
 
     def setUp(self):
         # create the user
@@ -87,11 +102,11 @@ class ItemTest(TestCase):
 
         # create the items
         self.item1 = Item.create_item(self.user, self.TEXTBOOK_NAME, \
-                self.TEXTBOOK_DESCRIPTION, self.category1)
+                self.TEXTBOOK_DESCRIPTION, self.category1, self.TEXTBOOK_PRICE)
         self.item2 = self.user.add_item(self.TEXTBOOK_NAME, \
-                self.TEXTBOOK_DESCRIPTION, self.category1)
+                self.TEXTBOOK_DESCRIPTION, self.category1, self.TEXTBOOK_PRICE)
         self.item3 = self.user.add_item(self.VIDEOS_NAME, \
-                self.VIDEOS_DESCRIPTION, self.category2)
+                self.VIDEOS_DESCRIPTION, self.category2, self.VIDEOS_PRICE)
 
     def tearDown(self):
         # delete the items
@@ -108,7 +123,7 @@ class ItemTest(TestCase):
 
     def test_items(self):
         # check to make sure that both ways of getting items work
-        for items in [Item.get_items(self.user), self.user.get_items()]:
+        for items in [Item.get_items(self.user), self.user.get_items(), Item.get_all_items()]:
             # check the item count
             self.assertEqual(len(items), 3)
 
@@ -134,9 +149,11 @@ class ClaimTest(TestCase):
 
     ITEM_1_NAME = '3.091 Textbook'
     ITEM_1_DESCRIPTION = 'Textbook for Professor Sadoway\'s awesome class!'
+    ITEM_1_PRICE = '30.00'
 
     ITEM_2_NAME = '5.111 Video Lectures'
     ITEM_2_DESCRIPTION = 'Professor Klibinov is hilarious!'
+    ITEM_2_PRICE = '100.00'
 
     def setUp(self):
         # create the users
@@ -151,9 +168,9 @@ class ClaimTest(TestCase):
         self.category2 = Category.create_category(self.CATEGORY_2)
         # create the items
         self.item1 = Item.create_item(self.seller, self.ITEM_1_NAME, \
-                self.ITEM_1_DESCRIPTION, self.category1)
+                self.ITEM_1_DESCRIPTION, self.category1, self.ITEM_1_PRICE)
         self.item2 = Item.create_item(self.seller, self.ITEM_2_NAME, \
-                self.ITEM_2_DESCRIPTION, self.category2)
+                self.ITEM_2_DESCRIPTION, self.category2, self.ITEM_2_PRICE)
         # create the claims
         self.claim1 = Claim.create_claim(self.buyer, self.item1)
         self.claim2 = self.buyer.add_claim(self.item2)

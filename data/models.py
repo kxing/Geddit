@@ -2,6 +2,7 @@ from django.db import models
 import smtplib
 from email.mime.text import MIMEText
 from googlevoice import Voice
+from datetime import datetime
 
 USERNAME_MAX_LENGTH = 25
 PERSON_NAME_MAX_LENGTH = 25
@@ -56,8 +57,8 @@ class User(models.Model):
         voice.login(GEDDIT_GMAIL, GEDDIT_PASSWORD)
         voice.send_sms(self.cell_phone, message)
 
-    def add_item(self, name, description, category):
-        return Item.create_item(self, name, description, category)
+    def add_item(self, name, description, category, price):
+        return Item.create_item(self, name, description, category, price)
 
     def get_items(self):
         return Item.get_items(self)
@@ -96,6 +97,10 @@ class Category(models.Model):
     def delete_category(category):
         category.delete()
 
+    @staticmethod
+    def get_all_categories():
+        return Category.objects.all().order_by('name')
+
 ITEM_NAME_MAX_LENGTH = 100
 DESCRIPTION_NAME_MAX_LENGTH = 1000
 
@@ -107,6 +112,8 @@ class Item(models.Model):
     description = models.CharField(max_length=DESCRIPTION_NAME_MAX_LENGTH)
     active = models.BooleanField()
     category = models.ForeignKey(Category)
+    upload_time = models.DateTimeField(default=datetime.utcnow)
+    price = models.DecimalField(max_digits=8, decimal_places=2)
 
     def __unicode__(self):
         return self.name
@@ -116,15 +123,19 @@ class Item(models.Model):
         verbose_name_plural = 'Items'
 
     @staticmethod
-    def create_item(seller_user, name, description, category):
+    def create_item(seller_user, name, description, category, price):
         i = Item(seller_user=seller_user, name=name, description=description, \
-                active=True, category=category)
+                active=True, category=category, price=price)
         i.save()
         return i
 
     @staticmethod
     def get_items(seller_user):
         return Item.objects.filter(seller_user=seller_user)
+
+    @staticmethod
+    def get_all_items():
+        return Item.objects.all().order_by('-upload_time')
 
     @staticmethod
     def delete_item(item):
