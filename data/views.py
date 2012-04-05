@@ -12,7 +12,8 @@ from datetime import datetime
 def index(request):
     return render(request, 'index.html', {
             'categories': Category.get_all_categories(),
-            'items': Item.get_all_items()
+            'items': Item.get_all_items(),
+            'user': get_current_user(),
         },
         context_instance=RequestContext(request))
 
@@ -40,7 +41,8 @@ def create_listing(request):
         
     return render(request, 'create_listing.html', {
             'form': form,
-            'categories': Category.get_all_categories()
+            'categories': Category.get_all_categories(),
+            'user': get_current_user(),
         },
         context_instance=RequestContext(request))
 
