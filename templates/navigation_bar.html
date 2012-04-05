@@ -1,0 +1,21 @@
+<div id=nav_bar">
+  <div id="nav_buttons">
+    {% block navigation %}
+      <a href="/buy">Buy</a>
+      <a href="/sell">Sell</a>
+      <a href="">Reserve</a>
+      <a href="">Cart</a>
+      <a href="">Settings</a>
+    {% endblock %}
+  </div>
+  <div id="search">
+    {% block search %}
+    <form name="search" action="" method="get">
+      <input type="text" name="query" />
+      <input type="submit" value="Search" />
+    </form>
+    {% endblock %}
+  </div>
+
+</div>
+
