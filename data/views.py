@@ -30,7 +30,7 @@ def create_listing(request):
             upload_time = datetime.utcnow
             
             # TODO: Grab username from web cert
-            user = User.get_user("pwh")
+            user = get_current_user()
             
             Item.create_item(user, name, description, category, price)
             
@@ -43,3 +43,7 @@ def create_listing(request):
             'categories': Category.get_all_categories()
         },
         context_instance=RequestContext(request))
+
+def get_current_user():
+    # TODO: replace this with the user from the web cert
+    return User.get_user('kxing')
