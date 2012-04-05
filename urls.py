@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import patterns, include, url
 
 from tastypie.api import Api
-from Geddit.api.resources import UserResource, ItemResource, ClaimResource, CategoryResource, FilterResource
+from geddit.api.resources import UserResource, ItemResource, ClaimResource, CategoryResource, FilterResource
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()

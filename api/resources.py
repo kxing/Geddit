@@ -1,6 +1,6 @@
 from tastypie.resources import ModelResource
 from tastypie import fields
-from Geddit.data.models import User, Claim, Filter, Category, Item
+from geddit.data.models import User, Claim, Filter, Category, Item
 from tastypie.constants import ALL, ALL_WITH_RELATIONS
 
 class UserResource(ModelResource):
