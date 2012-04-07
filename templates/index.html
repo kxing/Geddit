@@ -13,7 +13,9 @@
       ${{ item.price }}
     </div>
     <div class="item-claim-button">
-      <form name="claim" action="" method="get">
+      <form name="claim" action="/claim_listing" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="item_id" value={{ item.id }}>
         <input type="submit" value="Claim">
       </form>
     </div>

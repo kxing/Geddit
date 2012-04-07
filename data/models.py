@@ -130,6 +130,10 @@ class Item(models.Model):
         return i
 
     @staticmethod
+    def get_item_by_id(id):
+        return Item.objects.get(id=id)
+
+    @staticmethod
     def get_items(seller_user):
         return Item.objects.filter(seller_user=seller_user)
 

@@ -130,6 +130,9 @@ class ItemTest(TestCase):
             self.assertTrue(self.item1 in items)
             self.assertTrue(self.item2 in items)
             self.assertTrue(self.item3 in items)
+        self.assertEqual(Item.get_item_by_id(self.item1.id), self.item1)
+        self.assertEqual(Item.get_item_by_id(self.item2.id), self.item2)
+        self.assertEqual(Item.get_item_by_id(self.item3.id), self.item3)
 
 class ClaimTest(TestCase):
     BUYER_USERNAME = 'qwerty'

@@ -34,7 +34,6 @@ def create_listing(request):
             user = get_current_user()
             
             Item.create_item(user, name, description, category, price)
-            print 'success'
             return redirect('data.views.index')
     else:
         return redirect('data.views.sell_page')
@@ -48,6 +47,13 @@ def sell_page(request):
             'user': get_current_user(),
         },
         context_instance=RequestContext(request))
+
+def claim_listing(request):
+    if request.method != 'POST':
+        return redirect('data.views.index')
+    item_id = request.POST['item_id']
+    get_current_user().add_claim(Item.get_item_by_id(item_id))
+    return redirect('data.views.index')
 
 def get_current_user():
     # TODO: replace this with the user from the web cert

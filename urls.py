@@ -31,6 +31,7 @@ urlpatterns = patterns('',
     url(r'^sell$', 'data.views.sell_page'),
     url(r'^buy$', 'data.views.index'),
     url(r'^create_listing$', 'data.views.create_listing'),
+    url(r'^claim_listing$', 'data.views.claim_listing'),
 
     #url(r'login', 'auth.view.scripts_login'),
 )
