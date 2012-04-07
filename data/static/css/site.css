@@ -1,20 +1,7 @@
-#logo {
-    float: left;
-    width: 300px;
-}
-
 #heading {
     clear: both;
     height: 110px;
     width: 100%;
-}
-
-#search {
-}
-
-#sidebar {
-    float: left;
-    width: 300px;
 }
 
 #content {
