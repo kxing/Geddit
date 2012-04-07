@@ -22,11 +22,11 @@ class ItemAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {'fields': ['name']}),
         ('Item Information',
-            {'fields': ['description', 'category', 'active',
+            {'fields': ['description', 'category', 'claimed',
             'seller_user', 'upload_time', 'price']}
         ),
     ]
-    list_display = ['name', 'category', 'active', 'seller_user', 'price']
+    list_display = ['name', 'category', 'claimed', 'seller_user', 'price']
 admin.site.register(Item, ItemAdmin)
 
 class FilterAdmin(admin.ModelAdmin):

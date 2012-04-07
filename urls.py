@@ -33,7 +33,8 @@ urlpatterns = patterns('',
     url(r'^cart$', 'data.views.cart_page'),
 
     url(r'^create_listing$', 'data.views.create_listing'),
-    url(r'^claim_listing$', 'data.views.claim_listing'),
+    url(r'^claim$', 'data.views.claim_listing'),
+    url(r'^unclaim$', 'data.views.unclaim_listing'),
 
     #url(r'login', 'auth.view.scripts_login'),
 )

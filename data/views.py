@@ -61,7 +61,14 @@ def claim_listing(request):
         return redirect('data.views.buy_page')
     item = Item.get_item_by_id(request.POST['item_id'])
     get_current_user().add_claim(item)
-    return redirect('data.views.buy_page')
+    return redirect('data.views.cart_page')
+
+def unclaim_listing(request):
+    if request.method != 'POST':
+        return redirect('data.views.cart_page')
+    item = Item.get_item_by_id(request.POST['item_id'])
+    get_current_user().remove_claim(item)
+    return redirect('data.views.cart_page')
 
 def get_current_user():
     # TODO: replace this with the user from the web cert

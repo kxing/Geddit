@@ -66,6 +66,9 @@ class User(models.Model):
     def add_claim(self, item):
         return Claim.create_claim(self, item)
 
+    def remove_claim(self, item):
+        Claim.delete_claim(Claim.get_claim(self, item))
+
     def get_claims(self):
         return Claim.get_claims(self)
 
@@ -110,7 +113,7 @@ class Item(models.Model):
     seller_user = models.ForeignKey(User)
     name = models.CharField(max_length=ITEM_NAME_MAX_LENGTH)
     description = models.CharField(max_length=DESCRIPTION_NAME_MAX_LENGTH)
-    active = models.BooleanField()
+    claimed = models.BooleanField()
     category = models.ForeignKey(Category)
     upload_time = models.DateTimeField(default=datetime.utcnow)
     price = models.DecimalField(max_digits=8, decimal_places=2)
@@ -125,7 +128,7 @@ class Item(models.Model):
     @staticmethod
     def create_item(seller_user, name, description, category, price):
         i = Item(seller_user=seller_user, name=name, description=description, \
-                active=True, category=category, price=price)
+                claimed=False, category=category, price=price)
         i.save()
         return i
 
@@ -139,7 +142,7 @@ class Item(models.Model):
 
     @staticmethod
     def get_all_items():
-        return Item.objects.all().order_by('-upload_time')
+        return Item.objects.all().filter(claimed=False).order_by('-upload_time')
 
     @staticmethod
     def delete_item(item):
@@ -166,7 +169,7 @@ class Claim(models.Model):
     item = models.ForeignKey(Item)
 
     def __unicode__(self):
-        return str(self.buyer) + ' ' + str(item)
+        return str(self.buyer) + ' ' + str(self.item)
 
     class Meta:
         verbose_name = 'Claim'
@@ -176,6 +179,8 @@ class Claim(models.Model):
     def create_claim(buyer, item):
         c = Claim(buyer=buyer, item=item)
         c.save()
+        item.claimed = True
+        item.save()
         return c
 
     @staticmethod
@@ -183,5 +188,11 @@ class Claim(models.Model):
         return Claim.objects.filter(buyer=buyer)
 
     @staticmethod
+    def get_claim(buyer, item):
+        return Claim.objects.get(buyer=buyer, item=item)
+
+    @staticmethod
     def delete_claim(claim):
+        claim.item.claimed = False
+        claim.item.save()
         claim.delete()

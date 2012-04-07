@@ -174,14 +174,8 @@ class ClaimTest(TestCase):
                 self.ITEM_1_DESCRIPTION, self.category1, self.ITEM_1_PRICE)
         self.item2 = Item.create_item(self.seller, self.ITEM_2_NAME, \
                 self.ITEM_2_DESCRIPTION, self.category2, self.ITEM_2_PRICE)
-        # create the claims
-        self.claim1 = Claim.create_claim(self.buyer, self.item1)
-        self.claim2 = self.buyer.add_claim(self.item2)
 
     def tearDown(self):
-        # delete the claims
-        Claim.delete_claim(self.claim1)
-        Claim.delete_claim(self.claim2)
         # delete the items
         Item.delete_item(self.item1)
         Item.delete_item(self.item2)
@@ -193,6 +187,34 @@ class ClaimTest(TestCase):
         User.delete_user(self.seller)
 
     def test_claims(self):
+        # check that the items are not claimed
+        self.assertFalse(self.item1.claimed)
+        self.assertFalse(self.item2.claimed)
+
+        # create the claims
+        self.claim1 = Claim.create_claim(self.buyer, self.item1)
+        self.claim2 = self.buyer.add_claim(self.item2)
+
+        # check that the items are claimed
+        self.assertTrue(self.item1.claimed)
+        self.assertTrue(self.item2.claimed)
+
         for claims in [Claim.get_claims(self.buyer), self.buyer.get_claims()]:
             self.assertTrue(self.claim1 in claims)
             self.assertTrue(self.claim2 in claims)
+        self.assertEqual(Claim.get_claim(self.buyer, self.item1), self.claim1)
+
+        # delete the second claim and verify that the item is not claimed
+        self.buyer.remove_claim(self.item2)
+        # refresh self.item2
+        self.item2 = Item.get_item_by_id(self.item2.id)
+        self.assertFalse(self.item2.claimed)
+
+        # add the claim back
+        self.claim2 = self.buyer.add_claim(self.item2)
+        self.assertTrue(self.item2.claimed)
+
+        # delete the claims
+        Claim.delete_claim(self.claim1)
+        Claim.delete_claim(self.claim2)
+
