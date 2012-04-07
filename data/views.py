@@ -34,10 +34,13 @@ def create_listing(request):
             user = get_current_user()
             
             Item.create_item(user, name, description, category, price)
-            
+            print 'success'
             return redirect('data.views.index')
     else:
-        form = ItemForm()
+        return redirect('data.views.sell_page')
+
+def sell_page(request):
+    form = ItemForm()
         
     return render(request, 'create_listing.html', {
             'form': form,

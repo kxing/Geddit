@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <form action="/item" method="post">
+    <form action="/create_listing" method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Create Listing" />
