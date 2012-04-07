@@ -3,13 +3,6 @@
     width: 300px;
 }
 
-#nav_bar {
-    float: right;
-}
-
-#nav_buttons {
-}
-
 #heading {
     clear: both;
     height: 110px;
@@ -28,24 +21,4 @@
     float: left;
 }
 
-.item-listing {
-}
 
-.item-name {
-    width: 200px;
-    float: left;
-}
-
-.item-description {
-    width: 400px;
-    float: left;
-}
-
-.item-price {
-    width: 100px;
-    float: left;
-}
-
-.item-claim-button {
-    float: left;
-}
