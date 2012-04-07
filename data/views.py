@@ -21,6 +21,20 @@ def buy_page(request):
     return render(request, 'buy.html', render_params, \
             context_instance=RequestContext(request))
 
+def sell_page(request):
+    form = ItemForm()
+    render_params = base_params()
+    render_params['form'] = form
+        
+    return render(request, 'create_listing.html', render_params, \
+            context_instance=RequestContext(request))
+
+def cart_page(request):
+    render_params = base_params()
+    render_params['claims'] = get_current_user().get_claims()
+    return render(request, 'cart.html', render_params, \
+            context_instance=RequestContext(request))
+
 def create_listing(request):
     if request.method == "POST":
         form = ItemForm(request.POST)
@@ -42,26 +56,12 @@ def create_listing(request):
     else:
         return redirect('data.views.sell_page')
 
-def sell_page(request):
-    form = ItemForm()
-    render_params = base_params()
-    render_params['form'] = form
-        
-    return render(request, 'create_listing.html', render_params, \
-            context_instance=RequestContext(request))
-
 def claim_listing(request):
     if request.method != 'POST':
         return redirect('data.views.buy_page')
-    item_id = request.POST['item_id']
-    get_current_user().add_claim(Item.get_item_by_id(item_id))
+    item = Item.get_item_by_id(request.POST['item_id'])
+    get_current_user().add_claim(item)
     return redirect('data.views.buy_page')
-
-def cart_page(request):
-    render_params = base_params()
-    render_params['claims'] = get_current_user().get_claims()
-    return render(request, 'cart.html', render_params, \
-            context_instance=RequestContext(request))
 
 def get_current_user():
     # TODO: replace this with the user from the web cert
