@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/claim.css" />
+
+{% for claim in claims %}
+  <div class="claim">
+    <div class="claim-item-name">
+      {{ claim.item.name }}
+    </div>
+    <div class="claim-item-description">
+      {{ claim.item.description }}
+    </div>
+    <div class="claim-item-price">
+      ${{ claim.item.price }}
+    </div>
+    <div class="claim-remove-button">
+      <form name="unclaim" action="/unclaim" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="item_id" value={{ claim.item.id }}>
+        <input type="submit" value="Unclaim">
+      </form>
+    </div>
+    <div class="claim-email-seller">
+      <form name="email_seller" action="/email_seller" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="item_id" value={{ claim.item.id }}>
+        <input type="submit" value="Email Seller">
+      </form>
+    </div>
+  </div>
+{% endfor %}
+{% endblock %}
+

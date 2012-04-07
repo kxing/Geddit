@@ -27,9 +27,11 @@ urlpatterns = patterns('',
     #url(r'^jstest/', 'jstest.views.index'),
     url(r'^api/', include(v1_api.urls)),
     url(r'^$', 'data.views.index'),
-    
+
+    url(r'^buy$', 'data.views.index'),    
     url(r'^sell$', 'data.views.sell_page'),
-    url(r'^buy$', 'data.views.index'),
+    url(r'^cart$', 'data.views.cart_page'),
+
     url(r'^create_listing$', 'data.views.create_listing'),
     url(r'^claim_listing$', 'data.views.claim_listing'),
 
