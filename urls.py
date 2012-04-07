@@ -26,9 +26,9 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     #url(r'^jstest/', 'jstest.views.index'),
     url(r'^api/', include(v1_api.urls)),
-    url(r'^$', 'data.views.index'),
+    url(r'^$', 'data.views.buy_page'),
 
-    url(r'^buy$', 'data.views.index'),    
+    url(r'^buy$', 'data.views.buy_page'),    
     url(r'^sell$', 'data.views.sell_page'),
     url(r'^cart$', 'data.views.cart_page'),
 

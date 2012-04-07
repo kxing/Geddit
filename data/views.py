@@ -16,9 +16,9 @@ def base_params():
         'user': get_current_user(), \
     }
 
-def index(request):
+def buy_page(request):
     render_params = base_params()
-    return render(request, 'index.html', render_params, \
+    return render(request, 'buy.html', render_params, \
             context_instance=RequestContext(request))
 
 def create_listing(request):
@@ -38,7 +38,7 @@ def create_listing(request):
             user = get_current_user()
             
             Item.create_item(user, name, description, category, price)
-            return redirect('data.views.index')
+            return redirect('data.views.buy_page')
     else:
         return redirect('data.views.sell_page')
 
@@ -52,10 +52,10 @@ def sell_page(request):
 
 def claim_listing(request):
     if request.method != 'POST':
-        return redirect('data.views.index')
+        return redirect('data.views.buy_page')
     item_id = request.POST['item_id']
     get_current_user().add_claim(Item.get_item_by_id(item_id))
-    return redirect('data.views.index')
+    return redirect('data.views.buy_page')
 
 def cart_page(request):
     render_params = base_params()
