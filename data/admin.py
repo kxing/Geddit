@@ -35,6 +35,9 @@ class ItemAdmin(admin.ModelAdmin):
             {'fields': ['description', 'category', 'claimed',
             'seller_user', 'upload_time', 'price']}
         ),
+        ('Media',
+            {'fields': ['image']}
+        )
     ]
     list_display = ['name', 'category', 'claimed', 'seller_user', 'price']
 admin.site.register(Item, ItemAdmin)

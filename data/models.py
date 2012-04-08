@@ -150,6 +150,7 @@ class Item(models.Model):
     category = models.ForeignKey(Category)
     upload_time = models.DateTimeField(default=datetime.utcnow)
     price = models.DecimalField(max_digits=8, decimal_places=2)
+    image = models.ImageField(upload_to="images/%Y/%m/%d/", blank=True, null=True)
 
     def __unicode__(self):
         return self.name
@@ -159,9 +160,9 @@ class Item(models.Model):
         verbose_name_plural = 'Items'
 
     @staticmethod
-    def create_item(seller_user, name, description, category, price):
+    def create_item(seller_user, name, description, category, price, image=None):
         i = Item(seller_user=seller_user, name=name, description=description, \
-                claimed=False, category=category, price=price)
+                claimed=False, category=category, price=price, image=image)
         i.save()
         return i
 
