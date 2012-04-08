@@ -52,9 +52,7 @@ def create_listing(request):
             upload_time = datetime.utcnow
             
             # TODO: Grab username from web cert
-            user = get_current_user()
-            
-            Item.create_item(user, name, description, category, price, image)
+            get_current_user().add_item(name, description, category, price, image)
             return redirect('data.views.buy_page')
     else:
         return redirect('data.views.sell_page')
