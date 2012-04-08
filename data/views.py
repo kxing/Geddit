@@ -25,6 +25,8 @@ def sell_page(request):
     form = ItemForm()
     render_params = base_params()
     render_params['form'] = form
+    render_params['latitude'] = get_current_user().location.latitude
+    render_params['longitude'] = get_current_user().location.longitude
         
     return render(request, 'create_listing.html', render_params, \
             context_instance=RequestContext(request))

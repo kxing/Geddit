@@ -5,10 +5,10 @@ from data.models import User, Category, Item, Filter, Claim, Location
 import time
 
 # Make location
-maseeh = Location.create_location('Maseeh Hall', '24.5325235', '95.9283942834')
-next_house = Location.create_location('Next House', '12.4234234', '012.1241241')
-bexely = Location.create_location('Bexely', '94.124124124', '124.93845345')
-print maseeh
+maseeh = Location.create_location('Maseeh Hall', '42.35764801061463', '-71.09338732275393')
+next_house = Location.create_location('Next House', '42.354714540813504', '-71.10203476461794')
+bexely = Location.create_location('Bexely', '42.35852604285305', '-71.09368236574556')
+
 # Add in categories
 girs = Category.create_category('GIRs')
 furniture = Category.create_category('Furniture')
