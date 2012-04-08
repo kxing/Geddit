@@ -90,8 +90,8 @@ class User(models.Model):
         voice.login(GEDDIT_GMAIL, GEDDIT_PASSWORD)
         voice.send_sms(self.cell_phone, message)
 
-    def add_item(self, name, description, category, price):
-        return Item.create_item(self, name, description, category, price)
+    def add_item(self, name, description, category, price, image=None):
+        return Item.create_item(self, name, description, category, price, image=image)
 
     def get_items(self):
         return Item.get_items(self)
