@@ -50,7 +50,7 @@ class User(models.Model):
     last_name = models.CharField(max_length=PERSON_NAME_MAX_LENGTH)
     email = models.EmailField()
     cell_phone = models.CharField(max_length=PHONE_NUMBER_MAX_LENGTH)
-    location = models.ForeignKey(Location)
+    location = models.ForeignKey(Location, blank=True, null=True)
 
     def __unicode__(self):
         return self.first_name + ' ' + self.last_name
@@ -74,7 +74,7 @@ class User(models.Model):
     @staticmethod
     def delete_user(user):
         user.delete()
-
+    
     def send_email(self, message, subject):
         msg = MIMEText(message)
         msg['Subject'] = subject

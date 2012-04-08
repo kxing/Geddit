@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block content %}
-    <form enctype='multipart/form-data' action="/create_listing" method="post">
+    <form enctype='multipart/form-data' action="/sell" method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Create Listing" />
