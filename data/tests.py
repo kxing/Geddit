@@ -6,7 +6,7 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
-from data.models import User, Category, Item, Claim
+from data.models import User, Category, Item, Claim, Location
 
 class UserTest(TestCase):
     USERNAME = 'asdf1234'
@@ -14,11 +14,12 @@ class UserTest(TestCase):
     LAST_NAME = 'Qwerty'
     EMAIL = 'asdf1234@mit.edu'
     PHONE = '(123)456-7890'
+    LOCATION = Location.create_location('qwerty', '92.123', '321.29')
 
     def setUp(self):
         # create a user
         self.user = User.create_user(self.USERNAME, self.FIRST_NAME, \
-                self.LAST_NAME, self.EMAIL, self.PHONE)
+                self.LAST_NAME, self.EMAIL, self.PHONE, self.LOCATION)
 
     def tearDown(self):
         # delete the user
@@ -39,7 +40,7 @@ class UserTest(TestCase):
         self.assertEqual(u.last_name, self.LAST_NAME)
         self.assertEqual(u.email, self.EMAIL)
         self.assertEqual(u.cell_phone, self.PHONE)
-
+        
 class CategoryTest(TestCase):
     CATEGORY_NAME = '3.091'
     CATEGORY2_NAME = '1.00'
@@ -80,6 +81,7 @@ class ItemTest(TestCase):
     LAST_NAME = 'Qwerty'
     EMAIL = 'asdf1234@mit.edu'
     PHONE = '(123)456-7890'
+    LOCATION = Location.create_location('asdffdasa', '12.345', '54.321')
 
     TEXTBOOK_CATEGORY = '3.091'
     VIDEOS_CATEGORY = '5.111'
@@ -94,7 +96,7 @@ class ItemTest(TestCase):
     def setUp(self):
         # create the user
         self.user = User.create_user(self.USERNAME, self.FIRST_NAME, \
-                self.LAST_NAME, self.EMAIL, self.PHONE)
+                self.LAST_NAME, self.EMAIL, self.PHONE, self.LOCATION)
 
         # create the categories
         self.category1 = Category.create_category(self.TEXTBOOK_CATEGORY)
@@ -140,12 +142,14 @@ class ClaimTest(TestCase):
     BUYER_LAST_NAME = 'W'
     BUYER_EMAIL = 'qwerty@mit.edu'
     BUYER_CELL_PHONE = '(123)456-7890'
+    BUYER_LOCATION = Location.create_location('asdf', '92.123', '92.321')
 
     SELLER_USERNAME = 'asdf'
     SELLER_FIRST_NAME = 'A'
     SELLER_LAST_NAME = 'S'
     SELLER_EMAIL = 'asdf@mit.edu'
     SELLER_CELL_PHONE = '(987)654-3210'
+    SELLER_LOCATION = Location.create_location('asdf', '55.555', '55.555')
 
     CATEGORY_1 = '3.091'
     CATEGORY_2 = '5.111'
@@ -162,10 +166,12 @@ class ClaimTest(TestCase):
         # create the users
         self.buyer = User.create_user(self.BUYER_USERNAME, \
                 self.BUYER_FIRST_NAME, self.BUYER_LAST_NAME, \
-                self.BUYER_EMAIL, self.BUYER_CELL_PHONE)
+                self.BUYER_EMAIL, self.BUYER_CELL_PHONE,
+                self.BUYER_LOCATION)
         self.seller = User.create_user(self.SELLER_USERNAME, \
                 self.SELLER_FIRST_NAME, self.SELLER_LAST_NAME, \
-                self.SELLER_EMAIL, self.SELLER_CELL_PHONE)
+                self.SELLER_EMAIL, self.SELLER_CELL_PHONE,
+                self.SELLER_LOCATION)
         # create the categories
         self.category1 = Category.create_category(self.CATEGORY_1)
         self.category2 = Category.create_category(self.CATEGORY_2)
