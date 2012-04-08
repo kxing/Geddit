@@ -4,6 +4,8 @@ from tastypie.api import Api
 from geddit.api.resources import UserResource, ItemResource, ClaimResource, CategoryResource, FilterResource
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
+import settings
+
 admin.autodiscover()
 
 v1_api = Api(api_name='v1')
@@ -36,5 +38,8 @@ urlpatterns = patterns('',
     url(r'^claim$', 'data.views.claim_listing'),
     url(r'^unclaim$', 'data.views.unclaim_listing'),
 
+    url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+            'document_root': settings.MEDIA_ROOT,
+        }),
     #url(r'login', 'auth.view.scripts_login'),
 )

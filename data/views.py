@@ -25,6 +25,8 @@ def sell_page(request):
     form = ItemForm()
     render_params = base_params()
     render_params['form'] = form
+    render_params['latitude'] = get_current_user().location.latitude
+    render_params['longitude'] = get_current_user().location.longitude
         
     return render(request, 'create_listing.html', render_params, \
             context_instance=RequestContext(request))
@@ -37,13 +39,14 @@ def cart_page(request):
 
 def create_listing(request):
     if request.method == "POST":
-        form = ItemForm(request.POST)
+        form = ItemForm(request.POST, request.FILES)
         
         if form.is_valid():
             name = form.cleaned_data['name']
             description = form.cleaned_data['description']
             category = form.cleaned_data['category']
             price = form.cleaned_data['price']
+            image = form.files['image']
             
             active = True
             upload_time = datetime.utcnow
@@ -51,7 +54,7 @@ def create_listing(request):
             # TODO: Grab username from web cert
             user = get_current_user()
             
-            Item.create_item(user, name, description, category, price)
+            Item.create_item(user, name, description, category, price, image)
             return redirect('data.views.buy_page')
     else:
         return redirect('data.views.sell_page')
