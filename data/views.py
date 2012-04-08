@@ -71,6 +71,16 @@ def unclaim_listing(request):
     get_current_user().remove_claim(item)
     return redirect('data.views.cart_page')
 
+def email_seller(request):
+    if request.method != 'POST':
+        return redirect('data.views.cart_page')
+    print 'email sent'
+    buyer = get_current_user()
+    item = Item.get_item_by_id(request.POST['item_id'])
+    item.seller_user.send_email(str(buyer) + ' wants to buy your ' + str(item) + '. Please contact your buyer at ' + buyer.email, '[Geddit] Buyer for ' + str(item))
+    # TODO: show a confirmation message
+    return redirect('data.views.cart_page')
+
 def get_current_user():
     # TODO: replace this with the user from the web cert
     return User.get_user('kxing')

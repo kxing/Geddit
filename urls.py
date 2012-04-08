@@ -37,6 +37,7 @@ urlpatterns = patterns('',
     url(r'^create_listing$', 'data.views.create_listing'),
     url(r'^claim$', 'data.views.claim_listing'),
     url(r'^unclaim$', 'data.views.unclaim_listing'),
+    url(r'^email_seller$', 'data.views.email_seller'),
 
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
             'document_root': settings.MEDIA_ROOT,

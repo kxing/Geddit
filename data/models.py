@@ -53,7 +53,7 @@ class User(models.Model):
     location = models.ForeignKey(Location)
 
     def __unicode__(self):
-        return self.last_name + ', ' + self.first_name
+        return self.first_name + ' ' + self.last_name
 
     class Meta:
         verbose_name = 'User'
