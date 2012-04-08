@@ -150,7 +150,7 @@ class Item(models.Model):
     category = models.ForeignKey(Category)
     upload_time = models.DateTimeField(default=datetime.utcnow)
     price = models.DecimalField(max_digits=8, decimal_places=2)
-    image = models.ImageField(upload_to="media/images/%Y/%m/%d/", blank=True, null=True)
+    image = models.ImageField(upload_to="images/%Y/%m/%d/", blank=True, null=True)
 
     def __unicode__(self):
         return self.name
