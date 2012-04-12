@@ -79,6 +79,11 @@ def unclaim_listing(request):
     get_current_user().remove_claim(item)
     return redirect('data.views.cart_page')
 
+def make_reservation(request):
+    if request.method != 'POST':
+        return redirect('data.views.reserve_page')
+    return redirect('data.views.reserve_page')
+
 def settings_page(request):
     if request.method == "POST":
         form = UserSettingsForm(request.POST, instance=get_current_user())
