@@ -32,6 +32,7 @@ urlpatterns = patterns('',
 
     url(r'^buy$', 'data.views.buy_page'),    
     url(r'^sell$', 'data.views.sell_page'),
+    url(r'^reserve$', 'data.views.reserve_page'),
     url(r'^cart$', 'data.views.cart_page'),
     url(r'^settings$', 'data.views.settings_page'),
 

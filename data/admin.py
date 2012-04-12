@@ -44,9 +44,9 @@ admin.site.register(Item, ItemAdmin)
 
 class FilterAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None, {'fields': ['user', 'conditions', 'timestamp']})
+        (None, {'fields': ['user', 'search_query', 'timestamp']})
     ]
-    list_display = ['user', 'conditions', 'timestamp']
+    list_display = ['user', 'search_query', 'timestamp']
 admin.site.register(Filter, FilterAdmin)
 
 class ClaimAdmin(admin.ModelAdmin):

@@ -190,7 +190,8 @@ class Filter(models.Model):
     # Django will automatically generate this:
     # id = models.IntegerField()
     user = models.ForeignKey(User)
-    conditions = models.CharField(max_length=DESCRIPTION_NAME_MAX_LENGTH)
+    search_query = models.CharField(max_length=DESCRIPTION_NAME_MAX_LENGTH)
+    max_price = models.DecimalField(max_digits=8, decimal_places=2)
     timestamp = models.TimeField()
 
     def __unicode__(self):

@@ -2,7 +2,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import Context, loader, RequestContext
 from data.models import Category, Item, User
-from data.forms import ItemForm, UserSettingsForm
+from data.forms import ItemForm, UserSettingsForm, FilterForm
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 
@@ -19,12 +19,6 @@ def base_params():
 def buy_page(request):
     render_params = base_params()
     return render(request, 'buy.html', render_params, \
-            context_instance=RequestContext(request))
-
-def cart_page(request):
-    render_params = base_params()
-    render_params['claims'] = get_current_user().get_claims()
-    return render(request, 'cart.html', render_params, \
             context_instance=RequestContext(request))
 
 def sell_page(request):
@@ -56,7 +50,20 @@ def sell_page(request):
     
     return render(request, 'sell_page.html', render_params, \
                   context_instance=RequestContext(request))
-    
+
+def reserve_page(request):
+    render_params = base_params()
+
+    form = FilterForm()
+    render_params['form'] = form
+    return render(request, 'reserve.html', render_params, \
+            context_instance=RequestContext(request))
+
+def cart_page(request):
+    render_params = base_params()
+    render_params['claims'] = get_current_user().get_claims()
+    return render(request, 'cart.html', render_params, \
+            context_instance=RequestContext(request))
 
 def claim_listing(request):
     if request.method != 'POST':

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/reserve.css" />
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/greyout.css" />
+
+<form name="new_reserve" action="javascript: void(0);">
+  <input type="submit" name="new_reservation" value="New Reservation" onclick="showNewReservationDialog();">
+</form>
+
+<div class="greyout greyout-visible"></div>
+<div id="new-reservation" class="greyout-visible">
+  <form name="reserve" action="javascript: void(0);">
+    {{ form.as_p }}
+    <input type="submit" value="Create">
+    <input type="submit" value="Cancel">
+  </form>
+</div>
+
+{% endblock %}
+
+{% block js_extra_imports %}
+<script src="{{ STATIC_URL }}js/reserve.js"
+    type="text/javascript"
+    charset="utf8"></script>
+{% endblock %}
+
