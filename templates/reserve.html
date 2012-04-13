@@ -4,6 +4,7 @@
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/reserve.css" />
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/greyout.css" />
 
+<!-- Stuff for new reservations -->
 <input type="submit" value="New Reservation" onclick="showNewReservationDialog();">
 
 <div class="greyout greyout-visible"></div>
@@ -16,6 +17,25 @@
   </form>
   <input type="submit" value="Cancel" onclick="hideNewReservationDialog();">
 </div>
+
+<!-- Existing reservations -->
+<h1>My Reservations</h1>
+{% for reservation in reservations %}
+  <div class="reservation">
+    <div class="reservation-search-query">
+      {{ reservation.search_query }}
+    </div>
+    <div class="reservation-max-price">
+      {{ reservation.max_price }}
+    </div>
+    <div class="reservation-delete">
+      <form name="delete" action="" method="get">
+        <input type="hidden" name="reservation_id" value={{ reservation.id }}>
+        <input type="submit" value="Delete">
+      </form>
+    </div>
+  </div>
+{% endfor %}
 
 {% endblock %}
 

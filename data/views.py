@@ -56,6 +56,7 @@ def reserve_page(request):
 
     form = ReservationForm()
     render_params['form'] = form
+    render_params['reservations'] = get_current_user().get_reservations()
     return render(request, 'reserve.html', render_params, \
             context_instance=RequestContext(request))
 

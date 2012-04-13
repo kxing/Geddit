@@ -8,3 +8,21 @@
     z-index: 1001;
 }
 
+.reservation {
+    clear: both;
+}
+
+.reservation-search-query {
+    width: 300px;
+    float: left;
+}
+
+.reservation-max-price {
+    width: 100px;
+    float: left;
+}
+
+.reservation-delete {
+    float: left;
+}
+
