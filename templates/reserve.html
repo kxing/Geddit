@@ -29,7 +29,8 @@
       {{ reservation.max_price }}
     </div>
     <div class="reservation-delete">
-      <form name="delete" action="" method="get">
+      <form name="delete" action="/delete_reservation" method="post">
+        {% csrf_token %}
         <input type="hidden" name="reservation_id" value={{ reservation.id }}>
         <input type="submit" value="Delete">
       </form>

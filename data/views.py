@@ -1,7 +1,7 @@
 # Create your views here.
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import Context, loader, RequestContext
-from data.models import Category, Item, User
+from data.models import Category, Item, User, Reservation
 from data.forms import ItemForm, UserSettingsForm, ReservationForm
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
@@ -91,6 +91,15 @@ def make_reservation(request):
     max_price = form.cleaned_data['max_price']
 
     get_current_user().add_reservation(search_query, max_price)
+    return redirect('data.views.reserve_page')
+
+def delete_reservation(request):
+    if request.method != 'POST':
+        return redirect('data.views.reserve_page')
+
+    reservation_id = request.POST['reservation_id']
+    reservation = Reservation.get_reservation_by_id(reservation_id)
+    get_current_user().remove_reservation(reservation)
     return redirect('data.views.reserve_page')
 
 def settings_page(request):
