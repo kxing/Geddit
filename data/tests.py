@@ -252,4 +252,8 @@ class ReservationTest(TestCase):
             self.assertTrue(r in [self.reservation1, self.reservation2])
         for r in self.user.get_reservations():
             self.assertTrue(r in [self.reservation1, self.reservation2])
+        self.assertEqual(Reservation.get_reservation_by_id(self.reservation1.id), \
+                self.reservation1)
+        self.assertEqual(Reservation.get_reservation_by_id(self.reservation2.id), \
+                self.reservation2)
 

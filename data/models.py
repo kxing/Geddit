@@ -221,6 +221,10 @@ class Reservation(models.Model):
         return Reservation.objects.filter(user=user)
 
     @staticmethod
+    def get_reservation_by_id(id):
+        return Reservation.objects.get(id=id)
+
+    @staticmethod
     def delete_reservation(reservation):
         reservation.delete()
 
