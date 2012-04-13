@@ -12,12 +12,17 @@ from datetime import datetime
 def base_params():
     return { \
         'categories': Category.get_all_categories(), \
-        'items': Item.get_all_items(), \
         'user': get_current_user(), \
     }
 
 def buy_page(request):
     render_params = base_params()
+
+    category = None
+    if 'category' in request.GET:
+        category = Category.get_category(request.GET['category'])
+    render_params['items'] = Item.get_filtered_items(category)
+
     return render(request, 'buy.html', render_params, \
             context_instance=RequestContext(request))
 

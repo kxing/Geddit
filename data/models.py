@@ -183,9 +183,17 @@ class Item(models.Model):
     def get_items(seller_user):
         return Item.objects.filter(seller_user=seller_user)
 
+    # deprecated
     @staticmethod
     def get_all_items():
         return Item.objects.all().filter(claimed=False).order_by('-upload_time')
+
+    @staticmethod
+    def get_filtered_items(category=None):
+        items = Item.objects.all().filter(claimed=False)
+        if category is not None:
+            items = items.filter(category=category)
+        return items.order_by('-upload_time')
 
     @staticmethod
     def delete_item(item):
