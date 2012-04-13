@@ -105,6 +105,15 @@ class User(models.Model):
     def get_claims(self):
         return Claim.get_claims(self)
 
+    def add_reservation(self, search_query, max_price):
+        return Reservation.create_reservation(self, search_query, max_price)
+
+    def get_reservations(self):
+        return Reservation.get_reservations(self)
+
+    def remove_reservation(self, reservation):
+        Reservation.delete_reservation(reservation)
+
 CATEGORY_NAME_MAX_LENGTH = 100
 
 class Category(models.Model):
@@ -186,20 +195,34 @@ class Item(models.Model):
     def get_item_location(item):
         pass
     
-class Filter(models.Model):
+class Reservation(models.Model):
     # Django will automatically generate this:
     # id = models.IntegerField()
     user = models.ForeignKey(User)
     search_query = models.CharField(max_length=DESCRIPTION_NAME_MAX_LENGTH)
     max_price = models.DecimalField(max_digits=8, decimal_places=2)
-    timestamp = models.TimeField()
+    timestamp = models.DateTimeField(default=datetime.utcnow)
 
     def __unicode__(self):
-        return self.conditions
+        return self.search_query
 
     class Meta:
-        verbose_name = 'Filter'
-        verbose_name_plural = 'Filters'
+        verbose_name = 'Reservation'
+        verbose_name_plural = 'Reservations'
+
+    @staticmethod
+    def create_reservation(user, search_query, max_price):
+        r = Reservation(user=user, search_query=search_query, max_price=max_price)
+        r.save()
+        return r
+
+    @staticmethod
+    def get_reservations(user):
+        return Reservation.objects.filter(user=user)
+
+    @staticmethod
+    def delete_reservation(reservation):
+        reservation.delete()
 
 class Claim(models.Model):
     # Django will automatically generate this:

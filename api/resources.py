@@ -1,6 +1,6 @@
 from tastypie.resources import ModelResource
 from tastypie import fields
-from geddit.data.models import User, Claim, Filter, Category, Item
+from geddit.data.models import User, Claim, Reservation, Category, Item
 from tastypie.constants import ALL, ALL_WITH_RELATIONS
 
 class UserResource(ModelResource):
@@ -51,10 +51,10 @@ class CategoryResource(ModelResource):
             "name": ALL_WITH_RELATIONS,
         }
 
-class FilterResource(ModelResource):
+class ReservationResource(ModelResource):
     user = fields.ToOneField(UserResource, 'user')
     class Meta:
-        queryset = Filter.objects.all()
+        queryset = Reservation.objects.all()
         resource_name = 'filter'
         filtering = {
             "user": ALL_WITH_RELATIONS,

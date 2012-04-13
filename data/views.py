@@ -2,7 +2,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import Context, loader, RequestContext
 from data.models import Category, Item, User
-from data.forms import ItemForm, UserSettingsForm, FilterForm
+from data.forms import ItemForm, UserSettingsForm, ReservationForm
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 
@@ -54,7 +54,7 @@ def sell_page(request):
 def reserve_page(request):
     render_params = base_params()
 
-    form = FilterForm()
+    form = ReservationForm()
     render_params['form'] = form
     return render(request, 'reserve.html', render_params, \
             context_instance=RequestContext(request))
@@ -82,6 +82,14 @@ def unclaim_listing(request):
 def make_reservation(request):
     if request.method != 'POST':
         return redirect('data.views.reserve_page')
+    form = ReservationForm(request.POST)
+    if not form.is_valid():
+        return redirect('data.views.reserve_page')
+
+    search_query = form.cleaned_data['search_query']
+    max_price = form.cleaned_data['max_price']
+
+    get_current_user().add_reservation(search_query, max_price)
     return redirect('data.views.reserve_page')
 
 def settings_page(request):

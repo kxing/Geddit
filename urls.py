@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import patterns, include, url
 
 from tastypie.api import Api
-from geddit.api.resources import UserResource, ItemResource, ClaimResource, CategoryResource, FilterResource
+from geddit.api.resources import UserResource, ItemResource, ClaimResource, CategoryResource, ReservationResource
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 import settings
@@ -13,7 +13,7 @@ v1_api.register(UserResource())
 v1_api.register(ClaimResource())
 v1_api.register(ItemResource())
 v1_api.register(CategoryResource())
-v1_api.register(FilterResource())
+v1_api.register(ReservationResource())
 
 urlpatterns = patterns('',
     # Examples:

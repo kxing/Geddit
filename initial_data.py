@@ -1,7 +1,7 @@
 # Data to be entered into the database, so we don't have to manually enter it
 # every time we run sync_db
 
-from data.models import User, Category, Item, Filter, Claim, Location
+from data.models import User, Category, Item, Reservation, Claim, Location
 import time
 
 # Make location

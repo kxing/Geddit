@@ -6,7 +6,7 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
-from data.models import User, Category, Item, Claim, Location
+from data.models import User, Category, Item, Claim, Location, Reservation
 
 class UserTest(TestCase):
     USERNAME = 'asdf1234'
@@ -223,4 +223,33 @@ class ClaimTest(TestCase):
         # delete the claims
         Claim.delete_claim(self.claim1)
         Claim.delete_claim(self.claim2)
+
+class ReservationTest(TestCase):
+    USERNAME = 'asdf1234'
+    FIRST_NAME = 'Asdf'
+    LAST_NAME = 'Qwerty'
+    EMAIL = 'asdf1234@mit.edu'
+    PHONE = '(123)456-7890'
+    LOCATION = Location.create_location('asdffdasa', '12.345', '54.321')
+
+    SEARCH_QUERY1 = '8.01 Textbook'
+    SEARCH_QUERY2 = '3.091 Textbook'
+    MAX_PRICE = '69.99'
+
+    def setUp(self):
+        self.user = User.create_user(self.USERNAME, self.FIRST_NAME, self.LAST_NAME, \
+                self.EMAIL, self.PHONE, self.LOCATION)
+        self.reservation1 = Reservation.create_reservation(self.user, \
+                self.SEARCH_QUERY1, self.MAX_PRICE)
+        self.reservation2 = self.user.add_reservation(self.SEARCH_QUERY2, self.MAX_PRICE)
+
+    def tearDown(self):
+        Reservation.delete_reservation(self.reservation1)
+        self.user.remove_reservation(self.reservation2)
+
+    def test_reservations(self):
+        for r in Reservation.get_reservations(self.user):
+            self.assertTrue(r in [self.reservation1, self.reservation2])
+        for r in self.user.get_reservations():
+            self.assertTrue(r in [self.reservation1, self.reservation2])
 

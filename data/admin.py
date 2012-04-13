@@ -1,4 +1,4 @@
-from data.models import User, Category, Item, Filter, Claim, Location
+from data.models import User, Category, Item, Reservation, Claim, Location
 from django.contrib import admin
 
 class LocationAdmin(admin.ModelAdmin):
@@ -42,12 +42,12 @@ class ItemAdmin(admin.ModelAdmin):
     list_display = ['name', 'category', 'claimed', 'seller_user', 'price']
 admin.site.register(Item, ItemAdmin)
 
-class FilterAdmin(admin.ModelAdmin):
+class ReservationAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None, {'fields': ['user', 'search_query', 'timestamp']})
+        (None, {'fields': ['user', 'search_query', 'max_price', 'timestamp']})
     ]
     list_display = ['user', 'search_query', 'timestamp']
-admin.site.register(Filter, FilterAdmin)
+admin.site.register(Reservation, ReservationAdmin)
 
 class ClaimAdmin(admin.ModelAdmin):
     fieldsets = [
