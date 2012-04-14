@@ -5,6 +5,7 @@ from data.models import Category, Item, User, Reservation
 from data.forms import ItemForm, UserSettingsForm, ReservationForm
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
+from site_specific import SITE_ROOT
 
 from datetime import datetime
 #from .auth import scripts_login
@@ -13,6 +14,7 @@ def base_params():
     return { \
         'categories': Category.get_all_categories(), \
         'user': get_current_user(), \
+        'SITE_ROOT': SITE_ROOT, \
     }
 
 def buy_page(request):
