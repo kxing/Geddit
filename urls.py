@@ -1,19 +1,21 @@
 from django.conf.urls.defaults import patterns, include, url
 
-from tastypie.api import Api
-from geddit.api.resources import UserResource, ItemResource, ClaimResource, CategoryResource, ReservationResource
+#from tastypie.api import Api
+#from geddit.api.resources import UserResource, ItemResource, ClaimResource, CategoryResource, ReservationResource
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 import settings
 
 admin.autodiscover()
 
+'''
 v1_api = Api(api_name='v1')
 v1_api.register(UserResource())
 v1_api.register(ClaimResource())
 v1_api.register(ItemResource())
 v1_api.register(CategoryResource())
 v1_api.register(ReservationResource())
+'''
 
 urlpatterns = patterns('',
     # Examples:
@@ -27,7 +29,7 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
     #url(r'^jstest/', 'jstest.views.index'),
-    url(r'^api/', include(v1_api.urls)),
+    #url(r'^api/', include(v1_api.urls)),
     url(r'^$', 'data.views.buy_page'),
 
     url(r'^buy$', 'data.views.buy_page'),    
