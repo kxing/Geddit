@@ -23,7 +23,10 @@ def buy_page(request):
     category = None
     if 'category' in request.GET:
         category = Category.get_category(request.GET['category'])
-    render_params['items'] = Item.get_filtered_items(category)
+
+    search_query = request.GET.get('search_query', None)
+
+    render_params['items'] = Item.get_filtered_items(category, search_query)
 
     return render(request, 'buy.html', render_params, \
             context_instance=RequestContext(request))
