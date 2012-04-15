@@ -25,8 +25,9 @@ def buy_page(request):
         category = Category.get_category(request.GET['category'])
 
     search_query = request.GET.get('search_query', None)
+    id = request.GET.get('id', None)
 
-    render_params['items'] = Item.get_filtered_items(category, search_query)
+    render_params['items'] = Item.get_filtered_items(category, search_query, id)
 
     return render(request, 'buy.html', render_params, \
             context_instance=RequestContext(request))
@@ -145,4 +146,4 @@ def email_seller(request):
 
 def get_current_user():
     # TODO: replace this with the user from the web cert
-    return User.get_user('pwh')
+    return User.get_user('kxing')

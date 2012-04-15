@@ -177,6 +177,23 @@ class ItemTest(TestCase):
         self.assertIn(self.video_5111, principles)
         self.assertIn(self.cheat_sheets, principles)
 
+    def test_filter_by_id(self):
+        textbook_1 = Item.get_filtered_items(id=self.textbook_3091_1.id)
+        self.assertEqual(len(textbook_1), 1)
+        self.assertIn(self.textbook_3091_1, textbook_1)
+
+        textbook_2 = Item.get_filtered_items(id=self.textbook_3091_2.id)
+        self.assertEqual(len(textbook_2), 1)
+        self.assertIn(self.textbook_3091_2, textbook_2)
+
+        video = Item.get_filtered_items(id=self.video_5111.id)
+        self.assertEqual(len(video), 1)
+        self.assertIn(self.video_5111, video)
+
+        sheets = Item.get_filtered_items(id=self.cheat_sheets.id)
+        self.assertEqual(len(sheets), 1)
+        self.assertIn(self.cheat_sheets, sheets)
+
 class ClaimTest(TestCase):
     BUYER_USERNAME = 'qwerty'
     BUYER_FIRST_NAME = 'Q'

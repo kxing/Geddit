@@ -3,6 +3,7 @@ import smtplib
 from email.mime.text import MIMEText
 from googlevoice import Voice
 from datetime import datetime
+from site_specific import SITE_ROOT
 
 USERNAME_MAX_LENGTH = 25
 PERSON_NAME_MAX_LENGTH = 25
@@ -91,7 +92,24 @@ class User(models.Model):
         voice.send_sms(self.cell_phone, message)
 
     def add_item(self, name, description, category, price, image=None):
-        return Item.create_item(self, name, description, category, price, image=image)
+        item = Item.create_item(self, name, description, category, price, image=image)
+
+        # find reservations that match the item
+        reservations = Reservation.get_matching_reservations(item)
+
+        # figure out the users to be emailed and SMS-ed
+        users = {}
+        for reservation in reservations:
+            if reservation.user.id in users:
+                continue
+            users[reservation.user.id] = reservation.user
+        # email and SMS
+        for uid in users:
+            users[uid].send_email('An item has been posted that matches your reservation.\n' + \
+                    'Check it out at ' + SITE_ROOT + 'buy?id=' + str(item.id), \
+                    '[Geddit] matching reservation')
+
+        return item
 
     def get_items(self):
         return Item.get_items(self)
@@ -189,13 +207,15 @@ class Item(models.Model):
         return Item.objects.all().filter(claimed=False).order_by('-upload_time')
 
     @staticmethod
-    def get_filtered_items(category=None, search_query=None):
+    def get_filtered_items(category=None, search_query=None, id=None):
         items = Item.objects.all().filter(claimed=False)
         if category is not None:
             items = items.filter(category=category)
         if search_query is not None:
             for keyword in search_query.split():
                 items = items.filter(name__icontains=keyword)
+        if id is not None:
+            items = items.filter(id=id)
         return items.order_by('-upload_time')
 
     @staticmethod
