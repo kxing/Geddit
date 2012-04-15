@@ -273,13 +273,31 @@ class ReservationTest(TestCase):
     PHONE = '(123)456-7890'
     LOCATION = Location.create_location('asdffdasa', '12.345', '54.321')
 
-    SEARCH_QUERY1 = '8.01 Textbook'
-    SEARCH_QUERY2 = '3.091 Textbook'
+    SEARCH_QUERY1 = '8.01'
+    SEARCH_QUERY2 = '3.091'
     MAX_PRICE = '69.99'
 
+    GIRS_CATEGORY = 'GIRs'
+
+    PHYSICS_NAME = '8.01 Textbook'
+    PHYSICS_DESCRIPTION = 'in great condition'
+    PHYSICS_PRICE_1 = '56.78'
+    PHYSICS_PRICE_2 = '89.99'
+
+    VIDEO_NAME = 'video'
+    VIDEO_DESCRIPTION = 'video'
+    VIDEO_PRICE = '12.00'
+
     def setUp(self):
+        self.category = Category.create_category(self.GIRS_CATEGORY)
         self.user = User.create_user(self.USERNAME, self.FIRST_NAME, self.LAST_NAME, \
                 self.EMAIL, self.PHONE, self.LOCATION)
+        self.item1 = Item.create_item(self.user, self.PHYSICS_NAME, \
+                self.PHYSICS_DESCRIPTION, self.category, self.PHYSICS_PRICE_1)
+        self.item2 = Item.create_item(self.user, self.PHYSICS_NAME, \
+                self.PHYSICS_DESCRIPTION, self.category, self.PHYSICS_PRICE_2)
+        self.item3 = Item.create_item(self.user, self.VIDEO_NAME, \
+                self.VIDEO_DESCRIPTION, self.category, self.VIDEO_PRICE)
         self.reservation1 = Reservation.create_reservation(self.user, \
                 self.SEARCH_QUERY1, self.MAX_PRICE)
         self.reservation2 = self.user.add_reservation(self.SEARCH_QUERY2, self.MAX_PRICE)
@@ -287,6 +305,13 @@ class ReservationTest(TestCase):
     def tearDown(self):
         Reservation.delete_reservation(self.reservation1)
         self.user.remove_reservation(self.reservation2)
+
+        Item.delete_item(self.item1)
+        Item.delete_item(self.item2)
+        Item.delete_item(self.item3)
+
+        User.delete_user(self.user)
+        Category.delete_category(self.category)
 
     def test_reservations(self):
         for r in Reservation.get_reservations(self.user):
@@ -298,3 +323,16 @@ class ReservationTest(TestCase):
         self.assertEqual(Reservation.get_reservation_by_id(self.reservation2.id), \
                 self.reservation2)
 
+    def test_matching_reservations(self):
+        # we expect to match the 8.01 reservation
+        physics1 = Reservation.get_matching_reservations(self.item1)
+        self.assertEqual(len(physics1), 1)
+        self.assertIn(self.reservation1, physics1)
+
+        # we expect to match nothing, since the price is too high
+        physics2 = Reservation.get_matching_reservations(self.item2)
+        self.assertEqual(len(physics2), 0)
+
+        # we don't expect to match anything
+        video = Reservation.get_matching_reservations(self.item3)
+        self.assertEqual(len(video), 0)

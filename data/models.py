@@ -201,7 +201,7 @@ class Item(models.Model):
     @staticmethod
     def delete_item(item):
         item.delete()
-        
+
     @staticmethod
     def get_item_location(item):
         pass
@@ -234,6 +234,21 @@ class Reservation(models.Model):
     @staticmethod
     def get_reservation_by_id(id):
         return Reservation.objects.get(id=id)
+
+    @staticmethod
+    def get_matching_reservations(item):
+        ''' returns the reservations that match the item '''
+        matches = {}
+
+        for keyword in item.name.split():
+            reservations = Reservation.objects.filter( \
+                    search_query__icontains=keyword, \
+                    max_price__gte=item.price)
+            for reservation in reservations:
+                if reservation.id in matches:
+                    continue
+                matches[reservation.id] = reservation
+        return matches.values()
 
     @staticmethod
     def delete_reservation(reservation):
