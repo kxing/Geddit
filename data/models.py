@@ -189,10 +189,13 @@ class Item(models.Model):
         return Item.objects.all().filter(claimed=False).order_by('-upload_time')
 
     @staticmethod
-    def get_filtered_items(category=None):
+    def get_filtered_items(category=None, search_query=None):
         items = Item.objects.all().filter(claimed=False)
         if category is not None:
             items = items.filter(category=category)
+        if search_query is not None:
+            for keyword in search_query.split():
+                items = items.filter(name__icontains=keyword)
         return items.order_by('-upload_time')
 
     @staticmethod

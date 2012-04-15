@@ -85,13 +85,17 @@ class ItemTest(TestCase):
 
     TEXTBOOK_CATEGORY = '3.091'
     VIDEOS_CATEGORY = '5.111'
+    GIRS_CATEGORY = 'GIRs'
 
     TEXTBOOK_NAME = '3.091 Textbook'
     TEXTBOOK_DESCRIPTION = 'The textbook for the legendary class ... 3.091!'
     TEXTBOOK_PRICE = '30.00'
-    VIDEOS_NAME = '5.111 Video Lecture Series'
+    VIDEOS_NAME = '5.111 Video Lecture Series' 
     VIDEOS_DESCRIPTION = 'Watch 5-fun-fun-fun!'
     VIDEOS_PRICE = '100.00'
+    CHEAT_SHEET_NAME = '3.091, 5.111, 5.112 Cheat Sheets'
+    CHEAT_SHEET_DESCRIPTION = 'Cheat Sheets for all your GIRs'
+    CHEAT_SHEET_PRICE = '20.00'
 
     def setUp(self):
         # create the user
@@ -99,26 +103,31 @@ class ItemTest(TestCase):
                 self.LAST_NAME, self.EMAIL, self.PHONE, self.LOCATION)
 
         # create the categories
-        self.category1 = Category.create_category(self.TEXTBOOK_CATEGORY)
-        self.category2 = Category.create_category(self.VIDEOS_CATEGORY)
+        self.textbooks = Category.create_category(self.TEXTBOOK_CATEGORY)
+        self.videos = Category.create_category(self.VIDEOS_CATEGORY)
+        self.girs = Category.create_category(self.GIRS_CATEGORY)
 
         # create the items
-        self.item1 = Item.create_item(self.user, self.TEXTBOOK_NAME, \
-                self.TEXTBOOK_DESCRIPTION, self.category1, self.TEXTBOOK_PRICE)
-        self.item2 = self.user.add_item(self.TEXTBOOK_NAME, \
-                self.TEXTBOOK_DESCRIPTION, self.category1, self.TEXTBOOK_PRICE)
-        self.item3 = self.user.add_item(self.VIDEOS_NAME, \
-                self.VIDEOS_DESCRIPTION, self.category2, self.VIDEOS_PRICE)
+        self.textbook_3091_1 = Item.create_item(self.user, self.TEXTBOOK_NAME, \
+                self.TEXTBOOK_DESCRIPTION, self.textbooks, self.TEXTBOOK_PRICE)
+        self.textbook_3091_2 = self.user.add_item(self.TEXTBOOK_NAME, \
+                self.TEXTBOOK_DESCRIPTION, self.textbooks, self.TEXTBOOK_PRICE)
+        self.video_5111 = self.user.add_item(self.VIDEOS_NAME, \
+                self.VIDEOS_DESCRIPTION, self.videos, self.VIDEOS_PRICE)
+        self.cheat_sheets = self.user.add_item(self.CHEAT_SHEET_NAME, \
+                self.CHEAT_SHEET_DESCRIPTION, self.girs, self.CHEAT_SHEET_PRICE)
 
     def tearDown(self):
         # delete the items
-        Item.delete_item(self.item1)
-        Item.delete_item(self.item2)
-        Item.delete_item(self.item3)
+        Item.delete_item(self.textbook_3091_1)
+        Item.delete_item(self.textbook_3091_2)
+        Item.delete_item(self.video_5111)
+        Item.delete_item(self.cheat_sheets)
 
         # delete the categories
-        Category.delete_category(self.category1)
-        Category.delete_category(self.category2)
+        Category.delete_category(self.textbooks)
+        Category.delete_category(self.videos)
+        Category.delete_category(self.girs)
 
         # delete the user
         User.delete_user(self.user)
@@ -127,14 +136,46 @@ class ItemTest(TestCase):
         # check to make sure that both ways of getting items work
         for items in [Item.get_items(self.user), self.user.get_items(), Item.get_all_items()]:
             # check the item count
-            self.assertEqual(len(items), 3)
+            self.assertEqual(len(items), 4)
 
-            self.assertTrue(self.item1 in items)
-            self.assertTrue(self.item2 in items)
-            self.assertTrue(self.item3 in items)
-        self.assertEqual(Item.get_item_by_id(self.item1.id), self.item1)
-        self.assertEqual(Item.get_item_by_id(self.item2.id), self.item2)
-        self.assertEqual(Item.get_item_by_id(self.item3.id), self.item3)
+            self.assertIn(self.textbook_3091_1, items)
+            self.assertIn(self.textbook_3091_2, items)
+            self.assertIn(self.video_5111, items)
+            self.assertIn(self.cheat_sheets, items)
+
+    def test_get_item_by_id(self):
+        self.assertEqual(Item.get_item_by_id(self.textbook_3091_1.id), self.textbook_3091_1)
+        self.assertEqual(Item.get_item_by_id(self.textbook_3091_2.id), self.textbook_3091_2)
+        self.assertEqual(Item.get_item_by_id(self.video_5111.id), self.video_5111)
+        self.assertEqual(Item.get_item_by_id(self.cheat_sheets.id), self.cheat_sheets)
+
+    def test_filter_by_category(self):
+        items1 = Item.get_filtered_items(category=self.textbooks)
+        self.assertIn(self.textbook_3091_1, items1)
+        self.assertIn(self.textbook_3091_2, items1)
+
+        items2 = Item.get_filtered_items(category=self.videos)
+        self.assertIn(self.video_5111, items2)
+
+        items3 = Item.get_filtered_items(category=self.girs)
+        self.assertIn(self.cheat_sheets, items3)
+
+    def test_filter_by_search(self):
+        textbooks = Item.get_filtered_items(search_query='Textbook')
+        self.assertIn(self.textbook_3091_1, textbooks)
+        self.assertIn(self.textbook_3091_2, textbooks)
+
+        videos = Item.get_filtered_items(search_query='Video')
+        self.assertIn(self.video_5111, videos)
+
+        solid_state = Item.get_filtered_items(search_query='3.091')
+        self.assertIn(self.textbook_3091_1, solid_state)
+        self.assertIn(self.textbook_3091_2, solid_state)
+        self.assertIn(self.cheat_sheets, solid_state)
+
+        principles = Item.get_filtered_items(search_query='5.111')
+        self.assertIn(self.video_5111, principles)
+        self.assertIn(self.cheat_sheets, principles)
 
 class ClaimTest(TestCase):
     BUYER_USERNAME = 'qwerty'
@@ -206,8 +247,8 @@ class ClaimTest(TestCase):
         self.assertTrue(self.item2.claimed)
 
         for claims in [Claim.get_claims(self.buyer), self.buyer.get_claims()]:
-            self.assertTrue(self.claim1 in claims)
-            self.assertTrue(self.claim2 in claims)
+            self.assertIn(self.claim1, claims)
+            self.assertIn(self.claim2, claims)
         self.assertEqual(Claim.get_claim(self.buyer, self.item1), self.claim1)
 
         # delete the second claim and verify that the item is not claimed
@@ -249,9 +290,9 @@ class ReservationTest(TestCase):
 
     def test_reservations(self):
         for r in Reservation.get_reservations(self.user):
-            self.assertTrue(r in [self.reservation1, self.reservation2])
+            self.assertIn(r, [self.reservation1, self.reservation2])
         for r in self.user.get_reservations():
-            self.assertTrue(r in [self.reservation1, self.reservation2])
+            self.assertIn(r, [self.reservation1, self.reservation2])
         self.assertEqual(Reservation.get_reservation_by_id(self.reservation1.id), \
                 self.reservation1)
         self.assertEqual(Reservation.get_reservation_by_id(self.reservation2.id), \
