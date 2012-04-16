@@ -41,7 +41,8 @@ def sell_page(request):
             description = form.cleaned_data['description']
             category = form.cleaned_data['category']
             price = form.cleaned_data['price']
-            image = form.files['image']
+
+            image = form.files.get('image', None)
             
             active = True
             upload_time = datetime.utcnow
