@@ -49,6 +49,15 @@
 }
 
 #search {
-    float: left;
+}
+
+#search input[type=text] {
+    border: 1px solid;
+    background: pink;
+}
+
+#search input[type=submit] {
+    border: 1px solid;
+    background: #FF6B88;
 }
 
