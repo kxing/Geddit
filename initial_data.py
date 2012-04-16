@@ -5,9 +5,18 @@ from data.models import User, Category, Item, Reservation, Claim, Location
 import time
 
 # Make location
+baker = Location.create_location('Baker Hall', '42.35666', '-71.09582')
+bexely = Location.create_location('Bexley Hall', '42.35852604285305', '-71.09368236574556')
+burton_conner = Location.create_location('Burton-Conner House', '42.35607', '-71.09811')
+east_campus = Location.create_location('East Campus', '42.36026', '-71.08880')
+macgregor = Location.create_location('MacGregeor House', '42.35543', '-71.09981')
 maseeh = Location.create_location('Maseeh Hall', '42.35764801061463', '-71.09338732275393')
+mccormick = Location.create_location('McCormick Hall', '42.35731', '-71.09454')
+new_house = Location.create_location('New House', '42.35543', '-71.10023')
 next_house = Location.create_location('Next House', '42.354714540813504', '-71.10203476461794')
-bexely = Location.create_location('Bexely', '42.35852604285305', '-71.09368236574556')
+random_hall = Location.create_location('Random Hall', '42.36191', '-71.09821')
+senior = Location.create_location('Senior House', '42.36007', '-71.08689')
+simmons = Location.create_location('Simmons Hall', '42.35733', '-71.10105')
 
 # Add in categories
 girs = Category.create_category('GIRs')
