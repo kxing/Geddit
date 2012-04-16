@@ -1,11 +1,11 @@
 #logo {
     float: left;
     width: 300px;
-    height: 130px;
+    height: 75px;
 }
 
 #logo-image {
-    width: 110px;
-    max-height: 87px;
+    width: 100px;
+    max-height: 50px;
 }
 
