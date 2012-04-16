@@ -22,14 +22,14 @@
       ${{ claim.item.price }}
     </div>
     <div class="claim-remove-button">
-      <form name="unclaim" action="/unclaim" method="post">
+      <form name="unclaim" action="{{ SITE_ROOT }}unclaim" method="post">
         {% csrf_token %}
         <input type="hidden" name="item_id" value={{ claim.item.id }}>
         <input type="submit" value="Unclaim">
       </form>
     </div>
     <div class="claim-email-seller">
-      <form name="email_seller" action="/email_seller" method="post">
+      <form name="email_seller" action="{{ SITE_ROOT }}email_seller" method="post">
         {% csrf_token %}
         <input type="hidden" name="item_id" value={{ claim.item.id }}>
         <input type="submit" value="Email Seller">

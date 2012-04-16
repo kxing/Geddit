@@ -10,7 +10,7 @@
 <div class="greyout greyout-visible"></div>
 <div id="new-reservation" class="greyout-visible">
   <h1>New Reservation</h1>
-  <form name="reserve" action="/new_reservation" method="post">
+  <form name="reserve" action="{{ SITE_ROOT }}new_reservation" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Create">
@@ -29,7 +29,7 @@
       {{ reservation.max_price }}
     </div>
     <div class="reservation-delete">
-      <form name="delete" action="/delete_reservation" method="post">
+      <form name="delete" action="{{ SITE_ROOT }}delete_reservation" method="post">
         {% csrf_token %}
         <input type="hidden" name="reservation_id" value={{ reservation.id }}>
         <input type="submit" value="Delete">
