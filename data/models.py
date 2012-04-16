@@ -111,6 +111,12 @@ class User(models.Model):
     def get_items(self):
         return Item.get_items(self)
 
+    def remove_item(self, item):
+        if item.seller_user != self:
+            # error, you can't delete someone else's item
+            return
+        Item.delete_item(item)
+
     def add_claim(self, item):
         return Claim.create_claim(self, item)
 

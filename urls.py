@@ -38,6 +38,7 @@ urlpatterns = patterns('',
     url(r'^cart$', 'data.views.cart_page'),
     url(r'^settings$', 'data.views.settings_page'),
 
+    url(r'^remove_item$', 'data.views.remove_item'),
     url(r'^new_reservation$', 'data.views.make_reservation'),
     url(r'^delete_reservation$', 'data.views.delete_reservation'),
     url(r'^claim$', 'data.views.claim_listing'),

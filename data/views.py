@@ -59,6 +59,7 @@ def sell_page(request):
     # For the Google Maps location
     render_params['latitude'] = get_current_user().location.latitude
     render_params['longitude'] = get_current_user().location.longitude
+    render_params['items'] = get_current_user().get_items()
     
     return render(request, 'sell.html', render_params, \
                   context_instance=RequestContext(request))
@@ -77,6 +78,13 @@ def cart_page(request):
     render_params['claims'] = get_current_user().get_claims()
     return render(request, 'cart.html', render_params, \
             context_instance=RequestContext(request))
+
+def remove_item(request):
+    if request.method != 'POST':
+        return redirect('data.views.sell_page')
+    item = Item.get_item_by_id(request.POST['item_id'])
+    get_current_user().remove_item(item)
+    return redirect('data.views.sell_page')
 
 def claim_listing(request):
     if request.method != 'POST':

@@ -9,3 +9,36 @@
     z-index: 1001;
 }
 
+.sell-item {
+    clear: both;
+}
+
+.sell-item-image-holder {
+    width: 100px;
+    float: left;
+}
+
+.sell-item-image {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.sell-item-name {
+    width: 200px;
+    float: left;
+}
+
+.sell-item-description {
+    width: 400px;
+    float: left;
+}
+
+.sell-item-price {
+    width: 100px;
+    float: left;
+}
+
+.sell-item-remove-button {
+    float: left;
+}
+

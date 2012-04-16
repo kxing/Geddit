@@ -36,6 +36,34 @@
 </div>
 
 <!-- Existing listings -->
+<h2>My Listings</h2>
+{% for item in items %}
+  <div class="sell-item">
+    <div class="sell-item-image-holder">
+      {% if item.image %}
+        <img class="sell-item-image" src="{{ item.image.url }}" alt="No image available" />
+      {% else %}
+        (No image available)
+      {% endif %}
+    </div>
+    <div class="sell-item-name">
+      {{ item.name }}
+    </div>
+    <div class="sell-item-description">
+      {{ item.description }}
+    </div>
+    <div class="sell-item-price">
+      ${{ item.price }}
+    </div>
+    <div class="sell-item-remove-button">
+      <form name="sell_item" action="{{ SITE_ROOT }}remove_item" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="item_id" value={{ item.id }}>
+        <input type="submit" value="Remove">
+      </form>
+    </div>
+  </div>
+{% endfor %}
 
 {% endblock %}
 
