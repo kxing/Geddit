@@ -1,0 +1,19 @@
+a {
+    padding: 0px 10px;
+    outline: 0;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:active {
+}
+

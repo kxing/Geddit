@@ -30,22 +30,7 @@
 }
 
 .nav_button a {
-    padding: 0px 10px;
     color: white;
-}
-
-.nav_button a:link {
-    text-decoration: none;
-}
-
-.nav_button a:visited {
-}
-
-.nav_button a:hover {
-    text-decoration: underline;
-}
-
-.nav_button a:active {
 }
 
 #search {
