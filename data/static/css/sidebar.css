@@ -1,5 +1,8 @@
 #sidebar {
+    position: absolute;
     float: left;
     width: 300px;
+    height: 100%;
+    background: pink;
 }
 
