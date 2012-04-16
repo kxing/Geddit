@@ -3,13 +3,23 @@
 <div id=nav_bar">
   <div id="nav_buttons">
     {% block navigation %}
-      <a href="{{ SITE_ROOT }}buy">Buy</a>
-      <a href="{{ SITE_ROOT }}sell">Sell</a>
-      <a href="{{ SITE_ROOT }}reserve">Reserve</a>
-      <a href="{{ SITE_ROOT }}cart">Cart</a>
-      <a href="{{ SITE_ROOT }}settings">Settings</a>
+      <div id="nav_buy" class="nav_button">
+        <a href="{{ SITE_ROOT }}buy">Buy</a>
+      </div>
+      <div id="nav_sell" class="nav_button">
+        <a href="{{ SITE_ROOT }}sell">Sell</a>
+      </div>
+      <div id="nav_reserve" class="nav_button">
+        <a href="{{ SITE_ROOT }}reserve">Reserve</a>
+      </div>
+      <div id="nav_cart" class="nav_button">
+        <a href="{{ SITE_ROOT }}cart">Cart</a>
+      </div>
+      <div id="nav_settings" class="nav_button">
+        <a href="{{ SITE_ROOT }}settings">Settings</a>
+      </div>
     {% endblock %}
-  </div>
+  </div><br>
   <div id="search">
     {% block search %}
     <form name="search" action="{{ SITE_ROOT }}buy" method="get">

@@ -3,8 +3,53 @@
 }
 
 #nav_buttons {
+    margin-left: 300px;
+    clear: right;
+    height: 20px;
+    background: purple;
+}
+
+#nav_buy {
+}
+
+#nav_sell {
+}
+
+#nav_reserve {
+}
+
+#nav_cart {
+}
+
+#nav_settings {
+    float: right;
+}
+
+.nav_button {
+    display: inline;
+    background: purple;
+}
+
+.nav_button a {
+    padding: 0px 10px;
+    color: white;
+}
+
+.nav_button a:link {
+    text-decoration: none;
+}
+
+.nav_button a:visited {
+}
+
+.nav_button a:hover {
+    text-decoration: underline;
+}
+
+.nav_button a:active {
 }
 
 #search {
+    float: left;
 }
 
