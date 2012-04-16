@@ -3,14 +3,11 @@ import smtplib
 from email.mime.text import MIMEText
 from googlevoice import Voice
 from datetime import datetime
-from site_specific import SITE_ROOT
+from site_specific import SITE_ROOT, GEDDIT_GMAIL, GEDDIT_PASSWORD
 
 USERNAME_MAX_LENGTH = 25
 PERSON_NAME_MAX_LENGTH = 25
 PHONE_NUMBER_MAX_LENGTH = 20
-
-GEDDIT_GMAIL = 'awib5dche9di@gmail.com'
-GEDDIT_PASSWORD = '' # You should fill this in
 
 LOCATION_NAME_MAX_LENGTH=100
 class Location(models.Model):
