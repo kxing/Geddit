@@ -5,7 +5,7 @@
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/greyout.css" />
 
 <!-- Stuff for new reservations -->
-<input type="submit" value="New Reservation" onclick="showNewReservationDialog();">
+<input type="submit" value="New Reservation" onclick="showGreyoutDialog();">
 
 <div class="greyout greyout-visible"></div>
 <div id="new-reservation" class="greyout-visible">
@@ -15,7 +15,7 @@
     {{ form.as_p }}
     <input type="submit" value="Create">
   </form>
-  <input type="submit" value="Cancel" onclick="hideNewReservationDialog();">
+  <input type="submit" value="Cancel" onclick="hideGreyoutDialog();">
 </div>
 
 <!-- Existing reservations -->
@@ -41,7 +41,7 @@
 {% endblock %}
 
 {% block js_extra_imports %}
-<script src="{{ STATIC_URL }}js/reserve.js"
+<script src="{{ STATIC_URL }}js/greyout_dialog.js"
     type="text/javascript"
     charset="utf8"></script>
 {% endblock %}

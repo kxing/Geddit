@@ -1,8 +1,8 @@
-function showNewReservationDialog() {
+function showGreyoutDialog() {
     $(".greyout-visible").css("visibility", "visible");
 }
 
-function hideNewReservationDialog() {
+function hideGreyoutDialog() {
     $(".greyout-visible").css("visibility", "hidden");
 }
 

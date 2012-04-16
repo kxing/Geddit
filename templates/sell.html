@@ -1,37 +1,54 @@
 {% extends "base.html" %}
 
 {% block imports %}
-    {{ block.super }}
-    <style type="text/css">
-        div#map_canvas {
-            width: 300px;
-            height: 300px;
-            border: 1px solid black;
-        }
-    </style>
+  {{ block.super }}
+  <style type="text/css">
+    div#map_canvas {
+      width: 300px;
+      height: 300px;
+      border: 1px solid black;
+    }
+  </style>
 {% endblock %}
 
 {% block content %}
-    <form enctype='multipart/form-data' action="{{ SITE_ROOT }}sell" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Create Listing" />
-    </form>
-    
-    <div id="map_canvas">
-        
-    </div>
-    
-    <div id="lat" style="display: none;">{{ latitude }}</div>
-    <div id="lng" style="display: none;">{{ longitude }}</div>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/sell.css" />
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/greyout.css" />
+
+<input type="submit" value="New Listing" onclick="showGreyoutDialog();">
+
+<!-- Stuff for new listings -->
+<div class="greyout greyout-visible"></div>
+<div id="new-listing" class="greyout-visible">
+  <form enctype='multipart/form-data' action="{{ SITE_ROOT }}sell" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Create Listing" />
+  </form>
+
+  <div id="map_canvas">
+
+  </div>
+
+  <div id="lat" style="display: none;">{{ latitude }}</div>
+  <div id="lng" style="display: none;">{{ longitude }}</div>
+  <input type="submit" value="Cancel" onclick="hideGreyoutDialog();">
+</div>
+
+<!-- Existing listings -->
+
 {% endblock %}
 
 {% block js_extra_imports %}
-  <script
-      type="text/javascript"
-      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBAomHvVoRCbc7MW7p0IpnJdSgGcFlbMUA&sensor=false">
-  </script>
-  <script type="text/javascript"
-          src="{{ STATIC_URL }}js/google_maps.js">
-  </script>
+<script
+  type="text/javascript"
+  src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBAomHvVoRCbc7MW7p0IpnJdSgGcFlbMUA&sensor=false">
+</script>
+<script
+  type="text/javascript"
+  src="{{ STATIC_URL }}js/google_maps.js">
+</script>
+<script src="{{ STATIC_URL }}js/greyout_dialog.js"
+    type="text/javascript"
+    charset="utf8"></script>
 {% endblock %}
