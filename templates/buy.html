@@ -4,6 +4,13 @@
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/buy.css" />
 
 <div id="buy-title">Listings</div><br>
+<div id="buy-columns">
+  <div id="buy-image-column">Image</div>
+  <div id="buy-name-column">Name</div>
+  <div id="buy-description-column">Description</div>
+  <div id="buy-price-column">Price</div>
+  <div id="buy-claim-column"></div>
+</div>
 
 {% for item in items %}
   <div class="item-listing">
@@ -14,15 +21,9 @@
         (No image)
       {% endif %}
     </div>
-    <div class="item-name">
-      {{ item.name }}
-    </div>
-    <div class="item-description">
-      {{ item.description }}
-    </div>
-    <div class="item-price">
-      ${{ item.price }}
-    </div>
+    <div class="item-name">{{ item.name }}</div>
+    <div class="item-description">{{ item.description }}</div>
+    <div class="item-price">${{ item.price }}</div>
     <div class="item-claim-button">
       <form name="claim" action="{{ SITE_ROOT }}claim" method="post">
         {% csrf_token %}
