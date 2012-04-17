@@ -5,7 +5,12 @@
 }
 
 #content {
+    position: absolute;
     float: left;
     margin-left: 300px;
+    padding: 10px;
+    background: aliceblue;
+    height: 100%;
+    width: 100%;
 }
 

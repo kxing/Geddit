@@ -3,13 +3,15 @@
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/buy.css" />
 
+<div id="buy-title">Listings</div><br>
+
 {% for item in items %}
   <div class="item-listing">
     <div class="item-image-holder">
       {% if item.image %}
         <img class="item-image" src="{{ item.image.url }}" alt="No image available" />
       {% else %}
-        (No image available)
+        (No image)
       {% endif %}
     </div>
     <div class="item-name">
