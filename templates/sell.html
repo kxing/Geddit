@@ -39,13 +39,22 @@
   <input type="submit" value="New Listing" onclick="showGreyoutDialog();">
 </div>
 
+<br><br>
+<div id="sell-columns">
+  <div id="sell-image-column">Image</div>
+  <div id="sell-name-column">Name</div>
+  <div id="sell-description-column">Description</div>
+  <div id="sell-price-column">Price</div>
+  <div id="sell-remove-column"></div>
+</div>
+
 {% for item in items %}
   <div class="sell-item">
     <div class="sell-item-image-holder">
       {% if item.image %}
         <img class="sell-item-image" src="{{ item.image.url }}" alt="No image available" />
       {% else %}
-        (No image available)
+        (No image)
       {% endif %}
     </div>
     <div class="sell-item-name">

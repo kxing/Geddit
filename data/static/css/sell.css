@@ -1,5 +1,7 @@
 #sell-listings-title {
-    float: left;
+    display: inline;
+    font-size: large;
+    font-weight: bold;
 }
 
 #new-listing-button {
@@ -17,13 +19,46 @@
     z-index: 1001;
 }
 
+#sell-columns {
+    clear: both;
+    padding: 10px 0px;
+    height: 30px;
+}
+
+#sell-image-column {
+    width: 100px;
+    float: left;
+    font-weight: bold;
+}
+
+#sell-name-column {
+    width: 200px;
+    float: left;
+    font-weight: bold;
+}
+
+#sell-description-column {
+    width: 400px;
+    float: left;
+    font-weight: bold;
+}
+
+#sell-price-column {
+    width: 100px;
+    float: left;
+    font-weight: bold;
+}
+
 .sell-item {
     clear: both;
+    padding: 5px 0px;
 }
 
 .sell-item-image-holder {
     width: 100px;
     float: left;
+    font-size: 11px;
+    color: gray;
 }
 
 .sell-item-image {
@@ -47,6 +82,6 @@
 }
 
 .sell-item-remove-button {
-    float: left;
+    float: right;
 }
 
