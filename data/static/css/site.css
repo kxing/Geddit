@@ -4,7 +4,20 @@
     width: 100%;
 }
 
+#sidebar-content {
+    position: absolute;
+    top: 100px;
+    bottom: 10px;
+    left: 0px;
+    right: 0px;
+}
+
 #content {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
     margin-left: 300px;
     padding: 10px;
     background: aliceblue;
