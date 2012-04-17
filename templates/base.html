@@ -20,10 +20,12 @@
   {% include 'navigation_bar.html' %}
 </div>
 
-{% include 'sidebar.html' %}
+<div id="sidebar-content">
+  {% include 'sidebar.html' %}
 
-<div id="content">
-  {% block content %}{% endblock %}
+  <div id="content">
+    {% block content %}{% endblock %}
+  </div>
 </div>
 
 </body>

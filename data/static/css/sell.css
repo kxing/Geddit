@@ -1,3 +1,11 @@
+#sell-listings-title {
+    float: left;
+}
+
+#new-listing-button {
+    float: right;
+}
+
 #new-listing {
     position: fixed;
     top: 10%;

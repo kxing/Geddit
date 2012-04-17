@@ -15,8 +15,6 @@
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/sell.css" />
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/greyout.css" />
 
-<input type="submit" value="New Listing" onclick="showGreyoutDialog();">
-
 <!-- Stuff for new listings -->
 <div class="greyout greyout-visible"></div>
 <div id="new-listing" class="greyout-visible">
@@ -36,7 +34,11 @@
 </div>
 
 <!-- Existing listings -->
-<h2>My Listings</h2>
+<div id="sell-listings-title">My Listings</div>
+<div id="new-listing-button">
+  <input type="submit" value="New Listing" onclick="showGreyoutDialog();">
+</div>
+
 {% for item in items %}
   <div class="sell-item">
     <div class="sell-item-image-holder">
