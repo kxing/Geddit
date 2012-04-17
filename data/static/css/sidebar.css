@@ -3,7 +3,7 @@
     float: left;
     width: 300px;
     height: 100%;
-    background: pink;
+    background: lightskyblue;
 }
 
 #sidebar-title {
@@ -14,5 +14,9 @@
 
 .sidebar-category-link {
     font-size: 11pt;
+}
+
+.sidebar-category-link a {
+    color: blue;
 }
 
