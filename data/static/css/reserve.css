@@ -8,8 +8,6 @@
 
 #reservation-columns {
     clear: both;
-    padding: 10px 0px;
-    height: 30px;
 }
 
 #new-reservation {
@@ -24,8 +22,6 @@
 }
 
 .reservation {
-    clear: both;
-    padding: 5px 0px;
 }
 
 .reservation-search-query-column {

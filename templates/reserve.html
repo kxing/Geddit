@@ -25,14 +25,14 @@
 
 <br><br>
 
-<div id="reservation-columns">
+<div id="reservation-columns" class="table-column-titles-row">
   <div class="table-column-title reservation-search-query-column">Search Query</div>
   <div class="table-column-title reservation-max-price-column">Maximum Price</div>
   <div class="table-column-title reservation-delete-column"></div>
 </div>
 
 {% for reservation in reservations %}
-  <div class="reservation">
+  <div class="table-row reservation">
     <div class="reservation-search-query-column">{{ reservation.search_query }}</div>
     <div class="reservation-max-price-column">{{ reservation.max_price }}</div>
     <div class="reservation-delete-column">

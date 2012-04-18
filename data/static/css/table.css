@@ -3,8 +3,19 @@
     font-weight: bold;
 }
 
+.table-column-titles-row {
+    clear: both;
+    padding: 10px 0px;
+    height: 30px;
+}
+
 .table-column-title {
     font-weight: bold;
+}
+
+.table-row {
+    clear: both;
+    padding: 5px 0px;
 }
 
 .item-image {
@@ -16,4 +27,5 @@
     font-size: 11px;
     color: gray;
 }
+
 

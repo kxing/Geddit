@@ -41,7 +41,7 @@
 </div>
 
 <br><br>
-<div id="sell-columns">
+<div id="sell-columns" class="table-column-titles-row">
   <div class="table-column-title sell-image-column">Image</div>
   <div class="table-column-title sell-name-column">Name</div>
   <div class="table-column-title sell-description-column">Description</div>
@@ -50,7 +50,7 @@
 </div>
 
 {% for item in items %}
-  <div class="sell-item">
+  <div class="sell-item table-row">
     <div class="sell-image-column item-image-text">
       {% if item.image %}
         <img class="item-image" src="{{ item.image.url }}" alt="(No image)" />

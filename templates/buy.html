@@ -4,8 +4,8 @@
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/buy.css" />
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/table.css" />
 
-<div id="buy-title">Listings</div><br>
-<div id="buy-columns">
+<div id="buy-title" class="table-title">Listings</div><br>
+<div id="buy-columns" class="table-column-titles-row">
   <div class="table-column-title buy-image-column">Image</div>
   <div class="table-column-title buy-name-column">Name</div>
   <div class="table-column-title buy-description-column">Description</div>
@@ -14,7 +14,7 @@
 </div>
 
 {% for item in items %}
-  <div class="buy-item-listing">
+  <div class="table-row buy-item-listing">
     <div class="buy-image-column item-image-text">
       {% if item.image %}
         <img class="item-image" src="{{ item.image.url }}" alt="(No image)" />

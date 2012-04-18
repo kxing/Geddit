@@ -1,7 +1,5 @@
 #sell-listings-title {
     display: inline;
-    font-size: large;
-    font-weight: bold;
 }
 
 #new-listing-button {
@@ -20,9 +18,6 @@
 }
 
 #sell-columns {
-    clear: both;
-    padding: 10px 0px;
-    height: 30px;
 }
 
 .sell-image-column {
@@ -50,7 +45,5 @@
 }
 
 .sell-item {
-    clear: both;
-    padding: 5px 0px;
 }
 
