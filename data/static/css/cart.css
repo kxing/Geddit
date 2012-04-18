@@ -1,0 +1,32 @@
+.claim {
+}
+
+.cart-image-column {
+    width: 100px;
+    float: left;
+}
+
+.cart-name-column {
+    width: 200px;
+    float: left;
+}
+
+.cart-description-column {
+    width: 400px;
+    float: left;
+}
+
+.cart-price-column {
+    width: 100px;
+    float: left;
+}
+
+.cart-unclaim-column {
+    width: 100px;
+    float: right;
+}
+
+.cart-email-seller-column {
+    float: right;
+}
+
