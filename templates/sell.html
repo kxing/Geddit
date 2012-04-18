@@ -14,6 +14,7 @@
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/sell.css" />
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/greyout.css" />
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/table.css" />
 
 <!-- Stuff for new listings -->
 <div class="greyout greyout-visible"></div>
@@ -34,39 +35,33 @@
 </div>
 
 <!-- Existing listings -->
-<div id="sell-listings-title">My Listings</div>
+<div id="sell-listings-title" class="table-title">My Listings</div>
 <div id="new-listing-button">
   <input type="submit" value="New Listing" onclick="showGreyoutDialog();">
 </div>
 
 <br><br>
 <div id="sell-columns">
-  <div id="sell-image-column">Image</div>
-  <div id="sell-name-column">Name</div>
-  <div id="sell-description-column">Description</div>
-  <div id="sell-price-column">Price</div>
-  <div id="sell-remove-column"></div>
+  <div class="table-column-title sell-image-column">Image</div>
+  <div class="table-column-title sell-name-column">Name</div>
+  <div class="table-column-title sell-description-column">Description</div>
+  <div class="table-column-title sell-price-column">Price</div>
+  <div class="table-column-title sell-remove-column"></div>
 </div>
 
 {% for item in items %}
   <div class="sell-item">
-    <div class="sell-item-image-holder">
+    <div class="sell-image-column item-image-text">
       {% if item.image %}
-        <img class="sell-item-image" src="{{ item.image.url }}" alt="No image available" />
+        <img class="item-image" src="{{ item.image.url }}" alt="No image available" />
       {% else %}
         (No image)
       {% endif %}
     </div>
-    <div class="sell-item-name">
-      {{ item.name }}
-    </div>
-    <div class="sell-item-description">
-      {{ item.description }}
-    </div>
-    <div class="sell-item-price">
-      ${{ item.price }}
-    </div>
-    <div class="sell-item-remove-button">
+    <div class="sell-name-column">{{ item.name }}</div>
+    <div class="sell-description-column">{{ item.description }}</div>
+    <div class="sell-price-column">${{ item.price }}</div>
+    <div class="sell-remove-column">
       <form name="sell_item" action="{{ SITE_ROOT }}remove_item" method="post">
         {% csrf_token %}
         <input type="hidden" name="item_id" value={{ item.id }}>

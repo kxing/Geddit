@@ -25,63 +25,32 @@
     height: 30px;
 }
 
-#sell-image-column {
+.sell-image-column {
     width: 100px;
     float: left;
-    font-weight: bold;
 }
 
-#sell-name-column {
+.sell-name-column {
     width: 200px;
     float: left;
-    font-weight: bold;
 }
 
-#sell-description-column {
+.sell-description-column {
     width: 400px;
     float: left;
-    font-weight: bold;
 }
 
-#sell-price-column {
+.sell-price-column {
     width: 100px;
     float: left;
-    font-weight: bold;
+}
+
+.sell-remove-column {
+    float: right;
 }
 
 .sell-item {
     clear: both;
     padding: 5px 0px;
-}
-
-.sell-item-image-holder {
-    width: 100px;
-    float: left;
-    font-size: 11px;
-    color: gray;
-}
-
-.sell-item-image {
-    max-width: 100%;
-    max-height: 100%;
-}
-
-.sell-item-name {
-    width: 200px;
-    float: left;
-}
-
-.sell-item-description {
-    width: 400px;
-    float: left;
-}
-
-.sell-item-price {
-    width: 100px;
-    float: left;
-}
-
-.sell-item-remove-button {
-    float: right;
 }
 
