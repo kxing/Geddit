@@ -1,0 +1,15 @@
+.form-title {
+    font-size: x-large;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.form-field {
+    padding: 5px 10px;
+}
+
+.form-label {
+    width: 100px;
+    display: inline-block;
+}
+

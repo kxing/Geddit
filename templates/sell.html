@@ -14,16 +14,25 @@
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/sell.css" />
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/greyout.css" />
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/form.css" />
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/table.css" />
 
 <!-- Stuff for new listings -->
 <div class="greyout greyout-visible"></div>
 <div id="new-listing" class="greyout-visible">
-  <form enctype='multipart/form-data' action="{{ SITE_ROOT }}sell" method="post">
+  <div class="form-title">New Listing</div>
+  <form enctype="multipart/form-data" action="{{ SITE_ROOT }}sell" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Create Listing" />
+    {% for field in form %}
+      <div class="form-field">
+        {{ field.errors }}
+        <label for="id_{{ field.html_name }}" class="form-label">{{ field.label }}:</label>
+        {{ field }}
+      </div>
+    {% endfor %}
+    <input id="sell-create-button" type="submit" value="Create Listing" />
   </form>
+  <input id="sell-cancel-button" type="submit" value="Cancel" onclick="hideGreyoutDialog();">
 
   <div id="map_canvas">
 
@@ -31,7 +40,6 @@
 
   <div id="lat" style="display: none;">{{ latitude }}</div>
   <div id="lng" style="display: none;">{{ longitude }}</div>
-  <input type="submit" value="Cancel" onclick="hideGreyoutDialog();">
 </div>
 
 <!-- Existing listings -->

@@ -17,6 +17,18 @@
     z-index: 1001;
 }
 
+#sell-create-button {
+    float: left;
+}
+
+#sell-cancel-button {
+    float: left;
+}
+
+#map_canvas {
+    clear: both;
+}
+
 #sell-columns {
 }
 
