@@ -10,66 +10,32 @@
     height: 30px;
 }
 
-#buy-image-column {
+.buy-image-column {
     width: 100px;
     float: left;
-    font-weight: bold;
 }
 
-#buy-name-column {
+.buy-name-column {
     width: 200px;
     float: left;
-    font-weight: bold;
 }
 
-#buy-description-column {
+.buy-description-column {
     width: 400px;
     float: left;
-    font-weight: bold;
 }
 
-#buy-price-column {
+.buy-price-column {
     width: 100px;
     float: left;
-    font-weight: bold;
 }
 
-#buy-claim-column {
+.buy-claim-column {
+    float: right;
 }
 
-.item-listing {
+.buy-item-listing {
     clear: both;
     padding: 5px 0px;
-}
-
-.item-image-holder {
-    width: 100px;
-    float: left;
-    font-size: 11px;
-    color: gray;
-}
-
-.item-image {
-    max-width: 100%;
-    max-height: 100%;
-}
-
-.item-name {
-    width: 200px;
-    float: left;
-}
-
-.item-description {
-    width: 400px;
-    float: left;
-}
-
-.item-price {
-    width: 100px;
-    float: left;
-}
-
-.item-claim-button {
-    float: right;
 }
 
