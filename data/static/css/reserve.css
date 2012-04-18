@@ -1,3 +1,17 @@
+#reserve-title {
+    float: left;
+}
+
+#new-reservation-button {
+    float: right;
+}
+
+#reservation-columns {
+    clear: both;
+    padding: 10px 0px;
+    height: 30px;
+}
+
 #new-reservation {
     position: fixed;
     top: 25%;
@@ -11,19 +25,20 @@
 
 .reservation {
     clear: both;
+    padding: 5px 0px;
 }
 
-.reservation-search-query {
+.reservation-search-query-column {
     width: 300px;
     float: left;
 }
 
-.reservation-max-price {
-    width: 100px;
+.reservation-max-price-column {
+    width: 200px;
     float: left;
 }
 
-.reservation-delete {
-    float: left;
+.reservation-delete-column {
+    float: right;
 }
 

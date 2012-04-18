@@ -3,10 +3,9 @@
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/reserve.css" />
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/greyout.css" />
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/table.css" />
 
 <!-- Stuff for new reservations -->
-<input type="submit" value="New Reservation" onclick="showGreyoutDialog();">
-
 <div class="greyout greyout-visible"></div>
 <div id="new-reservation" class="greyout-visible">
   <h1>New Reservation</h1>
@@ -19,16 +18,24 @@
 </div>
 
 <!-- Existing reservations -->
-<h1>My Reservations</h1>
+<div id="reserve-title" class="table-title">My Reservations</div>
+<div id="new-reservation-button">
+  <input type="submit" value="New Reservation" onclick="showGreyoutDialog();">
+</div>
+
+<br><br>
+
+<div id="reservation-columns">
+  <div class="table-column-title reservation-search-query-column">Search Query</div>
+  <div class="table-column-title reservation-max-price-column">Maximum Price</div>
+  <div class="table-column-title reservation-delete-column"></div>
+</div>
+
 {% for reservation in reservations %}
   <div class="reservation">
-    <div class="reservation-search-query">
-      {{ reservation.search_query }}
-    </div>
-    <div class="reservation-max-price">
-      {{ reservation.max_price }}
-    </div>
-    <div class="reservation-delete">
+    <div class="reservation-search-query-column">{{ reservation.search_query }}</div>
+    <div class="reservation-max-price-column">{{ reservation.max_price }}</div>
+    <div class="reservation-delete-column">
       <form name="delete" action="{{ SITE_ROOT }}delete_reservation" method="post">
         {% csrf_token %}
         <input type="hidden" name="reservation_id" value={{ reservation.id }}>
