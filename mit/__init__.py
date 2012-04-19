@@ -77,3 +77,4 @@ def scripts_login(request, **kwargs):
         # Move to port 444
         redirect_to = "https://%s:444%s" % (host, request.META['REQUEST_URI'], )
         return HttpResponseRedirect(redirect_to)
+

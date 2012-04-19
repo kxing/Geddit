@@ -86,6 +86,11 @@ STATICFILES_FINDERS = (
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'mixabjpkh^2#n3c2da7c3)w(5o+3hij&_!@l^nb=px==5y8ee&'
 
+SITE_WEB_PATH = ''
+LOGIN_REDIRECT_URL = SITE_WEB_PATH + 'buy'
+LOGIN_URL = SITE_WEB_PATH + 'login'
+LOGOUT_URL = SITE_WEB_PATH + 'logout'
+
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
@@ -99,6 +104,12 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'mit.ScriptsRemoteUserMiddleware',
+)
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'mit.ScriptsRemoteUserBackend',
 )
 
 ROOT_URLCONF = 'geddit.urls'

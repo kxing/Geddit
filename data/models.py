@@ -3,7 +3,7 @@ import smtplib
 from email.mime.text import MIMEText
 from googlevoice import Voice
 from datetime import datetime
-from site_specific import SITE_ROOT, GEDDIT_GMAIL, GEDDIT_PASSWORD
+from site_specific_constants import SITE_ROOT, GEDDIT_GMAIL, GEDDIT_PASSWORD
 
 USERNAME_MAX_LENGTH = 25
 PERSON_NAME_MAX_LENGTH = 25
@@ -47,7 +47,7 @@ class User(models.Model):
     first_name = models.CharField(max_length=PERSON_NAME_MAX_LENGTH)
     last_name = models.CharField(max_length=PERSON_NAME_MAX_LENGTH)
     email = models.EmailField()
-    cell_phone = models.CharField(max_length=PHONE_NUMBER_MAX_LENGTH)
+    cell_phone = models.CharField(max_length=PHONE_NUMBER_MAX_LENGTH, blank=True, null=True)
     location = models.ForeignKey(Location, blank=True, null=True)
 
     def __unicode__(self):
@@ -58,7 +58,7 @@ class User(models.Model):
         verbose_name_plural = 'Users'
 
     @staticmethod
-    def create_user(username, first_name, last_name, email, cell_phone, location):
+    def create_user(username, first_name, last_name, email, cell_phone=None, location=None):
         u = User(username=username, first_name=first_name, \
                 last_name=last_name, email=email, cell_phone=cell_phone,
                 location=location)

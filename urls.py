@@ -1,4 +1,5 @@
 from django.conf.urls.defaults import patterns, include, url
+from django.contrib.auth.views import login, logout
 
 #from tastypie.api import Api
 #from geddit.api.resources import UserResource, ItemResource, ClaimResource, CategoryResource, ReservationResource
@@ -48,5 +49,8 @@ urlpatterns = patterns('',
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
             'document_root': settings.MEDIA_ROOT,
         }),
-    #url(r'login', 'auth.view.scripts_login'),
+
+    url(r'^login/password/', 'django.contrib.auth.views.login', name='login-password', ),
+    url(r'^login/', 'mit.scripts_login', name='login', ),
+    url(r'^logout/', logout, name='logout', ),
 )
