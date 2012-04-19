@@ -44,7 +44,7 @@ urlpatterns = patterns('',
     url(r'^delete_reservation$', 'data.views.delete_reservation'),
     url(r'^claim$', 'data.views.claim_listing'),
     url(r'^unclaim$', 'data.views.unclaim_listing'),
-    url(r'^email_seller$', 'data.views.email_seller'),
+    #url(r'^email_seller$', 'data.views.email_seller'),
 
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
             'document_root': settings.MEDIA_ROOT,

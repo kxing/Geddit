@@ -32,7 +32,7 @@
         <input type="hidden" name="item_id" value={{ claim.item.id }}>
         <input type="submit" value="Email Seller">
       </form-->
-      <form name="email_seller" action="mailto:kxing@mit.edu" method="link">
+      <form name="email_seller" action="mailto:{{ claim.item.seller_user.email }}" method="link">
         <input type="submit" value="Email Seller">
       </form>
     </div>
