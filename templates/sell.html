@@ -34,12 +34,14 @@
   </form>
   <input id="sell-cancel-button" type="submit" value="Cancel" onclick="hideGreyoutDialog();">
 
-  <div id="map_canvas">
+  {% if latitude and longitude %}
+    <div id="map_canvas">
 
-  </div>
+    </div>
 
-  <div id="lat" style="display: none;">{{ latitude }}</div>
-  <div id="lng" style="display: none;">{{ longitude }}</div>
+    <div id="lat" style="display: none;">{{ latitude }}</div>
+    <div id="lng" style="display: none;">{{ longitude }}</div>
+  {% endif %}
 </div>
 
 <!-- Existing listings -->

@@ -52,8 +52,9 @@ def sell_page(request):
     render_params = base_params(request)
     render_params['form'] = form
     # For the Google Maps location
-    render_params['latitude'] = get_current_user(request).location.latitude
-    render_params['longitude'] = get_current_user(request).location.longitude
+    if get_current_user(request).location is not None:
+        render_params['latitude'] = get_current_user(request).location.latitude
+        render_params['longitude'] = get_current_user(request).location.longitude
     render_params['items'] = get_current_user(request).get_items()
     
     return render(request, 'sell.html', render_params, \
