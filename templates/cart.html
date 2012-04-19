@@ -27,9 +27,12 @@
     <div class="cart-description-column">{{ claim.item.description }}</div>
     <div class="cart-price-column">${{ claim.item.price }}</div>
     <div class="cart-email-seller-column">
-      <form name="email_seller" action="{{ SITE_ROOT }}email_seller" method="post">
+      <!--form name="email_seller" action="{{ SITE_ROOT }}email_seller" method="post">
         {% csrf_token %}
         <input type="hidden" name="item_id" value={{ claim.item.id }}>
+        <input type="submit" value="Email Seller">
+      </form-->
+      <form name="email_seller" action="mailto:kxing@mit.edu" method="link">
         <input type="submit" value="Email Seller">
       </form>
     </div>

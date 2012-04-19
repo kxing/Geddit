@@ -139,6 +139,7 @@ def settings_page(request):
     return render(request, 'settings.html', render_params,
                   context_instance=RequestContext(request))
 
+'''
 def email_seller(request):
     if request.method != 'POST':
         return redirect('data.views.cart_page')
@@ -148,5 +149,5 @@ def email_seller(request):
     item.seller_user.send_email(str(buyer) + ' wants to buy your ' + str(item) + '. Please contact your buyer at ' + buyer.email, '[Geddit] Buyer for ' + str(item))
     # TODO: show a confirmation message
     return redirect('data.views.cart_page')
-
+'''
 
