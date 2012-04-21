@@ -24,3 +24,16 @@
     overflow: auto;
 }
 
+/* Not a great font, but we should specify our own for consistency */
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+html {
+    font-family: "Open Sans", sans-serif;
+}
+
+h1 {
+    font-size: 1.1em;
+}
+
+h2 {
+    font-size: 1.05em;
+}

@@ -12,15 +12,17 @@
   <form name="reserve" action="{{ SITE_ROOT }}new_reservation" method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Create">
+    <input type="submit" value="Create" class="button">
+    <input type="button" value="Cancel" onclick="hideGreyoutDialog();"
+       class="button">
   </form>
-  <input type="submit" value="Cancel" onclick="hideGreyoutDialog();">
 </div>
 
 <!-- Existing reservations -->
-<div id="reserve-title" class="table-title">My Reservations</div>
+<div id="reserve-title" class="table-title"><h1>My Reservations</h1></div>
 <div id="new-reservation-button">
-  <input type="submit" value="New Reservation" onclick="showGreyoutDialog();">
+  <input type="button" value="New Reservation" onclick="showGreyoutDialog();"
+    class="button">
 </div>
 
 <br><br>
@@ -39,7 +41,7 @@
       <form name="delete" action="{{ SITE_ROOT }}delete_reservation" method="post">
         {% csrf_token %}
         <input type="hidden" name="reservation_id" value={{ reservation.id }}>
-        <input type="submit" value="Delete">
+        <input type="submit" value="Delete" class="button">
       </form>
     </div>
   </div>
