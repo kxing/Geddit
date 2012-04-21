@@ -15,13 +15,17 @@
     background: white;
     opacity: 1.0;
     z-index: 1001;
+    
+    padding: 1%;
 }
 
 #sell-create-button {
+    margin-top: 1%;
     float: left;
 }
 
 #sell-cancel-button {
+    margin-top: 1%;
     float: left;
 }
 

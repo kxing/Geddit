@@ -20,7 +20,7 @@
 <!-- Stuff for new listings -->
 <div class="greyout greyout-visible"></div>
 <div id="new-listing" class="greyout-visible">
-  <div class="form-title">New Listing</div>
+  <div class="form-title"><h1>New Listing</h1></div>
   <form enctype="multipart/form-data" action="{{ SITE_ROOT }}sell" method="post">
     {% csrf_token %}
     {% for field in form %}
@@ -30,24 +30,24 @@
         {{ field }}
       </div>
     {% endfor %}
-    <input id="sell-create-button" type="submit" value="Create Listing" />
+    <input id="sell-create-button" class="button" type="submit" value="Create Listing" />
+    <input id="sell-cancel-button" type="button" class="button" value="Cancel" onclick="hideGreyoutDialog();">
   </form>
-  <input id="sell-cancel-button" type="submit" value="Cancel" onclick="hideGreyoutDialog();">
-
+<!--
   {% if latitude and longitude %}
     <div id="map_canvas">
-
     </div>
 
     <div id="lat" style="display: none;">{{ latitude }}</div>
     <div id="lng" style="display: none;">{{ longitude }}</div>
   {% endif %}
+-->
 </div>
 
 <!-- Existing listings -->
 <div id="sell-listings-title" class="table-title">My Listings</div>
 <div id="new-listing-button">
-  <input type="submit" value="New Listing" onclick="showGreyoutDialog();">
+  <input type="button" class="button" value="New Listing" onclick="showGreyoutDialog();">
 </div>
 
 <br><br>
@@ -75,7 +75,7 @@
       <form name="sell_item" action="{{ SITE_ROOT }}remove_item" method="post">
         {% csrf_token %}
         <input type="hidden" name="item_id" value={{ item.id }}>
-        <input type="submit" value="Remove">
+        <input type="submit" value="Remove" class="button">
       </form>
     </div>
   </div>

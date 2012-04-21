@@ -1,5 +1,32 @@
-input[type=submit] {
+.button {
     border: 1px solid;
     background: lightblue;
 }
 
+input[type=Text] {
+    background: lightblue;
+}
+
+input[type=Text]:hover {
+    background: #ff8;
+}
+
+input[type=Text]:focus {
+    background: #ff8;
+}
+
+select {
+    background: #FFF;
+}
+
+input[type=file] {
+    background: #FFF;
+}
+
+input[type=file]:hover {
+    background: #ff8;
+}
+
+select:hover {
+    background: #ff8;
+}

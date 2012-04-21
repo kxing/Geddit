@@ -19,6 +19,16 @@
     background: white;
     opacity: 1.0;
     z-index: 1001;
+    
+    padding: 2%;
+}
+
+#new-reservation.input[type=Submit] {
+    float: left;
+}
+
+#new-reservation.input[type=Button] {
+    float: left;
 }
 
 .reservation {

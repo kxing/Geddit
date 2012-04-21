@@ -4,10 +4,8 @@
     <form action="{{ SITE_ROOT }}settings" method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="Update" />
+        <input type="submit" value="Update" class="button" />
     </form>
     
-    <div id="map_canvas">
-        
-    </div>
+    <div id="map_canvas"></div>
 {% endblock %}
