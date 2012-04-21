@@ -33,14 +33,14 @@
         <input type="submit" value="Email Seller">
       </form-->
       <form name="email_seller" action="mailto:{{ claim.item.seller_user.email }}" method="link">
-        <input type="submit" value="Email Seller">
+        <input type="submit" value="Email Seller" class="button">
       </form>
     </div>
     <div class="cart-unclaim-column">
       <form name="unclaim" action="{{ SITE_ROOT }}unclaim" method="post">
         {% csrf_token %}
         <input type="hidden" name="item_id" value={{ claim.item.id }}>
-        <input type="submit" value="Unclaim">
+        <input type="submit" value="Unclaim" class="button">
       </form>
     </div>
   </div>
