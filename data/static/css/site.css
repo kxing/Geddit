@@ -37,3 +37,9 @@ h1 {
 h2 {
     font-size: 1.05em;
 }
+
+.unimportant-font {
+    font-size: 11px;
+    color: gray;
+}
+

@@ -19,6 +19,11 @@
     float: left;
 }
 
+.buy-location {
+    width: 200px;
+    float: left;
+}
+
 .buy-price-column {
     width: 100px;
     float: left;
