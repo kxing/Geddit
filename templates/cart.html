@@ -9,6 +9,7 @@
   <div class="table-column-title cart-image-column">Image</div>
   <div class="table-column-title cart-name-column">Name</div>
   <div class="table-column-title cart-description-column">Description</div>
+  <div class="table-column-title cart-location-column">Location</div>
   <div class="table-column-title cart-price-column">Price</div>
   <div class="table-column-title cart-unclaim-column"></div>
   <div class="table-column-title cart-email-seller-column"></div>
@@ -25,6 +26,13 @@
     </div>
     <div class="cart-name-column">{{ claim.item.name }}</div>
     <div class="cart-description-column">{{ claim.item.description }}</div>
+    <div class="cart-location-column unimportant-font">
+      {% if claim.item.seller_user.location %}
+        {{ claim.item.seller_user.location.name }}
+      {% else %}
+        (Not listed)
+      {% endif %}
+    </div>
     <div class="cart-price-column">${{ claim.item.price }}</div>
     <div class="cart-email-seller-column">
       <!--form name="email_seller" action="{{ SITE_ROOT }}email_seller" method="post">

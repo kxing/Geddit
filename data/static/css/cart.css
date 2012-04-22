@@ -16,6 +16,11 @@
     float: left;
 }
 
+.cart-location-column {
+    width: 200px;
+    float: left;
+}
+
 .cart-price-column {
     width: 100px;
     float: left;
