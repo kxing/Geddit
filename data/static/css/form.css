@@ -12,3 +12,24 @@
     width: 100px;
     display: inline-block;
 }
+
+.form-field input[type=Text] {
+    width: 200px;
+}
+
+.form-field .currency-field {
+    display: inline-block;
+}
+
+.form-field .currency-field .dollar-sign {
+    display: inline-block;
+    width: 20px;
+    float: left;
+}
+
+.form-field .currency-field input[type=Text] {
+    width: 180px !important;
+    float: left;
+}
+
+
