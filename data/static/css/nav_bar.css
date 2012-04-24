@@ -1,8 +1,10 @@
 #nav_bar {
+    display: inline-block;
+    width: 80%;
+    float: left;
 }
 
 #nav_buttons {
-    margin-left: 300px;
     clear: right;
     height: 20px;
     background: darkblue;

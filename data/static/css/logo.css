@@ -1,7 +1,8 @@
 #logo {
-    float: left;
-    width: 300px;
+    display: inline-block;
+    width: 20%;
     height: 75px;
+    float: left;
 }
 
 #logo-image {

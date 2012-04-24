@@ -1,8 +1,12 @@
 #sidebar {
-    position: absolute;
-    width: 300px;
     background: lightskyblue;
-    height: 100%;
+
+    position: absolute;
+    left: 0px;
+    right: 80%;
+    top: 0px;
+    bottom: 0px;
+    overflow: auto;
 }
 
 #sidebar-title {
