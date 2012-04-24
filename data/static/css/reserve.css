@@ -35,16 +35,17 @@
 }
 
 .reservation-search-query-column {
-    width: 300px;
+    width: 60%;
     float: left;
 }
 
 .reservation-max-price-column {
-    width: 200px;
+    width: 30%;
     float: left;
 }
 
 .reservation-delete-column {
+    width: 10%;
     float: right;
 }
 

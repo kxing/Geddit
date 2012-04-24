@@ -2,36 +2,37 @@
 }
 
 .cart-image-column {
-    width: 100px;
+    width: 10%;
     float: left;
 }
 
 .cart-name-column {
-    width: 200px;
+    width: 15%;
     float: left;
 }
 
 .cart-description-column {
-    width: 400px;
+    width: 30%;
     float: left;
 }
 
 .cart-location-column {
-    width: 200px;
+    width: 15%;
     float: left;
 }
 
 .cart-price-column {
-    width: 100px;
+    width: 10%;
     float: left;
 }
 
 .cart-unclaim-column {
-    width: 100px;
+    width: 10%;
     float: right;
 }
 
 .cart-email-seller-column {
+    width: 10%;
     float: right;
 }
 

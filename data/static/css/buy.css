@@ -5,31 +5,32 @@
 }
 
 .buy-image-column {
-    width: 100px;
+    width: 10%;
     float: left;
 }
 
 .buy-name-column {
-    width: 200px;
+    width: 15%;
     float: left;
 }
 
 .buy-description-column {
-    width: 400px;
+    width: 35%;
     float: left;
 }
 
 .buy-location {
-    width: 200px;
+    width: 20%;
     float: left;
 }
 
 .buy-price-column {
-    width: 100px;
+    width: 10%;
     float: left;
 }
 
 .buy-claim-column {
+    width: 10%;
     float: right;
 }
 

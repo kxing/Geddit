@@ -37,26 +37,27 @@
 }
 
 .sell-image-column {
-    width: 100px;
+    width: 10%;
     float: left;
 }
 
 .sell-name-column {
-    width: 200px;
+    width: 25%;
     float: left;
 }
 
 .sell-description-column {
-    width: 400px;
+    width: 40%;
     float: left;
 }
 
 .sell-price-column {
-    width: 100px;
+    width: 15%;
     float: left;
 }
 
 .sell-remove-column {
+    width: 10%;
     float: right;
 }
 
