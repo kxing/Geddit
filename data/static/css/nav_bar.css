@@ -33,6 +33,10 @@
     color: white;
 }
 
+.nav_highlighted {
+    background: cornflowerblue;
+}
+
 #search {
 }
 

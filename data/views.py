@@ -12,8 +12,16 @@ from data.views_lib import base_params
 
 from datetime import datetime
 
+NAV_PAGE = 'nav_page'
+BUY = 'buy'
+SELL = 'sell'
+RESERVE = 'reserve'
+CART = 'cart'
+SETTINGS = 'settings'
+
 def buy_page(request):
     render_params = base_params(request)
+    render_params[NAV_PAGE] = BUY
 
     category = None
     if 'category' in request.GET:
@@ -50,6 +58,7 @@ def sell_page(request):
         form = ItemForm()
     
     render_params = base_params(request)
+    render_params[NAV_PAGE] = SELL
     render_params['form'] = form
     # For the Google Maps location
     if get_current_user(request).location is not None:
@@ -62,6 +71,7 @@ def sell_page(request):
 
 def reserve_page(request):
     render_params = base_params(request)
+    render_params[NAV_PAGE] = RESERVE
 
     form = ReservationForm()
     render_params['form'] = form
@@ -71,6 +81,7 @@ def reserve_page(request):
 
 def cart_page(request):
     render_params = base_params(request)
+    render_params[NAV_PAGE] = CART
     render_params['claims'] = get_current_user(request).get_claims()
     return render(request, 'cart.html', render_params, \
             context_instance=RequestContext(request))
@@ -134,6 +145,7 @@ def settings_page(request):
         form = UserSettingsForm(initial=initialData)
     
     render_params = base_params(request)
+    render_params[NAV_PAGE] = SETTINGS
     render_params['form'] = form
     
     return render(request, 'settings.html', render_params,
