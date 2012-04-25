@@ -1,7 +1,11 @@
-#nav_bar {
+#nav-bar-container {
     display: inline-block;
     width: 80%;
     float: left;
+}
+
+#nav-bar {
+    margin: 10px;
 }
 
 #nav_buttons {
