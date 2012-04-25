@@ -1,11 +1,14 @@
 #sidebar {
-    background: lightskyblue;
-
     position: absolute;
     left: 0px;
     right: 80%;
     top: 0px;
     bottom: 0px;
+
+    background: lightskyblue;
+    margin: 10px;
+    border-radius: 10px;
+
     overflow: auto;
 }
 
