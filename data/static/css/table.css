@@ -16,10 +16,19 @@
 .table-row {
     clear: both;
     padding: 5px 0px;
+    overflow: auto;
 }
 
 .item-image {
     max-width: 100%;
     max-height: 100%;
+}
+
+.lightcolor {
+    background: lightblue;
+}
+
+.darkcolor {
+    background: aliceblue;
 }
 

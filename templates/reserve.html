@@ -51,7 +51,8 @@
 </div>
 
 {% for reservation in reservations %}
-  <div class="table-row reservation">
+  {% cycle 'lightcolor' 'darkcolor' as rowcolor silent %}
+  <div class="table-row reservation {{ rowcolor }}">
     <div class="reservation-search-query-column">{{ reservation.search_query }}</div>
     <div class="reservation-max-price-column">{{ reservation.max_price }}</div>
     <div class="reservation-delete-column">

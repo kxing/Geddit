@@ -16,7 +16,8 @@
 </div>
 
 {% for claim in claims %}
-  <div class="table-row claim">
+  {% cycle 'lightcolor' 'darkcolor' as rowcolor silent %}
+  <div class="table-row claim {{ rowcolor }}">
     <div class="cart-image-column unimportant-font">
       {% if claim.item.image %}
         <img class="item-image" src="{{ claim.item.image.url }}" alt="(No image)" />

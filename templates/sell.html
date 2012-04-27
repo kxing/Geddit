@@ -91,7 +91,8 @@
 </div>
 
 {% for item in items %}
-  <div class="sell-item table-row">
+  {% cycle 'lightcolor' 'darkcolor' as rowcolor silent %}
+  <div class="sell-item table-row {{ rowcolor }}">
     <div class="sell-image-column unimportant-font">
       {% if item.image %}
         <img class="item-image" src="{{ item.image.url }}" alt="(No image)" />
