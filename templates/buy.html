@@ -4,7 +4,16 @@
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/buy.css" />
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/table.css" />
 
-<div id="buy-title" class="table-title">Listings</div><br>
+<div id="buy-title" class="table-title">Listings</div>
+<div id="search">
+  {% block search %}
+  <form name="search" action="{{ SITE_ROOT }}buy" method="get">
+    <input type="text" name="search_query" class="search_bar"/>
+    <input type="submit" value="Search" class="button" />
+  </form>
+  {% endblock %}
+</div>
+
 <div id="buy-columns" class="table-column-titles-row">
   <div class="table-column-title buy-image-column">Image</div>
   <div class="table-column-title buy-name-column">Name</div>
