@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/cart.css" />
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/sell.css" />
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/reserve.css" />
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/greyout.css" />
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/form.css" />
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/table.css" />
+
+<!-- Claims -->
+<div id="cart-title" class="table-title"><h1>Stuff to Pick Up</h1></div>
+<div id="cart-columns" class="table-column-titles-row">
+  <div class="table-column-title cart-image-column">Image</div>
+  <div class="table-column-title cart-name-column">Name</div>
+  <div class="table-column-title cart-description-column">Description</div>
+  <div class="table-column-title cart-location-column">Location</div>
+  <div class="table-column-title cart-price-column">Price</div>
+  <div class="table-column-title cart-unclaim-column"></div>
+  <div class="table-column-title cart-email-seller-column"></div>
+</div>
+
+{% for claim in claims %}
+  {% cycle 'lightcolor' 'darkcolor' as rowcolor silent %}
+  <div class="table-row claim {{ rowcolor }}">
+    <div class="cart-image-column unimportant-font">
+      {% if claim.item.image %}
+        <img class="item-image" src="{{ claim.item.image.url }}" alt="(No image)" />
+      {% else %}
+        (No image)
+      {% endif %}
+    </div>
+    <div class="cart-name-column">{{ claim.item.name }}</div>
+    <div class="cart-description-column">{{ claim.item.description }}</div>
+    <div class="cart-location-column unimportant-font">
+      {% if claim.item.seller_user.location %}
+        {{ claim.item.seller_user.location.name }}
+      {% else %}
+        (Not listed)
+      {% endif %}
+    </div>
+    <div class="cart-price-column">${{ claim.item.price }}</div>
+    <div class="cart-email-seller-column">
+      <!--form name="email_seller" action="{{ SITE_ROOT }}email_seller" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="item_id" value={{ claim.item.id }}>
+        <input type="submit" value="Email Seller">
+      </form-->
+      <form name="email_seller" action="mailto:{{ claim.item.seller_user.email }}" method="link">
+        <input type="submit" value="Email Seller" class="button">
+      </form>
+    </div>
+    <div class="cart-unclaim-column">
+      <form name="unclaim" action="{{ SITE_ROOT }}unclaim" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="item_id" value={{ claim.item.id }}>
+        <input type="submit" value="Unclaim" class="button">
+      </form>
+    </div>
+  </div>
+{% endfor %}
+
+<!-- Stuff for new reservations -->
+<div class="greyout greyout-visible"></div>
+<div id="new-reservation" class="greyout-visible">
+  <h1>New Reservation</h1>
+  <form name="reserve" action="{{ SITE_ROOT }}new_reservation" method="post">
+    {% csrf_token %}
+    <div class="form-field">
+      {{ form.search_query.errors }}
+      <label for="id_{{ form.search_query.html_name }}" class="form-label">
+        {{ form.search_query.label }}:
+      </label>
+      {{ form.search_query }}
+    </div>
+    <div class="form-field">
+      {{ form.max_price.errors }}
+      <label for="id_{{ form.max_price.html_name }}" class="form-label">
+        {{ form.max_price.label }}:
+      </label>
+      <div class="currency-field">
+        <div class="dollar-sign">$</div>
+        <input type="text" id="id_max_price" name="max_price" class="price-field">
+      </div>
+    </div>
+    <input type="submit" value="Create" class="button">
+    <input type="button" value="Cancel" onclick="hideGreyoutDialog();"
+       class="button">
+  </form>
+</div>
+
+<!-- Existing reservations -->
+<div id="reserve-title" class="table-title"><h1>My Reservations</h1></div>
+<div id="new-reservation-button">
+  <input type="button" value="New Reservation" onclick="showGreyoutDialog();"
+    class="button">
+</div>
+
+<br><br>
+
+<div id="reservation-columns" class="table-column-titles-row">
+  <div class="table-column-title reservation-search-query-column">Search Query</div>
+  <div class="table-column-title reservation-max-price-column">Maximum Price</div>
+  <div class="table-column-title reservation-delete-column"></div>
+</div>
+
+{% for reservation in reservations %}
+  {% cycle 'lightcolor' 'darkcolor' as rowcolor silent %}
+  <div class="table-row reservation {{ rowcolor }}">
+    <div class="reservation-search-query-column">{{ reservation.search_query }}</div>
+    <div class="reservation-max-price-column">{{ reservation.max_price }}</div>
+    <div class="reservation-delete-column">
+      <form name="delete" action="{{ SITE_ROOT }}delete_reservation" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="reservation_id" value={{ reservation.id }}>
+        <input type="submit" value="Delete" class="button">
+      </form>
+    </div>
+  </div>
+{% endfor %}
+
+<!-- Existing listings -->
+<div id="sell-listings-title" class="table-title">My Listings</div>
+<div id="new-listing-button">
+  <input type="button" class="button" value="New Listing" onclick="showGreyoutDialog();">
+</div>
+
+<br><br>
+<div id="sell-columns" class="table-column-titles-row">
+  <div class="table-column-title sell-image-column">Image</div>
+  <div class="table-column-title sell-name-column">Name</div>
+  <div class="table-column-title sell-description-column">Description</div>
+  <div class="table-column-title sell-price-column">Price</div>
+  <div class="table-column-title sell-remove-column"></div>
+</div>
+
+{% for item in items %}
+  {% cycle 'lightcolor' 'darkcolor' as rowcolor silent %}
+  <div class="sell-item table-row {{ rowcolor }}">
+    <div class="sell-image-column unimportant-font">
+      {% if item.image %}
+        <img class="item-image" src="{{ item.image.url }}" alt="(No image)" />
+      {% else %}
+        (No image)
+      {% endif %}
+    </div>
+    <div class="sell-name-column">{{ item.name }}</div>
+    <div class="sell-description-column">{{ item.description }}</div>
+    <div class="sell-price-column">${{ item.price }}</div>
+    <div class="sell-remove-column">
+      <form name="sell_item" action="{{ SITE_ROOT }}remove_item" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="item_id" value={{ item.id }}>
+        <input type="submit" value="Remove" class="button">
+      </form>
+    </div>
+  </div>
+{% endfor %}
+
+{% endblock %}
+
+{% block js_extra_imports %}
+<script src="{{ STATIC_URL }}js/greyout_dialog.js"
+    type="text/javascript"
+    charset="utf8"></script>
+{% endblock %}
+

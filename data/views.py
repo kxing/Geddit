@@ -15,8 +15,7 @@ from datetime import datetime
 NAV_PAGE = 'nav_page'
 BUY = 'buy'
 SELL = 'sell'
-RESERVE = 'reserve'
-CART = 'cart'
+DASHBOARD = 'dashboard'
 SETTINGS = 'settings'
 
 def buy_page(request):
@@ -69,21 +68,16 @@ def sell_page(request):
     return render(request, 'sell.html', render_params, \
                   context_instance=RequestContext(request))
 
-def reserve_page(request):
+def dashboard_page(request):
     render_params = base_params(request)
-    render_params[NAV_PAGE] = RESERVE
+    render_params[NAV_PAGE] = DASHBOARD
 
     form = ReservationForm()
     render_params['form'] = form
     render_params['reservations'] = get_current_user(request).get_reservations()
-    return render(request, 'reserve.html', render_params, \
-            context_instance=RequestContext(request))
-
-def cart_page(request):
-    render_params = base_params(request)
-    render_params[NAV_PAGE] = CART
     render_params['claims'] = get_current_user(request).get_claims()
-    return render(request, 'cart.html', render_params, \
+    render_params['items'] = get_current_user(request).get_items()
+    return render(request, 'dashboard.html', render_params, \
             context_instance=RequestContext(request))
 
 def remove_item(request):
@@ -98,14 +92,14 @@ def claim_listing(request):
         return redirect('data.views.buy_page')
     item = Item.get_item_by_id(request.POST['item_id'])
     get_current_user(request).add_claim(item)
-    return redirect('data.views.cart_page')
+    return redirect('data.views.dashboard_page')
 
 def unclaim_listing(request):
     if request.method != 'POST':
-        return redirect('data.views.cart_page')
+        return redirect('data.views.dashboard_page')
     item = Item.get_item_by_id(request.POST['item_id'])
     get_current_user(request).remove_claim(item)
-    return redirect('data.views.cart_page')
+    return redirect('data.views.dashboard_page')
 
 def make_reservation(request):
     if request.method != 'POST':
