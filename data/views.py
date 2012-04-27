@@ -103,25 +103,25 @@ def unclaim_listing(request):
 
 def make_reservation(request):
     if request.method != 'POST':
-        return redirect('data.views.reserve_page')
+        return redirect('data.views.dashboard_page')
     form = ReservationForm(request.POST)
     if not form.is_valid():
-        return redirect('data.views.reserve_page')
+        return redirect('data.views.dashboard_page')
 
     search_query = form.cleaned_data['search_query']
     max_price = form.cleaned_data['max_price']
 
     get_current_user(request).add_reservation(search_query, max_price)
-    return redirect('data.views.reserve_page')
+    return redirect('data.views.dashboard_page')
 
 def delete_reservation(request):
     if request.method != 'POST':
-        return redirect('data.views.reserve_page')
+        return redirect('data.views.dashboard_page')
 
     reservation_id = request.POST['reservation_id']
     reservation = Reservation.get_reservation_by_id(reservation_id)
     get_current_user(request).remove_reservation(reservation)
-    return redirect('data.views.reserve_page')
+    return redirect('data.views.dashboard_page')
 
 def settings_page(request):
     if request.method == "POST":
