@@ -256,8 +256,12 @@ class Reservation(models.Model):
         return r
 
     @staticmethod
+    def get_all_reservations():
+        return Reservation.objects.all().order_by('-timestamp')
+
+    @staticmethod
     def get_reservations(user):
-        return Reservation.objects.filter(user=user)
+        return Reservation.objects.filter(user=user).order_by('-timestamp')
 
     @staticmethod
     def get_reservation_by_id(id):

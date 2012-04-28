@@ -24,7 +24,7 @@
 </div>
 
 {% for item in items %}
-  {% cycle 'lightcolor' 'darkcolor' as rowcolor silent %}
+  {% cycle 'darkcolor' 'lightcolor' as rowcolor silent %}
   <div class="table-row buy-item-listing {{ rowcolor }}">
     <div class="buy-image-column unimportant-font">
       {% if item.image %}

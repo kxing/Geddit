@@ -64,3 +64,13 @@
 .sell-item {
 }
 
+.sell-reservation-search-query-column {
+    width: 60%;
+    float: left;
+}
+
+.seller-reservation-max-price-column {
+    width: 40%;
+    float: left;
+}
+

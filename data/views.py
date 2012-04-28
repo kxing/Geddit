@@ -65,6 +65,7 @@ def sell_page(request):
         render_params['latitude'] = get_current_user(request).location.latitude
         render_params['longitude'] = get_current_user(request).location.longitude
     render_params['items'] = get_current_user(request).get_items()
+    render_params['reservations'] = Reservation.get_all_reservations()
     
     return render(request, 'sell.html', render_params, \
                   context_instance=RequestContext(request))

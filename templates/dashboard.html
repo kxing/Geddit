@@ -22,7 +22,7 @@
 </div>
 
 {% for claim in claims %}
-  {% cycle 'lightcolor' 'darkcolor' as rowcolor silent %}
+  {% cycle 'darkcolor' 'lightcolor' as rowcolor silent %}
   <div class="table-row claim {{ rowcolor }}">
     <div class="cart-image-column unimportant-font">
       {% if claim.item.image %}
@@ -108,7 +108,7 @@
 </div>
 
 {% for reservation in reservations %}
-  {% cycle 'lightcolor' 'darkcolor' as rowcolor silent %}
+  {% cycle 'darkcolor' 'lightcolor' as rowcolor silent %}
   <div class="table-row reservation {{ rowcolor }}">
     <div class="reservation-search-query-column">{{ reservation.search_query }}</div>
     <div class="reservation-max-price-column">{{ reservation.max_price }}</div>
@@ -137,7 +137,7 @@
 </div>
 
 {% for item in items %}
-  {% cycle 'lightcolor' 'darkcolor' as rowcolor silent %}
+  {% cycle 'darkcolor' 'lightcolor' as rowcolor silent %}
   <div class="sell-item table-row {{ rowcolor }}">
     <div class="sell-image-column unimportant-font">
       {% if item.image %}
