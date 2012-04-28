@@ -87,7 +87,7 @@ def remove_item(request):
         return redirect('data.views.sell_page')
     item = Item.get_item_by_id(request.POST['item_id'])
     get_current_user(request).remove_item(item)
-    return redirect('data.views.sell_page')
+    return redirect('data.views.dashboard_page')
 
 def claim_listing(request):
     if request.method != 'POST':
