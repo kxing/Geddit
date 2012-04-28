@@ -75,40 +75,20 @@
 -->
 </div>
 
-<!-- Existing listings -->
 <div id="sell-listings-title" class="table-title">My Listings</div>
 <div id="new-listing-button">
   <input type="button" class="button" value="New Listing" onclick="showGreyoutDialog();">
 </div>
 
-<br><br>
-<div id="sell-columns" class="table-column-titles-row">
-  <div class="table-column-title sell-image-column">Image</div>
-  <div class="table-column-title sell-name-column">Name</div>
-  <div class="table-column-title sell-description-column">Description</div>
-  <div class="table-column-title sell-price-column">Price</div>
-  <div class="table-column-title sell-remove-column"></div>
+<div id="sell-reservation-columns" class="table-column-titles-row">
+  <div class="table-column-title sell-reservation-search-query-column">Item</div>
+  <div class="table-column-title sell-reservation-max-price-column">Max Price</div>
 </div>
-
-{% for item in items %}
-  <div class="sell-item table-row">
-    <div class="sell-image-column unimportant-font">
-      {% if item.image %}
-        <img class="item-image" src="{{ item.image.url }}" alt="(No image)" />
-      {% else %}
-        (No image)
-      {% endif %}
-    </div>
-    <div class="sell-name-column">{{ item.name }}</div>
-    <div class="sell-description-column">{{ item.description }}</div>
-    <div class="sell-price-column">${{ item.price }}</div>
-    <div class="sell-remove-column">
-      <form name="sell_item" action="{{ SITE_ROOT }}remove_item" method="post">
-        {% csrf_token %}
-        <input type="hidden" name="item_id" value={{ item.id }}>
-        <input type="submit" value="Remove" class="button">
-      </form>
-    </div>
+{% for reservation in reservations %}
+  {% cycle 'darkcolor' 'lightcolor' as rowcolor silent %}
+  <div class="table-row sell-reservation {{ rowcolor }}">
+    <div class="sell-reservation-search-query-column">{{ reservation.search_query }}</div>
+    <div class="sell-reservation-max-price-column">{{ reservation.max_price }}</div>
   </div>
 {% endfor %}
 

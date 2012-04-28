@@ -19,7 +19,7 @@
 #nav_sell {
 }
 
-#nav_reserve {
+#nav_dashboard {
 }
 
 #nav_cart {
@@ -43,7 +43,14 @@
     background: cornflowerblue;
 }
 
-#search {
+#messages-container {
+    margin: 20px 0px;
+    text-align: center;
 }
 
+#message {
+    display: inline-block;
+    background: lightblue;
+    padding: 2px;
+}
 

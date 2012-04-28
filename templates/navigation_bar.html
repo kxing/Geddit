@@ -12,27 +12,22 @@
              class="nav_button{% if nav_page == 'sell' %} nav_highlighted{% endif %}">
           <a href="{{ SITE_ROOT }}sell">Sell</a>
         </div>
-        <div id="nav_reserve"
-             class="nav_button{% if nav_page == 'reserve' %} nav_highlighted{% endif %}">
-          <a href="{{ SITE_ROOT }}reserve">Reserve</a>
-        </div>
-        <div id="nav_cart"
-             class="nav_button{% if nav_page == 'cart' %} nav_highlighted{% endif %}">
-          <a href="{{ SITE_ROOT }}cart">Cart</a>
+        <div id="nav_dashboard"
+             class="nav_button{% if nav_page == 'dashboard' %} nav_highlighted{% endif %}">
+          <a href="{{ SITE_ROOT }}dashboard">Dashboard</a>
         </div>
         <div id="nav_settings"
              class="nav_button{% if nav_page == 'settings' %} nav_highlighted{% endif %}">
           <a href="{{ SITE_ROOT }}settings">Settings</a>
         </div>
       {% endblock %}
-    </div><br>
-    <div id="search">
-      {% block search %}
-      <form name="search" action="{{ SITE_ROOT }}buy" method="get">
-        <input type="text" name="search_query" />
-        <input type="submit" value="Search" class="button" />
-      </form>
-      {% endblock %}
+    </div>
+  </div>
+  <div id="messages-container">
+    <div id="message">
+      {% if message %}
+        {{ message }}
+      {% endif %}
     </div>
   </div>
 </div>

@@ -7,6 +7,6 @@ def base_params(request):
         'categories': Category.get_all_categories(), \
         'SITE_ROOT': SITE_ROOT, \
         'user': get_current_user(request), \
+        'message': request.GET.get('message', None), \
     }
-
 
