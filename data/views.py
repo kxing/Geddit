@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from site_specific_functions import get_current_user
 from django.contrib.auth.decorators import login_required
+from django.utils import simplejson
 
 from data.views_lib import base_params
 
@@ -135,7 +136,9 @@ def settings_page(request):
     
         if form.is_valid():
             form.save()
-            return redirect('data.views.settings_page')
+            confirmation = dict({"message": "Updated settings!"})
+            return HttpResponse(simplejson.dumps(confirmation),
+                                mimetype="application/json")
     else:
         # Create unbound form if GET
         initialData = {
