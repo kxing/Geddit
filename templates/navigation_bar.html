@@ -23,10 +23,12 @@
       {% endblock %}
     </div>
   </div>
-  <div id="messages">
-    {% if message %}
-      {{ message }}
-    {% endif %}
+  <div id="messages-container">
+    <div id="message">
+      {% if message %}
+        {{ message }}
+      {% endif %}
+    </div>
   </div>
 </div>
 

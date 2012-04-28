@@ -291,6 +291,7 @@ class Claim(models.Model):
     # id = models.IntegerField()
     buyer = models.ForeignKey(User, related_name='buyer')
     item = models.ForeignKey(Item)
+    timestamp = models.DateTimeField(default=datetime.utcnow)
 
     def __unicode__(self):
         return str(self.buyer) + ' ' + str(self.item)
@@ -311,7 +312,7 @@ class Claim(models.Model):
 
     @staticmethod
     def get_claims(buyer):
-        return Claim.objects.filter(buyer=buyer)
+        return Claim.objects.filter(buyer=buyer).order_by('-timestamp')
 
     @staticmethod
     def get_claim(item):

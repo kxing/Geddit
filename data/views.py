@@ -100,7 +100,7 @@ def claim_listing(request):
     item.seller_user.send_email(str(buyer) + ' wants to buy your ' + str(item) + '. Please contact your buyer at ' + buyer.email, '[Geddit] Buyer for ' + str(item))
 
     get_params = QueryDict('', mutable=True)
-    get_params['message'] = 'Item claimed, seller contacted'
+    get_params['message'] = 'Item Claimed.  An email has been sent to the seller.  Please wait for them to contact you to coordinate the transaction.'
     return redirect(reverse('data.views.dashboard_page') + '?' + get_params.urlencode())
 
 def unclaim_listing(request):

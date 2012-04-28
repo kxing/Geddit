@@ -43,8 +43,14 @@
     background: cornflowerblue;
 }
 
-#messages {
+#messages-container {
+    margin: 20px 0px;
+    text-align: center;
+}
+
+#message {
     display: inline-block;
     background: lightblue;
+    padding: 2px;
 }
 
