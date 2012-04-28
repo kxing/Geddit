@@ -1,9 +1,8 @@
 #reserve-title {
-    float: left;
 }
 
 #new-reservation-button {
-    float: right;
+    padding: 10px 0px;
 }
 
 #reservation-columns {
