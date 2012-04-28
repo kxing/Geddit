@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from site_specific_functions import get_current_user
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
 
 from data.views_lib import base_params
 
@@ -68,7 +69,7 @@ def sell_page(request):
     return render(request, 'sell.html', render_params, \
                   context_instance=RequestContext(request))
 
-def dashboard_page(request, message=None):
+def dashboard_page(request):
     render_params = base_params(request)
     render_params[NAV_PAGE] = DASHBOARD
 
@@ -77,7 +78,7 @@ def dashboard_page(request, message=None):
     render_params['reservations'] = get_current_user(request).get_reservations()
     render_params['claims'] = get_current_user(request).get_claims()
     render_params['items'] = get_current_user(request).get_items()
-    render_params['message'] = message
+    render_params['message'] = request.GET.get('message', None)
     return render(request, 'dashboard.html', render_params, \
             context_instance=RequestContext(request))
 
@@ -97,7 +98,7 @@ def claim_listing(request):
     buyer = get_current_user(request)
     item = Item.get_item_by_id(request.POST['item_id'])
     item.seller_user.send_email(str(buyer) + ' wants to buy your ' + str(item) + '. Please contact your buyer at ' + buyer.email, '[Geddit] Buyer for ' + str(item))
-    return redirect('data.views.dashboard_page', message='Item claimed, seller contacted')
+    return redirect(reverse('data.views.dashboard_page') + '?message=Item claimed, seller contacted')
 
 def unclaim_listing(request):
     if request.method != 'POST':
