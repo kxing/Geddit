@@ -1,5 +1,5 @@
 # Create your views here.
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, QueryDict
 from django.template import Context, loader, RequestContext
 from data.models import Category, Item, User, Reservation
 from data.forms import ItemForm, UserSettingsForm, ReservationForm
@@ -78,7 +78,6 @@ def dashboard_page(request):
     render_params['reservations'] = get_current_user(request).get_reservations()
     render_params['claims'] = get_current_user(request).get_claims()
     render_params['items'] = get_current_user(request).get_items()
-    render_params['message'] = request.GET.get('message', None)
     return render(request, 'dashboard.html', render_params, \
             context_instance=RequestContext(request))
 
@@ -98,7 +97,10 @@ def claim_listing(request):
     buyer = get_current_user(request)
     item = Item.get_item_by_id(request.POST['item_id'])
     item.seller_user.send_email(str(buyer) + ' wants to buy your ' + str(item) + '. Please contact your buyer at ' + buyer.email, '[Geddit] Buyer for ' + str(item))
-    return redirect(reverse('data.views.dashboard_page') + '?message=Item claimed, seller contacted')
+
+    get_params = QueryDict('', mutable=True)
+    get_params['message'] = 'Item claimed, seller contacted'
+    return redirect(reverse('data.views.dashboard_page') + '?' + get_params.urlencode())
 
 def unclaim_listing(request):
     if request.method != 'POST':
@@ -135,7 +137,9 @@ def settings_page(request):
     
         if form.is_valid():
             form.save()
-            return redirect('data.views.settings_page')
+            get_params = QueryDict('', mutable=True)
+            get_params['message'] = 'Settings updated'
+            return redirect(reverse('data.views.settings_page') + '?' + get_params.urlencode())
     else:
         # Create unbound form if GET
         initialData = {
