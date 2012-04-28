@@ -266,7 +266,8 @@ class ClaimTest(TestCase):
         for claims in [Claim.get_claims(self.buyer), self.buyer.get_claims()]:
             self.assertIn(self.claim1, claims)
             self.assertIn(self.claim2, claims)
-        self.assertEqual(Claim.get_claim(self.buyer, self.item1), self.claim1)
+        self.assertEqual(Claim.get_claim(self.item1), self.claim1)
+        self.assertEqual(Claim.get_claim(self.item1).buyer, self.buyer)
 
         # delete the second claim and verify that the item is not claimed
         self.buyer.remove_claim(self.item2)
@@ -281,6 +282,27 @@ class ClaimTest(TestCase):
         # delete the claims
         Claim.delete_claim(self.claim1)
         Claim.delete_claim(self.claim2)
+
+    def test_claim_item_remove(self):
+        # create the item
+        test_item = Item.create_item(self.seller, self.ITEM_1_NAME, \
+                self.ITEM_1_DESCRIPTION, self.category1, self.ITEM_1_PRICE)
+
+        # check that the item is not claimed
+        self.assertFalse(test_item.claimed)
+
+        # create the claim
+        claim = Claim.create_claim(self.buyer, test_item)
+
+        # check that the item is claimed
+        test_item = Item.get_item_by_id(test_item.id)
+        self.assertTrue(test_item.claimed)
+
+        # delete the item
+        self.seller.remove_item(test_item)
+
+        # check that there is no claim on the item
+        self.assertEqual(len(self.buyer.get_claims()), 0)
 
 class ReservationTest(TestCase):
     USERNAME = 'asdf1234'

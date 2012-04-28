@@ -121,7 +121,10 @@ class User(models.Model):
         return Claim.create_claim(self, item)
 
     def remove_claim(self, item):
-        Claim.delete_claim(Claim.get_claim(self, item))
+        claim = Claim.get_claim(item)
+        if claim.buyer != self:
+            raise AssertionError('Claim does not belong to you')
+        Claim.delete_claim(claim)
 
     def get_claims(self):
         return Claim.get_claims(self)
@@ -223,6 +226,8 @@ class Item(models.Model):
 
     @staticmethod
     def delete_item(item):
+        if item.claimed:
+            Claim.delete_claim(Claim.get_claim(item))
         item.delete()
 
     @staticmethod
@@ -292,6 +297,8 @@ class Claim(models.Model):
 
     @staticmethod
     def create_claim(buyer, item):
+        if item.claimed:
+            raise AssertionError('Item already claimed')
         c = Claim(buyer=buyer, item=item)
         c.save()
         item.claimed = True
@@ -303,8 +310,8 @@ class Claim(models.Model):
         return Claim.objects.filter(buyer=buyer)
 
     @staticmethod
-    def get_claim(buyer, item):
-        return Claim.objects.get(buyer=buyer, item=item)
+    def get_claim(item):
+        return Claim.objects.get(item=item)
 
     @staticmethod
     def delete_claim(claim):
