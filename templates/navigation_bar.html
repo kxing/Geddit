@@ -21,7 +21,12 @@
           <a href="{{ SITE_ROOT }}settings">Settings</a>
         </div>
       {% endblock %}
-    </div><br>
+    </div>
+  </div>
+  <div id="messages">
+    {% if message %}
+      {{ message }}
+    {% endif %}
   </div>
 </div>
 

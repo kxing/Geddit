@@ -43,3 +43,8 @@
     background: cornflowerblue;
 }
 
+#messages {
+    display: inline-block;
+    background: lightblue;
+}
+

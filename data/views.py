@@ -68,7 +68,7 @@ def sell_page(request):
     return render(request, 'sell.html', render_params, \
                   context_instance=RequestContext(request))
 
-def dashboard_page(request):
+def dashboard_page(request, message=None):
     render_params = base_params(request)
     render_params[NAV_PAGE] = DASHBOARD
 
@@ -77,6 +77,7 @@ def dashboard_page(request):
     render_params['reservations'] = get_current_user(request).get_reservations()
     render_params['claims'] = get_current_user(request).get_claims()
     render_params['items'] = get_current_user(request).get_items()
+    render_params['message'] = message
     return render(request, 'dashboard.html', render_params, \
             context_instance=RequestContext(request))
 
@@ -92,7 +93,11 @@ def claim_listing(request):
         return redirect('data.views.buy_page')
     item = Item.get_item_by_id(request.POST['item_id'])
     get_current_user(request).add_claim(item)
-    return redirect('data.views.dashboard_page')
+
+    buyer = get_current_user(request)
+    item = Item.get_item_by_id(request.POST['item_id'])
+    item.seller_user.send_email(str(buyer) + ' wants to buy your ' + str(item) + '. Please contact your buyer at ' + buyer.email, '[Geddit] Buyer for ' + str(item))
+    return redirect('data.views.dashboard_page', message='Item claimed, seller contacted')
 
 def unclaim_listing(request):
     if request.method != 'POST':
