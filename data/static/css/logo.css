@@ -1,12 +1,13 @@
 #logo-space {
     display: inline-block;
     width: 20%;
-    height: 75px;
+    height: 50px;
     float: left;
 }
 
 #logo {
     padding: 10px;
+    margin: 0px auto;
 }
 
 #logo-image {

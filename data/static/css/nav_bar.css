@@ -1,7 +1,6 @@
 #nav-bar-container {
     display: inline-block;
     width: 80%;
-    float: left;
 }
 
 #nav-bar {
@@ -10,7 +9,7 @@
 
 #nav_buttons {
     clear: right;
-    height: 20px;
+    height: 40px;
 }
 
 #nav_buy {
@@ -26,7 +25,6 @@
 }
 
 #nav_settings {
-    float: right;
 }
 
 .nav_button {
@@ -44,13 +42,15 @@
 }
 
 #messages-container {
-    margin: 20px 0px;
+    display: none;
+    margin: 20px auto;
     text-align: center;
 }
 
 #message {
     display: inline-block;
-    background: lightblue;
-    padding: 2px;
+    background: #FFFED8;
+    border: 1px solid #CCC;
+    padding: 6px;
 }
 

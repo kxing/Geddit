@@ -13,18 +13,10 @@
 
 {% block js_extra_imports %}
     {{ block.super }}
-    <script src="http://malsup.github.com/jquery.form.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
- 
     <script type="text/javascript">
-    // Set up ajax requests with Django CSRF
-    $.ajaxSetup({
-       data: { csrfmiddlewaretoken: '{{ csrf_token }}' },
-    });
-    
     $(document).ready(function() {  
         var options = { 
-            success: showResponse  // post-submit callback 
+            success: gedditShowAjaxResponse  // post-submit callback 
         };     
         
         $('#settings_form').submit(function(event) {
@@ -35,10 +27,5 @@
             return false; 
         });
     });
-    
-    function showResponse(responseText, statusText, xhr, $form) { 
-        $("#flash").html(responseText.message);
-        $("#flash").effect("highlight", {}, 3000);
-    } 
     </script>
 {% endblock %}
