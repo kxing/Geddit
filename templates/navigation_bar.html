@@ -26,7 +26,9 @@
   <div id="messages-container">
     <div id="message">
       {% if message %}
-        {{ message }}
+        <script type="text/javascript">
+          flash("{{ message }}");
+        </script>
       {% endif %}
     </div>
   </div>

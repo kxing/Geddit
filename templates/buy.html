@@ -44,7 +44,7 @@
     </div>
     <div class="buy-price-column">${{ item.price }}</div>
     <div class="buy-claim-column">
-      <form name="claim" action="{{ SITE_ROOT }}claim" method="post">
+      <form name="claim" action="{{ SITE_ROOT }}claim" method="post" class="claim_form">
         {% csrf_token %}
         <input type="hidden" name="item_id" value={{ item.id }}>
         <input type="submit" value="Claim" class="button">
@@ -53,4 +53,3 @@
   </div>
 {% endfor %}
 {% endblock %}
-

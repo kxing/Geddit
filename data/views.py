@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from site_specific_functions import get_current_user
 from django.contrib.auth.decorators import login_required
+from django.utils import simplejson
 from django.core.urlresolvers import reverse
 
 from data.views_lib import base_params
@@ -98,9 +99,9 @@ def claim_listing(request):
     buyer = get_current_user(request)
     item = Item.get_item_by_id(request.POST['item_id'])
     item.seller_user.send_email(str(buyer) + ' wants to buy your ' + str(item) + '. Please contact your buyer at ' + buyer.email, '[Geddit] Buyer for ' + str(item))
-
+    
     get_params = QueryDict('', mutable=True)
-    get_params['message'] = 'Item Claimed.  An email has been sent to the seller.  Please wait for them to contact you to coordinate the transaction.'
+    get_params['message'] = "Item Claimed.  An email has been sent to the seller.  Please wait for them to contact you to coordinate the transaction."
     return redirect(reverse('data.views.dashboard_page') + '?' + get_params.urlencode())
 
 def unclaim_listing(request):
@@ -138,9 +139,9 @@ def settings_page(request):
     
         if form.is_valid():
             form.save()
-            get_params = QueryDict('', mutable=True)
-            get_params['message'] = 'Settings updated'
-            return redirect(reverse('data.views.settings_page') + '?' + get_params.urlencode())
+            confirmation = dict({"message": "Updated settings!"})
+            return HttpResponse(simplejson.dumps(confirmation),
+                                mimetype="application/json")
     else:
         # Create unbound form if GET
         initialData = {
