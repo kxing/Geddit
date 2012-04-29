@@ -98,7 +98,7 @@ def claim_listing(request):
 
     buyer = get_current_user(request)
     item = Item.get_item_by_id(request.POST['item_id'])
-   # item.seller_user.send_email(str(buyer) + ' wants to buy your ' + str(item) + '. Please contact your buyer at ' + buyer.email, '[Geddit] Buyer for ' + str(item))
+    item.seller_user.send_email(str(buyer) + ' wants to buy your ' + str(item) + '. Please contact your buyer at ' + buyer.email, '[Geddit] Buyer for ' + str(item))
     
     get_params = QueryDict('', mutable=True)
     get_params['message'] = "Item Claimed.  An email has been sent to the seller.  Please wait for them to contact you to coordinate the transaction."
