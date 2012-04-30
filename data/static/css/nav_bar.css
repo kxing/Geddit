@@ -28,9 +28,10 @@
 }
 
 .nav_button {
-    display: inline;
+    display: inline-block;
     background: darkblue;
-    border-radius: 10px;
+    border-radius: 15px;
+    font-size: 30px;
 }
 
 .nav_button a {
