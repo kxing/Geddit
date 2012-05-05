@@ -80,18 +80,24 @@
   <input type="button" class="button" value="New Listing" onclick="showGreyoutDialog();">
 </div>
 
-<div id="sell-reservation-columns" class="table-column-titles-row">
-  <div class="table-column-title sell-reservation-search-query-column">Item</div>
-  <div class="table-column-title sell-reservation-max-price-column">Max Price</div>
-</div>
-{% for reservation in reservations %}
-  {% cycle 'darkcolor' 'lightcolor' as rowcolor silent %}
-  <div class="table-row sell-reservation {{ rowcolor }}">
-    <div class="sell-reservation-search-query-column">{{ reservation.search_query }}</div>
-    <div class="sell-reservation-max-price-column">{{ reservation.max_price }}</div>
-  </div>
-{% endfor %}
+<table id="sell-reservation-table">
+  <thead>
+    <tr id="sell-reservation-columns" class="table-column-titles-row">
+      <td class="table-column-title sell-reservation-search-query-column">Item</td>
+      <td class="table-column-title sell-reservation-max-price-column">Max Price</td>
+    </tr>
+  </thead>
 
+  <tbody>
+    {% for reservation in reservations %}
+      {% cycle 'darkcolor' 'lightcolor' as rowcolor silent %}
+      <tr class="table-row sell-reservation {{ rowcolor }}">
+        <td class="sell-reservation-search-query-column">{{ reservation.search_query }}</td>
+        <td class="sell-reservation-max-price-column">${{ reservation.max_price }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
 {% endblock %}
 
 {% block js_extra_imports %}

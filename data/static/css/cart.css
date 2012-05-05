@@ -1,38 +1,43 @@
 .claim {
 }
 
+#cart-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
 .cart-image-column {
     width: 10%;
-    float: left;
+    text-align: center;
 }
 
 .cart-name-column {
     width: 15%;
-    float: left;
+    text-align: center;
 }
 
 .cart-description-column {
     width: 30%;
-    float: left;
+    text-align: center;
 }
 
 .cart-location-column {
     width: 15%;
-    float: left;
+    text-align: center;
 }
 
 .cart-price-column {
     width: 10%;
-    float: left;
+    text-align: center;
 }
 
 .cart-unclaim-column {
     width: 10%;
-    float: right;
+    text-align: center;
 }
 
 .cart-email-seller-column {
     width: 10%;
-    float: right;
+    text-align: center;
 }
 

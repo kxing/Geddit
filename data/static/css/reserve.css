@@ -30,21 +30,26 @@
     float: left;
 }
 
+#reserve-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
 .reservation {
 }
 
 .reservation-search-query-column {
     width: 60%;
-    float: left;
+    text-align: center;
 }
 
 .reservation-max-price-column {
     width: 30%;
-    float: left;
+    text-align: center;
 }
 
 .reservation-delete-column {
     width: 10%;
-    float: right;
+    text-align: center;
 }
 

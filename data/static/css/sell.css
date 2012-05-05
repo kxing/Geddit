@@ -33,44 +33,57 @@
     clear: both;
 }
 
+#sell-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
 #sell-columns {
 }
 
 .sell-image-column {
     width: 10%;
-    float: left;
+    text-align: center;
 }
 
 .sell-name-column {
     width: 25%;
-    float: left;
+    text-align: center;
 }
 
 .sell-description-column {
     width: 40%;
-    float: left;
+    text-align: center;
 }
 
 .sell-price-column {
     width: 15%;
-    float: left;
+    text-align: right;
 }
 
 .sell-remove-column {
     width: 10%;
-    float: right;
+    text-align: center;
 }
 
 .sell-item {
 }
 
-.sell-reservation-search-query-column {
-    width: 60%;
-    float: left;
+#sell-reservation-table {
+    width: 100%;
+    border-collapse: collapse;
 }
 
-.seller-reservation-max-price-column {
+.sell-reservation {
+}
+
+.sell-reservation-search-query-column {
+    width: 60%;
+    text-align: center;
+}
+
+.sell-reservation-max-price-column {
     width: 40%;
-    float: left;
+    text-align: center;
 }
 

@@ -4,34 +4,39 @@
 #buy-columns {
 }
 
+#buy-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
 .buy-image-column {
     width: 10%;
-    float: left;
+    text-align: center;
 }
 
 .buy-name-column {
     width: 15%;
-    float: left;
+    text-align: center;
 }
 
 .buy-description-column {
     width: 35%;
-    float: left;
+    text-align: center;
 }
 
 .buy-location {
     width: 20%;
-    float: left;
+    text-align: center;
 }
 
 .buy-price-column {
     width: 10%;
-    float: left;
+    text-align: right;
 }
 
 .buy-claim-column {
     width: 10%;
-    float: right;
+    text-align: center;
 }
 
 .buy-item-listing {
