@@ -22,27 +22,6 @@ class Location(models.Model):
                                    max_digits=20,
                                    decimal_places=17)
     
-    @staticmethod
-    def to_meta_string(location):
-        data = {'class_name': 'Location'}
-
-        data['id'] = location.id
-        data['name'] = location.name
-        data['longitude'] = str(location.longitude)
-        data['latitude'] = str(location.latitude)
-
-        return json.dumps(data)
-
-    @staticmethod
-    def from_meta_string(meta_string):
-        data = json.loads(meta_string)
-        return Location( \
-            id=data['id'], \
-            name=data['name'], \
-            longitude=data['longitude'], \
-            latitude=data['latitude'], \
-        )
-
     def __unicode__(self):
         return unicode(self.name)
     
@@ -71,36 +50,6 @@ class User(models.Model):
     email = models.EmailField()
     cell_phone = models.CharField(max_length=PHONE_NUMBER_MAX_LENGTH, blank=True, null=True)
     location = models.ForeignKey(Location, blank=True, null=True)
-
-    @staticmethod
-    def to_meta_string(user):
-        data = {'class_name': 'User'}
-
-        data['id'] = user.id
-        data['username'] = user.username
-        data['first_name'] = user.first_name
-        data['last_name'] = user.last_name
-        data['email'] = user.email
-        if hasattr(user, 'cell_phone'):
-            data['cell_phone'] = user.cell_phone
-        if hasattr(user, 'location'):
-            data['location'] = user.location.id
-
-        return json.dumps(data)
-
-    @staticmethod
-    def from_meta_string(meta_string):
-        data = json.loads(meta_string)
-
-        return User( \
-            id=data['id'], \
-            username=data['username'], \
-            first_name=data['first_name'], \
-            last_name=data['last_name'], \
-            email=data['email'], \
-            cell_phone=data.get('cell_phone', None), \
-            location=Location.get(id=data['location']) if 'location' in data else None, \
-        )
 
     def __unicode__(self):
         return self.first_name + ' ' + self.last_name
@@ -197,24 +146,6 @@ class Category(models.Model):
     # id = models.IntegerField()
     name = models.CharField(max_length=CATEGORY_NAME_MAX_LENGTH)
 
-    @staticmethod
-    def to_meta_string(category):
-        data = {'class_name': 'Category'}
-
-        data['id'] = category.id
-        data['name'] = category.name
-
-        return json.dumps(data)
-
-    @staticmethod
-    def from_meta_string(meta_string):
-        data = json.loads(meta_string)
-
-        return Category( \
-            id=data['id'], \
-            name=data['name'], \
-        )
-
     def __unicode__(self):
         return self.name
 
@@ -254,45 +185,6 @@ class Item(models.Model):
     upload_time = models.DateTimeField(default=datetime.utcnow)
     price = models.DecimalField(max_digits=8, decimal_places=2)
     image = models.ImageField(upload_to="images/%Y/%m/%d/", blank=True, null=True)
-
-    @staticmethod
-    def to_meta_string(item):
-        data = {'class_name': 'Item'}
-
-        data['id'] = item.id
-        data['seller_user'] = item.seller_user.id
-        data['name'] = item.name
-        data['description'] = item.description
-        data['claimed'] = item.claimed
-        data['category'] = item.category.id
-        data['upload_time'] = str(item.upload_time)
-        data['price'] = str(item.price)
-        if hasattr(item, 'image') and item.image:
-            data['image_path'] = item.image.path
-            data['image_url'] = item.image.url
-
-        return json.dumps(data)
-
-    @staticmethod
-    def from_meta_string(meta_string):
-        data = json.loads(meta_string)
-
-        item = Item( \
-            id=data['id'], \
-            seller_user=User.get(id=data['seller_user']), \
-            name=data['name'], \
-            description=data['description'], \
-            claimed=data['claimed'], \
-            category=Category.get(id=data['claimed']) if 'claimed' in data else None, \
-            upload_time=data['upload_time'], \
-            price=data['price'], \
-        )
-        if hasattr(data, 'image_path') and hasattr(data, 'image_url'):
-            f = open(data['image_path'])
-            item.image.save(data['image_url'], f)
-            f.close()
-
-        return item
 
     def __unicode__(self):
         return self.name
@@ -351,30 +243,6 @@ class Reservation(models.Model):
     max_price = models.DecimalField(max_digits=8, decimal_places=2)
     timestamp = models.DateTimeField(default=datetime.utcnow)
 
-    @staticmethod
-    def to_meta_string(reservation):
-        data = {'class_name': 'Reservation'}
-
-        data['id'] = reservation.id
-        data['user'] = reservation.user.id
-        data['search_query'] = reservation.search_query
-        data['max_price'] = str(reservation.max_price)
-        data['timestamp'] = str(reservation.timestamp)
-
-        return json.dumps(data)
-
-    @staticmethod
-    def from_meta_string(meta_string):
-        data = json.loads(meta_string)
-
-        return Reservation( \
-            id=data['id'], \
-            user=User.get(id=data['user']), \
-            search_query=data['search_query'], \
-            max_price=data['max_price'], \
-            timestamp=data['timestamp'], \
-        )
-
     def __unicode__(self):
         return self.search_query
 
@@ -425,28 +293,6 @@ class Claim(models.Model):
     buyer = models.ForeignKey(User, related_name='buyer')
     item = models.ForeignKey(Item)
     timestamp = models.DateTimeField(default=datetime.utcnow)
-
-    @staticmethod
-    def to_meta_string(claim):
-        data = {'class_name': 'Claim'}
-
-        data['id'] = claim.id
-        data['buyer'] = claim.buyer.id
-        data['item'] = claim.item.id
-        data['timestamp'] = str(claim.timestamp)
-
-        return json.dumps(data)
-
-    @staticmethod
-    def from_meta_string(meta_string):
-        data = json.loads(meta_string)
-
-        return Claim( \
-            id=data['id'], \
-            buyer=User.get(id=data['buyer']), \
-            item=Item.get(id=data['item']), \
-            timestamp=data['timestamp'], \
-        )
 
     def __unicode__(self):
         return str(self.buyer) + ' ' + str(self.item)
