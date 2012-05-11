@@ -1,0 +1,21 @@
+#new-reservation {
+    position: fixed;
+    top: 25%;
+    left: 25%;
+    right: 25%;
+
+    background: white;
+    opacity: 1.0;
+    z-index: 1001;
+    
+    padding: 2%;
+}
+
+#new-reservation.input[type=Submit] {
+    float: left;
+}
+
+#new-reservation.input[type=Button] {
+    float: left;
+}
+

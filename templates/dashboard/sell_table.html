@@ -1,11 +1,11 @@
-<table id="sell-table">
+<table id="sell-items-table">
   <thead>
-    <tr id="sell-columns" class="table-column-titles-row">
-      <td class="table-column-title sell-image-column">Image</td>
-      <td class="table-column-title sell-name-column">Name</td>
-      <td class="table-column-title sell-description-column">Description</td>
-      <td class="table-column-title sell-price-column">Price</td>
-      <td class="table-column-title sell-remove-column"></td>
+    <tr id="sell-item-columns" class="table-column-titles-row">
+      <td class="table-column-title sell-item-image-column">Image</td>
+      <td class="table-column-title sell-item-name-column">Name</td>
+      <td class="table-column-title sell-item-description-column">Description</td>
+      <td class="table-column-title sell-item-price-column">Price</td>
+      <td class="table-column-title sell-item-remove-column"></td>
     </tr>
   </thead>
 
@@ -13,17 +13,17 @@
     {% for item in items %}
       {% cycle 'darkcolor' 'lightcolor' as rowcolor silent %}
       <tr class="sell-item table-row {{ rowcolor }}">
-        <td class="sell-image-column unimportant-font">
+        <td class="sell-item-image-column unimportant-font">
           {% if item.image %}
             <img class="item-image" src="{{ item.image.url }}" alt="(No image)" />
           {% else %}
             (No image)
           {% endif %}
         </td>
-        <td class="sell-name-column">{{ item.name }}</td>
-        <td class="sell-description-column">{{ item.description }}</td>
-        <td class="sell-price-column">${{ item.price }}</td>
-        <td class="sell-remove-column">
+        <td class="sell-item-name-column">{{ item.name }}</td>
+        <td class="sell-item-description-column">{{ item.description }}</td>
+        <td class="sell-item-price-column">${{ item.price }}</td>
+        <td class="sell-item-remove-column">
           <form name="sell_item" action="{{ SITE_ROOT }}remove_item" method="post">
             {% csrf_token %}
             <input type="hidden" name="item_id" value={{ item.id }}>

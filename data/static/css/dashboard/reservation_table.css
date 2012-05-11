@@ -1,0 +1,27 @@
+#reserve-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#reservation-columns {
+    clear: both;
+}
+
+.reservation {
+}
+
+.reservation-search-query-column {
+    width: 60%;
+    text-align: center;
+}
+
+.reservation-max-price-column {
+    width: 30%;
+    text-align: center;
+}
+
+.reservation-delete-column {
+    width: 10%;
+    text-align: center;
+}
+

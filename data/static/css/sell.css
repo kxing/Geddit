@@ -33,42 +33,6 @@
     clear: both;
 }
 
-#sell-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-#sell-columns {
-}
-
-.sell-image-column {
-    width: 10%;
-    text-align: center;
-}
-
-.sell-name-column {
-    width: 25%;
-    text-align: center;
-}
-
-.sell-description-column {
-    width: 40%;
-    text-align: center;
-}
-
-.sell-price-column {
-    width: 15%;
-    text-align: right;
-}
-
-.sell-remove-column {
-    width: 10%;
-    text-align: center;
-}
-
-.sell-item {
-}
-
 #sell-reservation-table {
     width: 100%;
     border-collapse: collapse;

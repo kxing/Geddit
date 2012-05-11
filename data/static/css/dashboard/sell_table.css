@@ -1,0 +1,36 @@
+#sell-items-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#sell-item-columns {
+}
+
+.sell-item-image-column {
+    width: 10%;
+    text-align: center;
+}
+
+.sell-item-name-column {
+    width: 25%;
+    text-align: center;
+}
+
+.sell-item-description-column {
+    width: 40%;
+    text-align: center;
+}
+
+.sell-item-price-column {
+    width: 15%;
+    text-align: right;
+}
+
+.sell-item-remove-column {
+    width: 10%;
+    text-align: center;
+}
+
+.sell-item {
+}
+
