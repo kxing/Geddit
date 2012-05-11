@@ -12,33 +12,31 @@
 {% endblock %}
 
 {% block content %}
+  <!-- Claims -->
+  <div id="cart-title" class="table-title"><h1>Stuff to Pick Up</h1></div>
+  {% include 'dashboard/claims_table.html' %}
 
-<!-- Claims -->
-<div id="cart-title" class="table-title"><h1>Stuff to Pick Up</h1></div>
-{% include 'dashboard/claims_table.html' %}
+  <!-- Divider -->
+  <div class="divider"></div>
 
-<!-- Divider -->
-<div class="divider"></div>
+  <!-- Stuff for new reservations -->
+  {% include 'dashboard/new_reservation_form.html' %}
 
-<!-- Stuff for new reservations -->
-{% include 'dashboard/new_reservation_form.html' %}
+  <!-- Existing reservations -->
+  <div id="reserve-title" class="table-title"><h1>My Reservations</h1></div>
+  <div id="new-reservation-button">
+    <input type="button" value="New Reservation" onclick="showGreyoutDialog();"
+      class="button">
+  </div>
 
-<!-- Existing reservations -->
-<div id="reserve-title" class="table-title"><h1>My Reservations</h1></div>
-<div id="new-reservation-button">
-  <input type="button" value="New Reservation" onclick="showGreyoutDialog();"
-    class="button">
-</div>
+  {% include 'dashboard/reservations_table.html' %}
 
-{% include 'dashboard/reservations_table.html' %}
+  <!-- Divider -->
+  <div class="divider"></div>
 
-<!-- Divider -->
-<div class="divider"></div>
-
-<!-- Existing listings -->
-<div id="sell-listings-title" class="table-title"><h1>My Listings</h1></div>
-{% include 'dashboard/sell_table.html' %}
-
+  <!-- Existing listings -->
+  <div id="sell-listings-title" class="table-title"><h1>My Listings</h1></div>
+  {% include 'dashboard/sell_table.html' %}
 {% endblock %}
 
 {% block js_extra_imports %}

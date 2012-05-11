@@ -1,14 +1,14 @@
 {% if claims %}
-  <table id="cart-table">
+  <table id="claim-table">
     <thead>
-      <tr id="cart-columns" class="table-column-titles-row">
-        <td class="table-column-title cart-image-column">Image</td>
-        <td class="table-column-title cart-name-column">Name</td>
-        <td class="table-column-title cart-description-column">Description</td>
-        <td class="table-column-title cart-location-column">Location</td>
-        <td class="table-column-title cart-price-column">Price</td>
-        <td class="table-column-title cart-unclaim-column"></td>
-        <td class="table-column-title cart-email-seller-column"></td>
+      <tr id="claim-columns" class="table-column-titles-row">
+        <td class="table-column-title claim-image-column">Image</td>
+        <td class="table-column-title claim-name-column">Name</td>
+        <td class="table-column-title claim-description-column">Description</td>
+        <td class="table-column-title claim-location-column">Location</td>
+        <td class="table-column-title claim-price-column">Price</td>
+        <td class="table-column-title claim-unclaim-column"></td>
+        <td class="table-column-title claim-email-seller-column"></td>
       </tr>
     </thead>
 
@@ -16,29 +16,29 @@
       {% for claim in claims %}
         {% cycle 'darkcolor' 'lightcolor' as rowcolor silent %}
         <tr class="table-row claim {{ rowcolor }}">
-          <td class="cart-image-column unimportant-font">
+          <td class="claim-image-column unimportant-font">
             {% if claim.item.image %}
               <img class="item-image" src="{{ claim.item.image.url }}" alt="(No image)" />
             {% else %}
               (No image)
             {% endif %}
           </td>
-          <td class="cart-name-column">{{ claim.item.name }}</td>
-          <td class="cart-description-column">{{ claim.item.description }}</td>
-          <td class="cart-location-column unimportant-font">
+          <td class="claim-name-column">{{ claim.item.name }}</td>
+          <td class="claim-description-column">{{ claim.item.description }}</td>
+          <td class="claim-location-column unimportant-font">
             {% if claim.item.seller_user.location %}
               {{ claim.item.seller_user.location.name }}
             {% else %}
               (Not listed)
             {% endif %}
           </td>
-          <td class="cart-price-column">${{ claim.item.price }}</td>
-          <td class="cart-email-seller-column">
+          <td class="claim-price-column">${{ claim.item.price }}</td>
+          <td class="claim-email-seller-column">
             <form name="email_seller" action="mailto:{{ claim.item.seller_user.email }}" method="link">
               <input type="submit" value="Email Seller" class="button">
             </form>
           </td>
-          <td class="cart-unclaim-column">
+          <td class="claim-unclaim-column">
             <form name="unclaim" action="{{ SITE_ROOT }}unclaim" method="post">
               {% csrf_token %}
               <input type="hidden" name="item_id" value={{ claim.item.id }}>

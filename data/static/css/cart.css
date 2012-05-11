@@ -1,42 +1,39 @@
-.claim {
-}
-
-#cart-table {
+#claim-table {
     width: 100%;
     border-collapse: collapse;
 }
 
-.cart-image-column {
+.claim-image-column {
     width: 10%;
     text-align: center;
 }
 
-.cart-name-column {
+.claim-name-column {
     width: 15%;
     text-align: center;
 }
 
-.cart-description-column {
+.claim-description-column {
     width: 30%;
     text-align: center;
 }
 
-.cart-location-column {
+.claim-location-column {
     width: 15%;
     text-align: center;
 }
 
-.cart-price-column {
+.claim-price-column {
     width: 10%;
     text-align: center;
 }
 
-.cart-unclaim-column {
+.claim-unclaim-column {
     width: 10%;
     text-align: center;
 }
 
-.cart-email-seller-column {
+.claim-email-seller-column {
     width: 10%;
     text-align: center;
 }
