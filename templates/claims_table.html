@@ -1,0 +1,55 @@
+{% if claims %}
+  <table id="cart-table">
+    <thead>
+      <tr id="cart-columns" class="table-column-titles-row">
+        <td class="table-column-title cart-image-column">Image</td>
+        <td class="table-column-title cart-name-column">Name</td>
+        <td class="table-column-title cart-description-column">Description</td>
+        <td class="table-column-title cart-location-column">Location</td>
+        <td class="table-column-title cart-price-column">Price</td>
+        <td class="table-column-title cart-unclaim-column"></td>
+        <td class="table-column-title cart-email-seller-column"></td>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for claim in claims %}
+        {% cycle 'darkcolor' 'lightcolor' as rowcolor silent %}
+        <tr class="table-row claim {{ rowcolor }}">
+          <td class="cart-image-column unimportant-font">
+            {% if claim.item.image %}
+              <img class="item-image" src="{{ claim.item.image.url }}" alt="(No image)" />
+            {% else %}
+              (No image)
+            {% endif %}
+          </td>
+          <td class="cart-name-column">{{ claim.item.name }}</td>
+          <td class="cart-description-column">{{ claim.item.description }}</td>
+          <td class="cart-location-column unimportant-font">
+            {% if claim.item.seller_user.location %}
+              {{ claim.item.seller_user.location.name }}
+            {% else %}
+              (Not listed)
+            {% endif %}
+          </td>
+          <td class="cart-price-column">${{ claim.item.price }}</td>
+          <td class="cart-email-seller-column">
+            <form name="email_seller" action="mailto:{{ claim.item.seller_user.email }}" method="link">
+              <input type="submit" value="Email Seller" class="button">
+            </form>
+          </td>
+          <td class="cart-unclaim-column">
+            <form name="unclaim" action="{{ SITE_ROOT }}unclaim" method="post">
+              {% csrf_token %}
+              <input type="hidden" name="item_id" value={{ claim.item.id }}>
+              <input type="submit" value="Unclaim" class="button">
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>You have no items to pick up.</p>
+{% endif %}
+

@@ -1,0 +1,31 @@
+{% if reservations %}
+  <table id="reserve-table">
+    <thead>
+      <tr id="reservation-columns" class="table-column-titles-row">
+        <td class="table-column-title reservation-search-query-column">Item</td>
+        <td class="table-column-title reservation-max-price-column">Maximum Price</td>
+        <td class="table-column-title reservation-delete-column"></td>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for reservation in reservations %}
+        {% cycle 'darkcolor' 'lightcolor' as rowcolor silent %}
+        <tr class="table-row reservation {{ rowcolor }}">
+          <td class="reservation-search-query-column">{{ reservation.search_query }}</td>
+          <td class="reservation-max-price-column">${{ reservation.max_price }}</td>
+          <td class="reservation-delete-column">
+            <form name="delete" action="{{ SITE_ROOT }}delete_reservation" method="post">
+              {% csrf_token %}
+              <input type="hidden" name="reservation_id" value={{ reservation.id }}>
+              <input type="submit" value="Delete" class="button">
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>You have no reservations.</p>
+{% endif %}
+
