@@ -10,7 +10,7 @@ class ItemForm(forms.ModelForm):
 class UserSettingsForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('cell_phone', 'location')
+        fields = ('location', 'email_notifications', 'sms_notifications', 'cell_phone')
 
 class ReservationForm(forms.ModelForm):
     class Meta:

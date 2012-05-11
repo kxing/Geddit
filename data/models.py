@@ -50,6 +50,8 @@ class User(models.Model):
     email = models.EmailField()
     cell_phone = models.CharField(max_length=PHONE_NUMBER_MAX_LENGTH, blank=True, null=True)
     location = models.ForeignKey(Location, blank=True, null=True)
+    email_notifications = models.BooleanField(default=True)
+    sms_notifications = models.BooleanField(default=False)
 
     def __unicode__(self):
         return self.first_name + ' ' + self.last_name
@@ -59,10 +61,12 @@ class User(models.Model):
         verbose_name_plural = 'Users'
 
     @staticmethod
-    def create_user(username, first_name, last_name, email, cell_phone=None, location=None):
+    def create_user(username, first_name, last_name, email, cell_phone=None, location=None, \
+            email_notifications=True, sms_notifications=False):
         u = User(username=username, first_name=first_name, \
                 last_name=last_name, email=email, cell_phone=cell_phone,
-                location=location)
+                location=location, email_notifications=email_notifications,
+                sms_notifications=sms_notifications)
         u.save()
         return u
 
@@ -103,9 +107,13 @@ class User(models.Model):
             users[reservation.user.id] = reservation.user
         # email and SMS
         for uid in users:
-            users[uid].send_email('An item has been posted that matches your reservation.\n' + \
-                    'Check it out at ' + SITE_ROOT + 'buy?id=' + str(item.id), \
-                    '[Geddit] matching reservation')
+            if users[uid].email_notifications:
+                users[uid].send_email('An item has been posted that matches your reservation.\n' + \
+                        'Check it out at ' + SITE_ROOT + 'buy?id=' + str(item.id), \
+                        '[Geddit] matching reservation')
+            if users[uid].sms_notifications:
+                users[uid].send_sms('[Geddit] An item has been posted that matches your reservation.\n' + \
+                        'Check it out at ' + SITE_ROOT + 'buy?id=' + str(item.id))
 
         return item
 

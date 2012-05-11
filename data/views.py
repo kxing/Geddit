@@ -146,7 +146,9 @@ def settings_page(request):
         # Create unbound form if GET
         initialData = {
             'cell_phone': get_current_user(request).cell_phone,
-            'location': get_current_user(request).location
+            'location': get_current_user(request).location,
+            'email_notifications': get_current_user(request).email_notifications,
+            'sms_notifications': get_current_user(request).sms_notifications,
         }
         form = UserSettingsForm(initial=initialData)
     

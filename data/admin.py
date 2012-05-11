@@ -17,6 +17,7 @@ class UserAdmin(admin.ModelAdmin):
         ('Personal Information',
             {'fields': ['first_name', 'last_name', 'email', 'cell_phone', 'location']}
         ),
+        ('Preferences', {'fields': ['email_notifications', 'sms_notifications']}),
     ]
     list_display = ['username', 'first_name', 'last_name', 'email', 'cell_phone', 'location']
 admin.site.register(User, UserAdmin)
