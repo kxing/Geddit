@@ -15,40 +15,13 @@
 
 <!-- Claims -->
 <div id="cart-title" class="table-title"><h1>Stuff to Pick Up</h1></div>
-{% include 'claims_table.html' %}
+{% include 'dashboard/claims_table.html' %}
 
 <!-- Divider -->
 <div class="divider"></div>
 
 <!-- Stuff for new reservations -->
-<div class="greyout greyout-visible"></div>
-<div id="new-reservation" class="greyout-visible">
-  <h1>New Reservation</h1>
-  <form name="reserve" action="{{ SITE_ROOT }}new_reservation" method="post">
-    {% csrf_token %}
-    <div class="form-field">
-      {{ form.search_query.errors }}
-      <label for="id_{{ form.search_query.html_name }}" class="form-label">
-        {{ form.search_query.label }}:
-      </label>
-      {{ form.search_query }}
-    </div>
-    <div class="form-field">
-      {{ form.max_price.errors }}
-      <label for="id_{{ form.max_price.html_name }}" class="form-label">
-        {{ form.max_price.label }}:
-      </label>
-      <div class="currency-field">
-        <div class="dollar-sign">$</div>
-        <input type="text" id="id_max_price" name="max_price" class="price-field">
-      </div>
-    </div>
-    <input type="submit" value="Create" class="button">
-    <input type="button" value="Cancel" onclick="hideGreyoutDialog();"
-       class="button">
-  </form>
-</div>
-
+{% include 'dashboard/new_reservation_form.html' %}
 
 <!-- Existing reservations -->
 <div id="reserve-title" class="table-title"><h1>My Reservations</h1></div>
@@ -57,50 +30,15 @@
     class="button">
 </div>
 
-{% include 'reservations_table.html' %}
+{% include 'dashboard/reservations_table.html' %}
 
 <!-- Divider -->
 <div class="divider"></div>
 
 <!-- Existing listings -->
 <div id="sell-listings-title" class="table-title"><h1>My Listings</h1></div>
+{% include 'dashboard/sell_table.html' %}
 
-<table id="sell-table">
-  <thead>
-    <tr id="sell-columns" class="table-column-titles-row">
-      <td class="table-column-title sell-image-column">Image</td>
-      <td class="table-column-title sell-name-column">Name</td>
-      <td class="table-column-title sell-description-column">Description</td>
-      <td class="table-column-title sell-price-column">Price</td>
-      <td class="table-column-title sell-remove-column"></td>
-    </tr>
-  </thead>
-
-  <tbody>
-    {% for item in items %}
-      {% cycle 'darkcolor' 'lightcolor' as rowcolor silent %}
-      <tr class="sell-item table-row {{ rowcolor }}">
-        <td class="sell-image-column unimportant-font">
-          {% if item.image %}
-            <img class="item-image" src="{{ item.image.url }}" alt="(No image)" />
-          {% else %}
-            (No image)
-          {% endif %}
-        </td>
-        <td class="sell-name-column">{{ item.name }}</td>
-        <td class="sell-description-column">{{ item.description }}</td>
-        <td class="sell-price-column">${{ item.price }}</td>
-        <td class="sell-remove-column">
-          <form name="sell_item" action="{{ SITE_ROOT }}remove_item" method="post">
-            {% csrf_token %}
-            <input type="hidden" name="item_id" value={{ item.id }}>
-            <input type="submit" value="Remove" class="button">
-          </form>
-        </td>
-      </tr>
-    {% endfor %}
-  </tbody>
-</table>
 {% endblock %}
 
 {% block js_extra_imports %}

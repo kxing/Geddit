@@ -1,0 +1,28 @@
+<div class="greyout greyout-visible"></div>
+<div id="new-reservation" class="greyout-visible">
+  <h1>New Reservation</h1>
+  <form name="reserve" action="{{ SITE_ROOT }}new_reservation" method="post">
+    {% csrf_token %}
+    <div class="form-field">
+      {{ form.search_query.errors }}
+      <label for="id_{{ form.search_query.html_name }}" class="form-label">
+        {{ form.search_query.label }}:
+      </label>
+      {{ form.search_query }}
+    </div>
+    <div class="form-field">
+      {{ form.max_price.errors }}
+      <label for="id_{{ form.max_price.html_name }}" class="form-label">
+        {{ form.max_price.label }}:
+      </label>
+      <div class="currency-field">
+        <div class="dollar-sign">$</div>
+        <input type="text" id="id_max_price" name="max_price" class="price-field">
+      </div>
+    </div>
+    <input type="submit" value="Create" class="button">
+    <input type="button" value="Cancel" onclick="hideGreyoutDialog();"
+       class="button">
+  </form>
+</div>
+

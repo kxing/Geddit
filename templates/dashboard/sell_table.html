@@ -1,0 +1,37 @@
+<table id="sell-table">
+  <thead>
+    <tr id="sell-columns" class="table-column-titles-row">
+      <td class="table-column-title sell-image-column">Image</td>
+      <td class="table-column-title sell-name-column">Name</td>
+      <td class="table-column-title sell-description-column">Description</td>
+      <td class="table-column-title sell-price-column">Price</td>
+      <td class="table-column-title sell-remove-column"></td>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for item in items %}
+      {% cycle 'darkcolor' 'lightcolor' as rowcolor silent %}
+      <tr class="sell-item table-row {{ rowcolor }}">
+        <td class="sell-image-column unimportant-font">
+          {% if item.image %}
+            <img class="item-image" src="{{ item.image.url }}" alt="(No image)" />
+          {% else %}
+            (No image)
+          {% endif %}
+        </td>
+        <td class="sell-name-column">{{ item.name }}</td>
+        <td class="sell-description-column">{{ item.description }}</td>
+        <td class="sell-price-column">${{ item.price }}</td>
+        <td class="sell-remove-column">
+          <form name="sell_item" action="{{ SITE_ROOT }}remove_item" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="item_id" value={{ item.id }}>
+            <input type="submit" value="Remove" class="button">
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
