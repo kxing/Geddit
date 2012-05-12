@@ -1,15 +1,12 @@
 #sidebar {
-    position: absolute;
-    left: 0px;
-    right: 80%;
-    top: 0px;
-    bottom: 0px;
+    width: 20%;
+    display: inline-block;
+}
 
-    background: #E8E8E8;
+#sidebar-container {
     margin: 10px;
+    background: #E8E8E8;
     border-radius: 10px;
-
-    overflow: auto;
 }
 
 #sidebar-title {

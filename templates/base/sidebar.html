@@ -1,11 +1,13 @@
 <div id="sidebar">
-  {% block sidebar %}
-  <div id="sidebar-title">Browse by Category</div>
-  {% for category in categories %}
-    <div class="sidebar-category-link">
-    <a href="{{ SITE_ROOT }}buy?category={{ category.name }}">{{ category.name }}</a>
-    </div>
-  {% endfor %}
-  {% endblock %}
+  <div id="sidebar-container">
+    {% block sidebar %}
+    <div id="sidebar-title">Browse by Category</div>
+    {% for category in categories %}
+      <div class="sidebar-category-link">
+      <a href="{{ SITE_ROOT }}buy?category={{ category.name }}">{{ category.name }}</a>
+      </div>
+    {% endfor %}
+    {% endblock %}
+  </div>
 </div>
 
