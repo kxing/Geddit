@@ -1,5 +1,6 @@
 #nav-bar-container {
     display: inline-block;
+/*    background-image: url("/static/images/banner.png");*/
     width: 80%;
 }
 
@@ -29,17 +30,16 @@
 
 .nav_button {
     display: inline-block;
-    background: darkblue;
     border-radius: 15px;
     font-size: 30px;
 }
 
 .nav_button a {
-    color: white;
+    color: black;
 }
 
 .nav_highlighted {
-    background: cornflowerblue;
+    text-decoration:underline;
 }
 
 #messages-container {

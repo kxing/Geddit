@@ -12,10 +12,10 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'Geddit',                   # Or path to database file if using sqlite3.
-        'USER': 'geddit',                      # Not used with sqlite3.
-        'PASSWORD': 'teamawesome',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+        'NAME': 'pwh+6470',                   # Or path to database file if using sqlite3.
+        'USER': 'pwh',                      # Not used with sqlite3.
+        'PASSWORD': '159512',                  # Not used with sqlite3.
+        'HOST': 'sql.mit.edu',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
@@ -45,7 +45,7 @@ USE_L10N = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = '/home/kerry/geddit/media/'
+MEDIA_ROOT = '/home/pwh/workspace/geddit/media/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -56,7 +56,7 @@ MEDIA_URL = '/media/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = '/home/kerry/geddit/static/'
+STATIC_ROOT = '/home/pwh/workspace/geddit/static/'
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -72,7 +72,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    '/home/kerry/geddit/data/static',
+    '/home/pwh/workspace/geddit/data/static',
 )
 
 # List of finder classes that know how to find static files in
@@ -104,12 +104,10 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'mit.ScriptsRemoteUserMiddleware',
 )
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-    'mit.ScriptsRemoteUserBackend',
 )
 
 ROOT_URLCONF = 'geddit.urls'
@@ -118,7 +116,8 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    '/home/kerry/geddit/templates'
+    '/home/kerry/geddit/templates',
+    '/home/pwh/workspace/geddit/templates'
 )
 
 INSTALLED_APPS = (

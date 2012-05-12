@@ -49,7 +49,7 @@ urlpatterns = patterns('',
             'document_root': settings.MEDIA_ROOT,
         }),
 
-    url(r'^login/password/', 'django.contrib.auth.views.login', name='login-password', ),
-    url(r'^login/', 'mit.scripts_login', name='login', ),
-    url(r'^logout/', logout, name='logout', ),
+    #url(r'^login/password/', 'django.contrib.auth.views.login', name='login-password', ),
+    #url(r'^login/', 'mit.scripts_login', name='login', ),
+    #url(r'^logout/', logout, name='logout', ),
 )

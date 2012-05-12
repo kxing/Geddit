@@ -5,17 +5,17 @@
     top: 0px;
     bottom: 0px;
 
-    background: #E8E8E8;
+    background: #EEE;
     margin: 10px;
-    border-radius: 10px;
-
-    overflow: auto;
+    
+    border-bottom: 1px solid #CCC;
 }
 
 #sidebar-title {
     padding: 10px 10px;
     font-size: large;
-    font-weight: bold;
+    background: #AAA;
+    border: 1px solid #CCC;
 }
 
 .sidebar-category-link {
