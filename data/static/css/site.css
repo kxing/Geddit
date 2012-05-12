@@ -3,28 +3,22 @@ body {
 }
 
 #heading {
-    clear: both;
-    height: 40px;
-    width: 100%;
 }
 
 #sidebar-content {
-    position: absolute;
-    top: 100px;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
 }
 
 #content {
+<<<<<<< HEAD
     background: #FFF;
+=======
+    display: inline-block;
+    background: aliceblue;
+>>>>>>> e1b858365c7d4d52f037d0dcc3f12b66e04e5698
 
     position: absolute;
     left: 20%;
     right: 0px;
-    top: 0px;
-    bottom: 0px;
-    overflow: auto;
 
     margin: 10px;
     border-radius: 10px;

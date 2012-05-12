@@ -1,11 +1,16 @@
 #nav-bar-container {
     display: inline-block;
+<<<<<<< HEAD
 /*    background-image: url("/static/images/banner.png");*/
     width: 80%;
+=======
+    position: absolute;
+    padding: 20px 10px;
+    left: 20%;
+>>>>>>> e1b858365c7d4d52f037d0dcc3f12b66e04e5698
 }
 
 #nav-bar {
-    margin: 10px;
 }
 
 #nav_buttons {

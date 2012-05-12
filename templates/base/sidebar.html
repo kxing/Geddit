@@ -1,4 +1,5 @@
 <div id="sidebar">
+<<<<<<< HEAD
   {% block sidebar %}
   <div id="sidebar-title">Categories</div>
   {% for category in categories %}
@@ -7,5 +8,17 @@
     </div>
   {% endfor %}
   {% endblock %}
+=======
+  <div id="sidebar-container">
+    {% block sidebar %}
+    <div id="sidebar-title">Browse by Category</div>
+    {% for category in categories %}
+      <div class="sidebar-category-link">
+      <a href="{{ SITE_ROOT }}buy?category={{ category.name }}">{{ category.name }}</a>
+      </div>
+    {% endfor %}
+    {% endblock %}
+  </div>
+>>>>>>> e1b858365c7d4d52f037d0dcc3f12b66e04e5698
 </div>
 
