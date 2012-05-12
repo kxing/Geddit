@@ -50,8 +50,10 @@
     <li>has already been claimed</li>
     <li>has been removed by the seller</li>
   </ul>
+{% else %} {% if category %}
+  <p>There are no listings under this category.</p>
 {% else %} {% if search_query %}
   <p>There are no listings that match your search.</p>
 {% else %}
   <p>There are no new listings.</p>
-{% endif %} {% endif %} {% endif %}
+{% endif %} {% endif %} {% endif %} {% endif %}
