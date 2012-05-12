@@ -11,7 +11,7 @@
     <tbody>
       {% for reservation in reservations %}
         {% cycle 'darkcolor' 'lightcolor' as rowcolor silent %}
-        <tr class="table-row reservation {{ rowcolor }}">
+        <tr class="table-row {{ rowcolor }}">
           <td class="reservation-search-query-column">{{ reservation.search_query }}</td>
           <td class="reservation-max-price-column">${{ reservation.max_price }}</td>
           <td class="reservation-delete-column">

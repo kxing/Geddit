@@ -3,9 +3,6 @@
     border-collapse: collapse;
 }
 
-#sell-item-columns {
-}
-
 .sell-item-image-column {
     width: 10%;
     text-align: center;
@@ -29,8 +26,5 @@
 .sell-item-remove-column {
     width: 10%;
     text-align: center;
-}
-
-.sell-item {
 }
 

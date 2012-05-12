@@ -2,12 +2,12 @@
 
 {% block imports %}
   {{ block.super }}
-  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/dashboard/claims.css" />
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/dashboard/claims_table.css" />
   <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/dashboard/divider.css" />
   <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/dashboard/new_reservation_form.css" />
   <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/dashboard/reservation_table.css" />
   <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/dashboard/sell_table.css" />
-  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/reserve.css" />
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/dashboard/dashboard.css" />
 
   <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/greyout.css" />
   <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/form.css" />
@@ -16,7 +16,7 @@
 
 {% block content %}
   <!-- Claims -->
-  <div id="cart-title" class="table-title"><h1>Stuff to Pick Up</h1></div>
+  <div class="table-title"><h1>Stuff to Pick Up</h1></div>
   {% include 'dashboard/claims_table.html' %}
 
   <!-- Divider -->
@@ -26,7 +26,7 @@
   {% include 'dashboard/new_reservation_form.html' %}
 
   <!-- Existing reservations -->
-  <div id="reserve-title" class="table-title"><h1>My Reservations</h1></div>
+  <div class="table-title"><h1>My Reservations</h1></div>
   <div id="new-reservation-button">
     <input type="button" value="New Reservation" onclick="showGreyoutDialog();"
       class="button">
@@ -38,7 +38,7 @@
   <div class="divider"></div>
 
   <!-- Existing listings -->
-  <div id="sell-listings-title" class="table-title"><h1>My Listings</h1></div>
+  <div class="table-title"><h1>My Listings</h1></div>
   {% include 'dashboard/sell_table.html' %}
 {% endblock %}
 

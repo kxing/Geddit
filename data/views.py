@@ -80,7 +80,7 @@ def dashboard_page(request):
     render_params['reservations'] = get_current_user(request).get_reservations()
     render_params['claims'] = get_current_user(request).get_claims()
     render_params['items'] = get_current_user(request).get_items()
-    return render(request, 'dashboard.html', render_params, \
+    return render(request, 'dashboard/dashboard.html', render_params, \
             context_instance=RequestContext(request))
 
 def remove_item(request):
