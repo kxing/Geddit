@@ -1,6 +1,7 @@
 {% extends "base/base.html" %}
 
 {% block content %}
+  <h1>Settings</h1>
   <form action="{{ SITE_ROOT }}settings" method="post" id="settings_form">
     {% csrf_token %}
     {{ form.as_p }}
