@@ -33,7 +33,7 @@ def buy_page(request):
 
     render_params['items'] = Item.get_filtered_items(category, search_query, id)
 
-    return render(request, 'buy.html', render_params, \
+    return render(request, 'buy/buy.html', render_params, \
             context_instance=RequestContext(request))
 
 def sell_page(request):
@@ -68,7 +68,7 @@ def sell_page(request):
     render_params['items'] = get_current_user(request).get_items()
     render_params['reservations'] = Reservation.get_all_reservations()
     
-    return render(request, 'sell.html', render_params, \
+    return render(request, 'sell/sell.html', render_params, \
                   context_instance=RequestContext(request))
 
 def dashboard_page(request):

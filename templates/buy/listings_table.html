@@ -1,0 +1,48 @@
+{% if items %}
+  <table id="buy-table">
+    <thead>
+      <tr id="buy-columns" class="table-column-titles-row">
+        <th class="table-column-title buy-image-column">Image</th>
+        <th class="table-column-title buy-name-column">Name</th>
+        <th class="table-column-title buy-description-column">Description</th>
+        <th class="table-column-title buy-location">Location</th>
+        <th class="table-column-title buy-price-column">Price</th>
+        <th class="table-column-title buy-claim-column"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+    {% for item in items %}
+      {% cycle 'darkcolor' 'lightcolor' as rowcolor silent %}
+      <tr class="table-row buy-item-listing {{ rowcolor }}">
+        <td class="buy-image-column unimportant-font">
+          {% if item.image %}
+            <img class="item-image" src="{{ item.image.url }}" alt="(No image)" />
+          {% else %}
+            (No image)
+          {% endif %}
+        </td>
+        <td class="buy-name-column">{{ item.name }}</td>
+        <td class="buy-description-column">{{ item.description }}</td>
+        <td class="buy-location unimportant-font">
+          {% if item.seller_user.location %}
+            {{ item.seller_user.location.name }}
+          {% else %}
+            (Not listed)
+          {% endif %}
+        </td>
+        <td class="buy-price-column">${{ item.price }}</td>
+        <td class="buy-claim-column">
+          <form name="claim" action="{{ SITE_ROOT }}claim" method="post" class="claim_form">
+            {% csrf_token %}
+            <input type="hidden" name="item_id" value={{ item.id }}>
+            <input type="submit" value="Claim" class="button">
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>There are no new listings.</p>
+{% endif %}

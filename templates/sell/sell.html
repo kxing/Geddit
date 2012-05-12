@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block imports %}
+  {{ block.super }}
+  <style type="text/css">
+    div#map_canvas {
+      width: 300px;
+      height: 300px;
+      border: 1px solid black;
+    }
+  </style>
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/sell/sell.css" />
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/sell/sell_form.css" />
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/sell/reservations_table.css" />
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/greyout.css" />
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/form.css" />
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/table.css" />
+{% endblock %}
+
+{% block js_extra_imports %}
+<script
+  type="text/javascript"
+  src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBAomHvVoRCbc7MW7p0IpnJdSgGcFlbMUA&sensor=false">
+</script>
+<script
+  type="text/javascript"
+  src="{{ STATIC_URL }}js/google_maps.js">
+</script>
+<script src="{{ STATIC_URL }}js/greyout_dialog.js"
+  type="text/javascript"
+  charset="utf8"></script>
+{% endblock %}
+
+{% block content %}
+  {% include 'sell/sell_form.html' %}
+  <div id="sell-listings-title" class="table-title"><h1>Things People Have Requested</h1></div>
+  <div id="new-listing-button">
+    <input type="button" class="button" value="New Listing" onclick="showGreyoutDialog();">
+  </div>
+  {% include 'sell/reservations_table.html' %}
+{% endblock %}
+

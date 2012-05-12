@@ -1,0 +1,23 @@
+{% if reservations %}
+  <table id="sell-reservation-table">
+    <thead>
+      <tr class="table-column-titles-row">
+        <td class="table-column-title sell-reservation-search-query-column">Item</td>
+        <td class="table-column-title sell-reservation-max-price-column">Max Price</td>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for reservation in reservations %}
+        {% cycle 'darkcolor' 'lightcolor' as rowcolor silent %}
+        <tr class="table-row {{ rowcolor }}">
+          <td class="sell-reservation-search-query-column">{{ reservation.search_query }}</td>
+          <td class="sell-reservation-max-price-column">${{ reservation.max_price }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>People have not made any requests yet.</p>
+{% endif %}
+

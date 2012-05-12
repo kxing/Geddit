@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block imports %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/buy/search_bar.css" />
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/buy/listings_table.css" />
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/table.css" />
+{% endblock %}
+
+{% block content %}
+  <div id="buy-title" class="table-title">Listings</div>
+  {% include 'buy/search_bar.html' %}
+  {% include 'buy/listings_table.html' %}
+{% endblock %}

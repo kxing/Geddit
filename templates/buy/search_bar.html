@@ -1,0 +1,9 @@
+<div id="search">
+  {% block search %}
+  <form name="search" action="{{ SITE_ROOT }}buy" method="get">
+    <input type="text" name="search_query" class="search_bar"/>
+    <input type="submit" value="Search" class="button" />
+  </form>
+  {% endblock %}
+</div>
+

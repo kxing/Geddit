@@ -1,0 +1,58 @@
+<div class="greyout greyout-visible"></div>
+<div id="new-listing" class="greyout-visible">
+  <div class="form-title"><h1>New Listing</h1></div>
+  <form enctype="multipart/form-data" action="{{ SITE_ROOT }}sell" method="post">
+    {% csrf_token %}
+    <div class="form-field">
+      {{ form.name.errors }}
+      <label for="id_{{ form.name.html_name }}" class="form-label">
+        Item name:
+      </label>
+      {{ form.name }}
+    </div>
+    <div class="form-field">
+      {{ form.description.errors }}
+      <label for="id_{{ form.description.html_name }}" class="form-label">
+        {{ form.description.label }}:
+      </label>
+      {{ form.description }}
+    </div>
+    <div class="form-field">
+      {{ form.category.errors }}
+      <label for="id_{{ form.category.html_name }}" class="form-label">
+        {{ form.category.label }}:
+      </label>
+      {{ form.category }}
+    </div>
+    <div class="form-field">
+      {{ form.price.errors }}
+      <label for="id_{{ form.price.html_name }}" class="form-label">
+        {{ form.price.label }}:
+      </label>
+      <div class="currency-field">
+      <div class="dollar-sign">$</div>
+      <input type="text" id="id_price" name="price" class="price-field">
+      </div>
+    </div>
+    <div class="form-field">
+      {{ form.image.errors }}
+      <label for="id_{{ form.image.html_name }}" class="form-label">
+        {{ form.image.label }}:
+      </label>
+      {{ form.image }}
+    </div>
+    <input id="sell-create-button" class="button" type="submit" value="Create Listing" />
+    <input id="sell-cancel-button" type="button" class="button" value="Cancel" onclick="hideGreyoutDialog();">
+  </form>
+<!--
+  {% if latitude and longitude %}
+    <div id="map_canvas">
+    </div>
+
+    <div id="lat" style="display: none;">{{ latitude }}</div>
+    <div id="lng" style="display: none;">{{ longitude }}</div>
+  {% endif %}
+-->
+</div>
+
+

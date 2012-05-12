@@ -1,0 +1,15 @@
+#sell-reservation-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.sell-reservation-search-query-column {
+    width: 60%;
+    text-align: center;
+}
+
+.sell-reservation-max-price-column {
+    width: 40%;
+    text-align: center;
+}
+
