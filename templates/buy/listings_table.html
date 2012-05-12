@@ -43,6 +43,15 @@
       {% endfor %}
     </tbody>
   </table>
+{% else %} {% if id %}
+  <p>The item either:</p>
+  <ul>
+    <li>does not exist</li>
+    <li>has already been claimed</li>
+    <li>has been removed by the seller</li>
+  </ul>
+{% else %} {% if search_query %}
+  <p>There are no listings that match your search.</p>
 {% else %}
   <p>There are no new listings.</p>
-{% endif %}
+{% endif %} {% endif %} {% endif %}

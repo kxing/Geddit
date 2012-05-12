@@ -32,6 +32,8 @@ def buy_page(request):
     id = request.GET.get('id', None)
 
     render_params['items'] = Item.get_filtered_items(category, search_query, id)
+    render_params['search_query'] = search_query
+    render_params['id'] = id
 
     return render(request, 'buy/buy.html', render_params, \
             context_instance=RequestContext(request))
