@@ -5,6 +5,9 @@
   
   {% block imports %}
   <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/site.css" />
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/nav_bar.css" />
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/logo.css" />
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/sidebar.css" />
   <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/links.css" />
   <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/inputs.css" />
   <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/text_field.css" />
@@ -20,12 +23,12 @@
 <body>  
 
 <div id="heading">
-  {% include 'logo.html' %}
-  {% include 'navigation_bar.html' %}
+  {% include 'base/logo.html' %}
+  {% include 'base/navigation_bar.html' %}
 </div>
 
 <div id="sidebar-content">
-  {% include 'sidebar.html' %}
+  {% include 'base/sidebar.html' %}
 
   <div id="content">
     {% block content %}{% endblock %}
