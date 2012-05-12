@@ -1,31 +1,31 @@
 {% extends "base/base.html" %}
 
 {% block content %}
-    <form action="{{ SITE_ROOT }}settings" method="post" id="settings_form">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Update" class="button" />
-    </form>
-    
-    <div id="map_canvas"></div>
-    <div id="test"></div>
+  <form action="{{ SITE_ROOT }}settings" method="post" id="settings_form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Update" class="button" />
+  </form>
+  
+  <div id="map_canvas"></div>
+  <div id="test"></div>
 {% endblock %}
 
 {% block js_extra_imports %}
-    {{ block.super }}
-    <script type="text/javascript">
-    $(document).ready(function() {  
-        var options = { 
-            success: gedditShowAjaxResponse  // post-submit callback 
-        };     
-        
-        $('#settings_form').submit(function(event) {
-            event.preventDefault();
-            $(this).ajaxSubmit(options);
-            
-            // return false to prevent normal browser submit and page navigation 
-            return false; 
-        });
-    });
-    </script>
+  {{ block.super }}
+  <script type="text/javascript">
+  $(document).ready(function() {  
+      var options = { 
+          success: gedditShowAjaxResponse  // post-submit callback 
+      };     
+      
+      $('#settings_form').submit(function(event) {
+          event.preventDefault();
+          $(this).ajaxSubmit(options);
+          
+          // return false to prevent normal browser submit and page navigation 
+          return false; 
+      });
+  });
+  </script>
 {% endblock %}
