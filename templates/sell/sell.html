@@ -15,6 +15,7 @@
   <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/greyout.css" />
   <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/form.css" />
   <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/table.css" />
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/dashboard/divider.css" />
 {% endblock %}
 
 {% block js_extra_imports %}
@@ -33,10 +34,15 @@
 
 {% block content %}
   {% include 'sell/sell_form.html' %}
-  <div id="sell-listings-title" class="table-title"><h1>Things People Have Requested</h1></div>
-  <div id="new-listing-button">
-    <input type="button" class="button" value="New Listing" onclick="showGreyoutDialog();">
+  <div id="new-listing-title"><h1>Create New Listing</h1>
+    <div id="new-listing-button">
+      <input type="button" class="button" value="New Listing" onclick="showGreyoutDialog();">
+    </div>
   </div>
+  
+  <div class="divider"></div>
+   
+  <div id="sell-listings-title" class="table-title"><h1>Things People Have Requested</h1></div>
   {% include 'sell/reservations_table.html' %}
 {% endblock %}
 

@@ -3,14 +3,19 @@
     position: absolute;
     padding: 20px 10px;
     left: 20%;
+    width: 70%;
 }
 
 #nav-bar {
+    width: 100%;
+    line-height: 35px;
+    display: inline-block;
 }
 
 #nav_buttons {
-    clear: right;
+    display: inline-block;
     height: 40px;
+    float: left;
 }
 
 #nav_buy {
@@ -30,17 +35,21 @@
 
 .nav_button {
     display: inline-block;
-    background: darkblue;
     border-radius: 15px;
     font-size: 30px;
 }
 
 .nav_button a {
-    color: white;
+    color: black;
 }
 
 .nav_highlighted {
-    background: cornflowerblue;
+    text-decoration:underline;
+}
+
+#welcome_message {
+    font-size: medium;
+    float: right;
 }
 
 #messages-container {
@@ -54,5 +63,6 @@
     background: #FFFED8;
     border: 1px solid #CCC;
     padding: 6px;
+    color: #000;
 }
 

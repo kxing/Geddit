@@ -1,7 +1,7 @@
 <div id="sidebar">
   <div id="sidebar-container">
     {% block sidebar %}
-    <div id="sidebar-title">Browse by Category</div>
+    <div id="sidebar-title">Categories</div>
     {% for category in categories %}
       <div class="sidebar-category-link">
       <a href="{{ SITE_ROOT }}buy?category={{ category.name }}">{{ category.name }}</a>
@@ -10,4 +10,3 @@
     {% endblock %}
   </div>
 </div>
-
