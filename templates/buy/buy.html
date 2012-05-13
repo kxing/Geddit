@@ -8,7 +8,9 @@
 {% endblock %}
 
 {% block content %}
-  <div id="buy-title" class="table-title">Listings</div>
-  {% include 'buy/search_bar.html' %}
+  <div id="listings-title-search">
+    <div id="buy-title" class="table-title">Listings</div>
+    {% include 'buy/search_bar.html' %}
+  </div>
   {% include 'buy/listings_table.html' %}
 {% endblock %}

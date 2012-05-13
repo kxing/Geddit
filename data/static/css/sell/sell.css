@@ -1,8 +1,11 @@
 #sell-listings-title, #sell-listings-title h1 {
-    display: inline;
+    display: inline-block;
 }
 
 #new-listing-button {
-    float: right;
+/*    float: right;*/
 }
 
+#new-listing-title {
+    font-size: larger;
+}

@@ -1,21 +1,21 @@
 #nav-bar-container {
     display: inline-block;
-<<<<<<< HEAD
-/*    background-image: url("/static/images/banner.png");*/
-    width: 80%;
-=======
     position: absolute;
     padding: 20px 10px;
     left: 20%;
->>>>>>> e1b858365c7d4d52f037d0dcc3f12b66e04e5698
+    width: 70%;
 }
 
 #nav-bar {
+    width: 100%;
+    line-height: 35px;
+    display: inline-block;
 }
 
 #nav_buttons {
-    clear: right;
+    display: inline-block;
     height: 40px;
+    float: left;
 }
 
 #nav_buy {
@@ -47,6 +47,11 @@
     text-decoration:underline;
 }
 
+#welcome_message {
+    font-size: medium;
+    float: right;
+}
+
 #messages-container {
     display: none;
     margin: 20px auto;
@@ -58,5 +63,6 @@
     background: #FFFED8;
     border: 1px solid #CCC;
     padding: 6px;
+    color: #000;
 }
 

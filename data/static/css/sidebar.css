@@ -3,24 +3,19 @@
     display: inline-block;
 }
 
-<<<<<<< HEAD
-    background: #EEE;
-    margin: 10px;
-    
-    border-bottom: 1px solid #CCC;
-=======
+
 #sidebar-container {
-    margin: 10px 10px 10px 20px;
-    background: #E8E8E8;
-    border-radius: 10px;
->>>>>>> e1b858365c7d4d52f037d0dcc3f12b66e04e5698
+    margin: 10px 20px 10px 20px;
+    border-radius: 0px 0px 10px 10px;
+    border: 1px solid #1C4259;
+    background: #EEE;
 }
 
 #sidebar-title {
-    padding: 10px 10px;
     font-size: large;
-    background: #AAA;
-    border: 1px solid #CCC;
+    background: #1C4259;
+    padding: 10px 10px;
+    color: #FFF;
 }
 
 .sidebar-category-link {
