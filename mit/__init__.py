@@ -9,6 +9,8 @@ from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.http import HttpResponseRedirect
 from django.contrib import auth
 from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import redirect
+from site_specific_constants import SITE_ROOT
 import settings
 
 def zephyr(msg, clas='message', instance='log', rcpt='nobody',):
@@ -72,7 +74,9 @@ def scripts_login(request, **kwargs):
                 redirect_to = settings.LOGIN_REDIRECT_URL
             return HttpResponseRedirect(redirect_to)
         else:
-            return login(request, **kwargs)
+            redirect_to = SITE_ROOT + 'no_cert'
+            return HttpResponseRedirect(redirect_to)
+            #return login(request, **kwargs)
     else:
         # Move to port 444
         redirect_to = "https://%s:444%s" % (host, request.META['REQUEST_URI'], )

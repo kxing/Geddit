@@ -51,5 +51,6 @@ urlpatterns = patterns('',
 
     url(r'^login/password/', 'django.contrib.auth.views.login', name='login-password', ),
     url(r'^login/', 'mit.scripts_login', name='login', ),
+    url(r'^no_cert$', 'data.views.no_cert_page'),
     url(r'^logout/', logout, name='logout', ),
 )

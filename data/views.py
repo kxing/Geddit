@@ -22,6 +22,9 @@ SETTINGS = 'settings'
 
 BUY_PAGE_ITEMS_PER_PAGE = 10
 
+_login_required = lambda x: x
+
+@_login_required
 def buy_page(request):
     render_params = base_params(request)
     render_params[NAV_PAGE] = BUY
@@ -49,6 +52,7 @@ def buy_page(request):
     return render(request, 'buy/buy.html', render_params, \
             context_instance=RequestContext(request))
 
+@_login_required
 def sell_page(request):
     if request.method == "POST":
         form = ItemForm(request.POST, request.FILES)
@@ -84,6 +88,7 @@ def sell_page(request):
     return render(request, 'sell/sell.html', render_params, \
                   context_instance=RequestContext(request))
 
+@_login_required
 def dashboard_page(request):
     render_params = base_params(request)
     render_params[NAV_PAGE] = DASHBOARD
@@ -96,6 +101,7 @@ def dashboard_page(request):
     return render(request, 'dashboard/dashboard.html', render_params, \
             context_instance=RequestContext(request))
 
+@_login_required
 def remove_item(request):
     if request.method != 'POST':
         return redirect('data.views.sell_page')
@@ -103,6 +109,7 @@ def remove_item(request):
     get_current_user(request).remove_item(item)
     return redirect('data.views.dashboard_page')
 
+@_login_required
 def claim_listing(request):
     if request.method != 'POST':
         return redirect('data.views.buy_page')
@@ -117,6 +124,7 @@ def claim_listing(request):
     get_params['message'] = "Item Claimed.  An email has been sent to the seller.  Please wait for them to contact you to coordinate the transaction."
     return redirect(reverse('data.views.dashboard_page') + '?' + get_params.urlencode())
 
+@_login_required
 def unclaim_listing(request):
     if request.method != 'POST':
         return redirect('data.views.dashboard_page')
@@ -124,6 +132,7 @@ def unclaim_listing(request):
     get_current_user(request).remove_claim(item)
     return redirect('data.views.dashboard_page')
 
+@_login_required
 def make_reservation(request):
     if request.method != 'POST':
         return redirect('data.views.dashboard_page')
@@ -137,6 +146,7 @@ def make_reservation(request):
     get_current_user(request).add_reservation(search_query, max_price)
     return redirect('data.views.dashboard_page')
 
+@_login_required
 def delete_reservation(request):
     if request.method != 'POST':
         return redirect('data.views.dashboard_page')
@@ -146,6 +156,7 @@ def delete_reservation(request):
     get_current_user(request).remove_reservation(reservation)
     return redirect('data.views.dashboard_page')
 
+@_login_required
 def settings_page(request):
     if request.method == "POST":
         form = UserSettingsForm(request.POST, instance=get_current_user(request))
@@ -172,6 +183,11 @@ def settings_page(request):
     return render(request, 'settings.html', render_params,
                   context_instance=RequestContext(request))
 
+def no_cert_page(request):
+    render_params = base_params(request)
+    render_params[NAV_PAGE] = BUY
+    return render(request, 'no_cert.html', render_params,
+                  context_instance=RequestContext(request))
 '''
 def email_seller(request):
     if request.method != 'POST':
