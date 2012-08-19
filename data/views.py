@@ -20,6 +20,8 @@ SELL = 'sell'
 DASHBOARD = 'dashboard'
 SETTINGS = 'settings'
 
+BUY_PAGE_ITEMS_PER_PAGE = 10
+
 def buy_page(request):
     render_params = base_params(request)
     render_params[NAV_PAGE] = BUY
@@ -30,11 +32,19 @@ def buy_page(request):
 
     search_query = request.GET.get('search_query', None)
     id = request.GET.get('id', None)
+    page = (int)(request.GET.get('page', 0))
 
-    render_params['items'] = Item.get_filtered_items(category, search_query, id)
+    matching_items = Item.get_filtered_items(category, search_query, id)
+
+    if page * BUY_PAGE_ITEMS_PER_PAGE > len(matching_items):
+      page = 0
+
+    render_params['items'] = matching_items[page * 10 : (page + 1) * 10]
     render_params['category'] = category
     render_params['search_query'] = search_query
     render_params['id'] = id
+    render_params['page'] = page
+    render_params['pages'] = 1 + (len(matching_items) - 1) / BUY_PAGE_ITEMS_PER_PAGE
 
     return render(request, 'buy/buy.html', render_params, \
             context_instance=RequestContext(request))

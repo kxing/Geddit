@@ -1,0 +1,8 @@
+<div id="pager">
+{% if page|add:-1 >= 0 %}
+<a class="pager_previous" href="{{ SITE_ROOT }}buy?page={{ page|add:-1 }}{% if category %}&category={{ category }}{% endif %}{% if search_query %}&search_query={{ search_query }}{% endif %}">Previous</a>
+{% endif %}
+{% if page|add:1 < pages %}
+<a class="pager_next" href="{{ SITE_ROOT }}buy?page={{ page|add:1 }}{% if category %}&category={{ category }}{% endif %}{% if search_query %}&search_query={{ search_query }}{% endif %}">Next</a>
+{% endif %}
+</div>
