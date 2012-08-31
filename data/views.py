@@ -106,7 +106,11 @@ def remove_item(request):
     if request.method != 'POST':
         return redirect('data.views.sell_page')
     item = Item.get_item_by_id(request.POST['item_id'])
-    get_current_user(request).remove_item(item)
+    try:
+        get_current_user(request).remove_item(item)
+    except:
+        # TODO(kxing): Log this.
+        pass
     return redirect('data.views.dashboard_page')
 
 @_login_required
@@ -129,7 +133,11 @@ def unclaim_listing(request):
     if request.method != 'POST':
         return redirect('data.views.dashboard_page')
     item = Item.get_item_by_id(request.POST['item_id'])
-    get_current_user(request).remove_claim(item)
+    try:
+        get_current_user(request).remove_claim(item)
+    except:
+        # TODO(kxing): Log this.
+        pass
     return redirect('data.views.dashboard_page')
 
 @_login_required
